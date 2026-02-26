@@ -2,6 +2,14 @@
 
 Sahaayak is a professional AI assistant designed to bridge the digital divide for rural populations in India. It provides a voice-first experience allowing users to discover and navigate government schemes, scholarships, and pensions in local dialects.
 
+## Interface Overview
+
+The application utilizes a refined design system optimized for clarity and accessibility.
+
+| Language Selection | Dashboard View | Voice Assistant |
+| :---: | :---: | :---: |
+| <img src="assets/screenshots/screenshot_emulator.png" width="250"> | <img src="assets/screenshots/dashboard_screenshot.png" width="250"> | <img src="assets/screenshots/microscreen_screenshot.png" width="250"> |
+
 ## Core Features
 
 - **Voice-First Interface**: Minimalist design focused on accessibility and ease of use.
@@ -45,10 +53,6 @@ Sahaayak is a professional AI assistant designed to bridge the digital divide fo
    ```bash
    flutter run
    ```
-
-## Development and Deployment
-
-The project follows a modular architecture separating the Flutter frontend from the Python-based intelligence layer. For backend setup, navigate to the `sahaayak_backend` directory and follow the instructions in its respective documentation.
 
 ---
 
