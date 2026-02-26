@@ -1,53 +1,28 @@
-# 🤖 SAHAAYAK — Voice AI for Bharat 🇮🇳
+# SAHAAYAK — Voice AI for Bharat
 
-> **Empowering the next billion users with an intuitive, voice-first AI assistant for government schemes and local help.**
+Sahaayak is a professional AI assistant designed to bridge the digital divide for rural populations in India. It provides a voice-first experience allowing users to discover and navigate government schemes, scholarships, and pensions in local dialects.
 
-![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white) 
-![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
-![AI](https://img.shields.io/badge/AI-Premium-%236366F1.svg?style=for-the-badge)
+## Core Features
 
-## 🌟 Overview
+- **Voice-First Interface**: Minimalist design focused on accessibility and ease of use.
+- **Dialect Normalization**: Advanced processing to understand regional languages and dialects.
+- **Scheme Matching Engine**: Intelligent matching of user profiles with relevant government programs.
+- **Step-by-Step Guidance**: Simplified application instructions for various schemes.
+- **Secure Data Handling**: Emphasis on privacy and on-device processing.
 
-**Sahaayak** is a professional-grade AI assistant designed for the rural Indian population. It bridges the digital divide by offering a **voice-first, minimalist experience** that allows users to discover government schemes, scholarships, and pensions in their local dialect.
+## Technical Architecture
 
-### ✨ Key Features
+- **Frontend**: Flutter (Multi-platform)
+- **Backend**: FastAPI (Python)
+- **Design System**: White Premium aesthetic utilizing Material 3 custom themes.
+- **Language Support**: English, Hindi, Marathi, and other regional dialects.
 
-- 🎤 **Voice-First UX**: Minimalist design centered around a massive hero mic button.
-- 🌊 **Dynamic Wave Animation**: Real-time feedback for a futuristic, responsive AI feel.
-- 🗺️ **Bharat-Ready**: Native support for **Hindi, Bhojpuri, Marathi, Tamil, and English**.
-- 🏛️ **Scheme Discovery**: Instant matching for schemes like PM-Kisan, PM-SVANidhi, and more.
-- 📄 **Apply Guides**: Simplified, numbered step-by-step instructions for rural users.
-- 🔄 **RLHF Feedback**: Built-in human feedback loop for continuous AI improvement.
-
----
-
-## 🎨 Premium Design System
-
-We've implemented a **White Premium** aesthetic to build trust and accessibility:
-
-- **Background**: Pure White (#FFFFFF) for a clean, government-ready professional feel.
-- **Accents**: AI Indigo (#6366F1) & Trustworthy Navy (#0F172A).
-- **Typography**: Large, bold **Outfit** font for maximum readability.
-- **Micro-interactions**: Smooth transitions and haptic-ready button ripples.
-
----
-
-## �️ Tech Stack
-
-- **Framework**: Flutter (Multi-platform)
-- **Language**: Dart
-- **Design**: Material 3 (Custom Theme)
-- **Local Engine**: Specialized dialect detection & keyword matching algorithm.
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - Flutter SDK (3.x or higher)
-- Android Studio / VS Code
-- Android Emulator or Physical Device
+- Android SDK / Platform Tools
 
 ### Installation
 
@@ -66,22 +41,15 @@ We've implemented a **White Premium** aesthetic to build trust and accessibility
    flutter pub get
    ```
 
-4. Run the app:
+4. Run the application:
    ```bash
    flutter run
    ```
 
----
+## Development and Deployment
 
-## � Presentation Strategy
-
-1. **The Pulse**: Start with the white splash screen — show the brand transition.
-2. **The Dialect**: Select a regional language (e.g., Bhojpuri) to show inclusivity.
-3. **The Power Move**: Press the mic and speak — let the **Dynamic Wave** animation shine.
-4. **The Impact**: Show the generated Scheme Card and the simplified Apply Guide.
+The project follows a modular architecture separating the Flutter frontend from the Python-based intelligence layer. For backend setup, navigate to the `sahaayak_backend` directory and follow the instructions in its respective documentation.
 
 ---
 
-## 🤝 Built for Bharat
-
-Sahaayak is not just an app; it's a bridge to opportunity for millions. **Built with ❤️ for Bharat.**
+Built for Bharat. Focused on Inclusion.
