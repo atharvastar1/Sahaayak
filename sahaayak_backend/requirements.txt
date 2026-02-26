@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+openai-whisper
+torch
+pandas
+psycopg2-binary
+python-multipart
+boto3
+pydantic
+python-dotenv
+coqui-tts
