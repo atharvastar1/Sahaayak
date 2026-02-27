@@ -125,35 +125,83 @@ setInterval(() => {
 
 // WhatsApp Simulation Logic
 let waFlowStep = 0;
+
+// Update mic icon to send icon when typing
+document.addEventListener('DOMContentLoaded', () => {
+    const inputField = document.getElementById('waInputField');
+    const waSendIcon = document.getElementById('waSendIcon');
+    if (inputField && waSendIcon) {
+        inputField.addEventListener('input', (e) => {
+            if (e.target.value.trim().length > 0) {
+                waSendIcon.innerText = 'send';
+            } else {
+                waSendIcon.innerText = 'mic';
+            }
+        });
+    }
+});
+
+function handleWaInput(e) {
+    if (e.key === 'Enter') {
+        simulateWhatsAppFlow();
+    }
+}
+
 function simulateWhatsAppFlow() {
     const chatBody = document.getElementById('waChatBody');
+    const inputField = document.getElementById('waInputField');
     if (!chatBody) return;
 
-    if (waFlowStep === 0) {
-        waFlowStep++;
-        const myMsg = document.createElement('div');
-        myMsg.innerHTML = `<p class="fs-14 fw-500">I need help with seeds. I am a farmer in UP.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">10:01 AM</span>`;
-        myMsg.style = "background:#D9FDD3; padding:8px 12px; border-radius:12px; border-top-right-radius:0; max-width:80%; align-self:flex-end; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
-        chatBody.appendChild(myMsg);
+    let userText = "I need help with seeds. I am a farmer in UP.";
+    if (inputField && inputField.value.trim().length > 0) {
+        userText = inputField.value.trim();
+        inputField.value = '';
+        const waSendIcon = document.getElementById('waSendIcon');
+        if (waSendIcon) waSendIcon.innerText = 'mic';
+    }
 
+    // Add User Message
+    const myMsg = document.createElement('div');
+    const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    myMsg.innerHTML = `<p class="fs-14 fw-500">${userText}</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">${timeNow}</span>`;
+    myMsg.style = "background:#D9FDD3; padding:8px 12px; border-radius:12px; border-top-right-radius:0; max-width:80%; align-self:flex-end; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+    chatBody.appendChild(myMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Typing indicator
+    setTimeout(() => {
+        const typingMsg = document.createElement('div');
+        typingMsg.id = "waTyping";
+        typingMsg.innerHTML = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14"><i>typing...</i></p>`;
+        typingMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+        chatBody.appendChild(typingMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Response logic
         setTimeout(() => {
-            const typingMsg = document.createElement('div');
-            typingMsg.id = "waTyping";
-            typingMsg.innerHTML = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14"><i>typing...</i></p>`;
-            typingMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
-            chatBody.appendChild(typingMsg);
+            const typing = document.getElementById('waTyping');
+            if (typing) typing.remove();
+
+            const replyMsg = document.createElement('div');
+            let replyHtml = "";
+            const replyTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            if (waFlowStep === 0) {
+                replyHtml = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14">Based on your query, you are eligible for the <b>PM Kisan Samman Nidhi</b> scheme! You qualify for ₹2000 in your linked bank account. Type <b>APPLY</b> to proceed.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">${replyTime}</span>`;
+            } else if (waFlowStep === 1) {
+                replyHtml = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14">Processing your application using your registered Aadhaar... ✅<br><br><b>Success!</b> Your application #49820 is submitted.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">${replyTime}</span>`;
+            } else {
+                replyHtml = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14">I am still here to help! Send another voice note or text message about any other schemes.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">${replyTime}</span>`;
+                waFlowStep = -1; // Reset flow
+            }
+
+            replyMsg.innerHTML = replyHtml;
+            replyMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+            chatBody.appendChild(replyMsg);
             chatBody.scrollTop = chatBody.scrollHeight;
 
-            setTimeout(() => {
-                const typing = document.getElementById('waTyping');
-                if (typing) typing.remove();
+            waFlowStep++;
 
-                const replyMsg = document.createElement('div');
-                replyMsg.innerHTML = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14">You are eligible for the <b>PM Kisan Samman Nidhi</b> scheme! I have automatically registered your profile. You will receive ₹2000 in your linked bank account.</p><p class="mt-2 text-main fs-14">You also qualify for a UP State Seed Subsidy. Type <b>YES</b> to apply.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">10:01 AM</span>`;
-                replyMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
-                chatBody.appendChild(replyMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 1800);
-        }, 500);
-    }
+        }, (Math.random() * 1000) + 1000); // 1-2 second response time
+    }, 500); // 0.5s delay before typing shows
 }
