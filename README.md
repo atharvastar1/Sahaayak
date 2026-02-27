@@ -23,16 +23,16 @@ Sahaayak is a next-generation AI assistant designed to bridge the digital divide
 - **Animated SVG Logo:** A breathing, floating logo integrated across Mobile and Web.
 - **Elite Design Tokens:** High-end blur effects, custom shadows, and refined typography (Outfit).
 
-## 📸 Mockups
+## 📸 Real UI Screenshots
 
-### Mobile Home Screen
-![Mobile Home Mockup](/Users/atharvainteractives/.gemini/antigravity/brain/ddfcca07-07c3-4479-b6bf-74cf35711ab1/mobile_home_mockup_1772223232005.png)
+### Mobile Main Interface
+![Mobile Home Interface](/Users/atharvainteractives/.gemini/antigravity/scratch/sahaayak/flutter_sahaayak/assets/screenshots/microscreen_screenshot.png)
 
-### Web Dashboard
-![Web Dashboard Mockup](/Users/atharvainteractives/.gemini/antigravity/brain/ddfcca07-07c3-4479-b6bf-74cf35711ab1/web_dashboard_mockup_1772223248083.png)
+### Citizen Insights Dashboard
+![Citizen Dashboard](/Users/atharvainteractives/.gemini/antigravity/scratch/sahaayak/flutter_sahaayak/assets/screenshots/dashboard_screenshot.png)
 
-### WhatsApp BharatBot Hub
-![WhatsApp Chat Mockup](/Users/atharvainteractives/.gemini/antigravity/brain/ddfcca07-07c3-4479-b6bf-74cf35711ab1/whatsapp_chat_mockup_1772223266282.png)
+### Premium Branding (Splash)
+![Premium Splash](/Users/atharvainteractives/.gemini/antigravity/scratch/sahaayak/flutter_sahaayak/assets/screenshots/screenshot_emulator.png)
 
 ## 🛠️ Technology Stack
 - **Frontend:** Flutter (Mobile), Vanilla JS/HTML5/CSS3 (Web)
