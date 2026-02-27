@@ -36,7 +36,8 @@ function enterApp() {
 function switchTab(tabId) {
     // Nav Items
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    document.getElementById('nav-' + tabId).classList.add('active');
+    const navItem = document.getElementById('nav-' + tabId);
+    if (navItem) navItem.classList.add('active');
 
     // Views
     document.querySelectorAll('.view-section').forEach(el => {
