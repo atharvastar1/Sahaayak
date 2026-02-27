@@ -117,12 +117,12 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Sahaayak AI Assistant', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
+                Text('Sahaayak BharatBot', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
                 Row(
                   children: [
                     Icon(Icons.verified_rounded, color: Color(0xFFD9FDD3), size: 12),
                     SizedBox(width: 4),
-                    Text('Official Government API', style: TextStyle(color: Color(0xFFD9FDD3), fontSize: 12)),
+                    Text('Verified Gov. of India API', style: TextStyle(color: Color(0xFFD9FDD3), fontSize: 12)),
                   ],
                 ),
               ],
@@ -189,7 +189,7 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Sahaayak AI is typing', style: TextStyle(color: Color(0xFF008069), fontWeight: FontWeight.w600, fontSize: 13, fontStyle: FontStyle.italic)),
+            const Text('Sahaayak BharatBot is typing', style: TextStyle(color: Color(0xFF008069), fontWeight: FontWeight.w600, fontSize: 13, fontStyle: FontStyle.italic)),
             const SizedBox(width: 8),
             _buildDot(0),
             _buildDot(200),
@@ -235,7 +235,7 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
             if (!isUser)
               const Padding(
                 padding: EdgeInsets.only(bottom: 4),
-                child: Text('Sahaayak AI', style: TextStyle(color: Color(0xFF008069), fontWeight: FontWeight.bold, fontSize: 13)),
+                child: Text('Sahaayak BharatBot', style: TextStyle(color: Color(0xFF008069), fontWeight: FontWeight.bold, fontSize: 13)),
               ),
             Text(
               text,
