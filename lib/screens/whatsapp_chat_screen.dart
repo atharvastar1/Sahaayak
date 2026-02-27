@@ -118,15 +118,19 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
               child: const AnimatedLogo(size: 32, isAnimated: true),
             ),
             const SizedBox(width: 12),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Sahaayak BharatBot', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
+                const Text('Sahaayak BharatBot', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: -0.5)),
                 Row(
                   children: [
-                    Icon(Icons.verified_rounded, color: Color(0xFFD9FDD3), size: 12),
-                    SizedBox(width: 4),
-                    Text('Verified Gov. of India API', style: TextStyle(color: Color(0xFFD9FDD3), fontSize: 12)),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(color: Color(0xFF25D366), shape: BoxShape.circle),
+                    ),
+                    const SizedBox(width: 4),
+                    Text('Online • Official Assistant', style: TextStyle(color: Colors.white.withValues(alpha: 0.8), fontSize: 11, fontWeight: FontWeight.w600)),
                   ],
                 ),
               ],

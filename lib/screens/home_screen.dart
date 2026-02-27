@@ -68,7 +68,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       backgroundColor: SahaayakTheme.background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white.withValues(alpha: 0.1),
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
         elevation: 0,
         centerTitle: true,
         leadingWidth: 100,
@@ -82,15 +88,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ) : null,
         title: const Hero(tag: 'logo', child: AnimatedLogo(size: 32)),
         actions: [
-          IconButton(
-            onPressed: () {
-              HapticService.light();
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const WhatsAppChatScreen()));
-            },
-            icon: const Icon(Icons.chat_rounded),
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white.withValues(alpha: 0.5),
-              foregroundColor: SahaayakTheme.primary,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: SahaayakTheme.premiumShadow,
+            ),
+            child: IconButton(
+              onPressed: () {
+                HapticService.light();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const WhatsAppChatScreen()));
+              },
+              icon: const Icon(Icons.forum_rounded, size: 20),
+              color: SahaayakTheme.primary,
             ),
           ),
           const SizedBox(width: 16),
@@ -223,13 +234,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             onTap: () => _handleQuery(e['query']!),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
-              padding: const EdgeInsets.all(20),
-              decoration: SahaayakTheme.premiumCard(radius: 24),
+              padding: const EdgeInsets.all(24),
+              decoration: SahaayakTheme.premiumCard(radius: 28).copyWith(
+                boxShadow: SahaayakTheme.premiumShadow,
+              ),
               child: Column(
                 children: [
-                  Text(e['icon']!, style: const TextStyle(fontSize: 24)),
-                  const SizedBox(height: 8),
-                  Text(e['label']!, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: SahaayakTheme.primaryDark)),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: const BoxDecoration(
+                      color: SahaayakTheme.background,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(e['icon']!, style: const TextStyle(fontSize: 28)),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(e['label']!, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: SahaayakTheme.primaryDark, letterSpacing: -0.5)),
                 ],
               ),
             ),
@@ -245,34 +265,51 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
          const Text('RECENT INSIGHTS', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 11, letterSpacing: 4, color: SahaayakTheme.textSecondary)),
          const SizedBox(height: 24),
          SizedBox(
-           height: 120,
+           height: 140,
            child: ListView.builder(
-             padding: const EdgeInsets.symmetric(horizontal: 24),
-             scrollDirection: Axis.horizontal,
-             itemCount: math.min(_history.length, 5),
-             itemBuilder: (context, index) {
-               final h = _history[index];
-               return GestureDetector(
-                 onTap: () => setState(() { _response = h; _state = AppState.success; }),
-                 child: Container(
-                   width: 200,
-                   margin: const EdgeInsets.only(right: 16),
-                   padding: const EdgeInsets.all(20),
-                   decoration: SahaayakTheme.premiumCard(radius: 24),
-                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Text(h.normalizedText, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14)),
-                       const Spacer(),
-                       Text('${h.suggestedSchemes.length} Schemes Found', style: const TextStyle(color: SahaayakTheme.primary, fontWeight: FontWeight.bold, fontSize: 11)),
-                     ],
+               padding: const EdgeInsets.symmetric(horizontal: 24),
+               scrollDirection: Axis.horizontal,
+               itemCount: math.min(_history.length, 5),
+               itemBuilder: (context, index) {
+                 final h = _history[index];
+                 return GestureDetector(
+                   onTap: () => setState(() { _response = h; _state = AppState.success; }),
+                   child: Container(
+                     width: 240,
+                     margin: const EdgeInsets.only(right: 20, bottom: 10),
+                     padding: const EdgeInsets.all(24),
+                     decoration: SahaayakTheme.premiumCard(radius: 28).copyWith(
+                       boxShadow: SahaayakTheme.premiumShadow,
+                       gradient: LinearGradient(
+                         colors: [Colors.white, SahaayakTheme.background.withValues(alpha: 0.5)],
+                         begin: Alignment.topLeft,
+                         end: Alignment.bottomRight,
+                       ),
+                     ),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Row(
+                           children: [
+                             const Icon(Icons.history_edu_rounded, size: 16, color: SahaayakTheme.primary),
+                             const SizedBox(width: 8),
+                             Expanded(child: Text(h.normalizedText, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14))),
+                           ],
+                         ),
+                         const Spacer(),
+                         Container(
+                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                           decoration: SahaayakTheme.categoryBadge(color: SahaayakTheme.primary),
+                           child: Text('${h.suggestedSchemes.length} Schemes Found', style: const TextStyle(color: SahaayakTheme.primary, fontWeight: FontWeight.w900, fontSize: 10)),
+                         ),
+                       ],
+                     ),
                    ),
-                 ),
-               );
-             },
+                 );
+               },
+             ),
            ),
-         ),
-       ],
+         ],
      ).animate().fadeIn();
   }
 

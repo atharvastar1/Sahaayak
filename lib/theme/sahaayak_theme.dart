@@ -53,6 +53,7 @@ class SahaayakTheme {
     return BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(radius),
+      border: Border.all(color: Colors.black.withValues(alpha: 0.05), width: 1),
       boxShadow: [
         BoxShadow(
           color: Colors.black.withValues(alpha: 0.04),
@@ -62,6 +63,26 @@ class SahaayakTheme {
       ],
     );
   }
+
+  // Ultra-Premium Depth
+  static List<BoxShadow> premiumShadow = [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.05),
+      blurRadius: 50,
+      offset: const Offset(0, 20),
+    ),
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.02),
+      blurRadius: 10,
+      offset: const Offset(0, 5),
+    ),
+  ];
+
+  static const LinearGradient glassGradient = LinearGradient(
+    colors: [Color(0x33FFFFFF), Color(0x0AFFFFFF)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 
   // Silicon Orb Shadow (Tactile 3D)
   static BoxDecoration siliconOrb({Color? glowColor}) {
