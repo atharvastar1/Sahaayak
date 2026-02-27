@@ -21,6 +21,13 @@ We designed the **"Tactile Elite"** interface for radical accessibility. Deep sh
 For enterprise scale, we also deployed a companion **"Ultra-Premium Web Architecture"** mirroring the flutter experience 1:1, featuring pure-white glassmorphic dashboards, deep indigo typography, and massive interaction states designed natively with HTML/CSS.
 
 <p align="center">
+  <img src="assets/screenshots/web_dashboard.png" width="800">
+</p>
+<p align="center">
+  <i>The Web-Native Citizen Command Center (1400px wide layout)</i>
+</p>
+
+<p align="center">
   <img src="assets/screenshots/screenshot_emulator.png" width="280">&nbsp;:&nbsp;
   <img src="assets/screenshots/dashboard_screenshot.png" width="280">&nbsp;&nbsp;
   <img src="assets/screenshots/microscreen_screenshot.png" width="280">
