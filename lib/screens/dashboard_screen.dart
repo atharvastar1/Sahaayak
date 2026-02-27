@@ -7,6 +7,7 @@ import '../services/haptic_service.dart';
 import 'guided_coach_screen.dart';
 import 'vault_screen.dart';
 import 'helpline_screen.dart';
+import 'whatsapp_chat_screen.dart';
 import 'widgets.dart';
 import '../services/ai_coordinator.dart';
 
@@ -24,6 +25,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     
     return Scaffold(
       backgroundColor: SahaayakTheme.background,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          HapticService.light();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const WhatsAppChatScreen()));
+        },
+        backgroundColor: const Color(0xFF008069), // WhatsApp green
+        elevation: 4,
+        icon: const Icon(Icons.chat_rounded, color: Colors.white),
+        label: const Text('Omni-Channel', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
+      ).animate().fadeIn(delay: 800.ms).slideY(begin: 1.0, duration: 400.ms, curve: Curves.easeOutBack),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
