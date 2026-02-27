@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../services/haptic_service.dart';
+import 'widgets.dart';
 
 class WhatsAppChatScreen extends StatefulWidget {
   const WhatsAppChatScreen({super.key});
@@ -108,10 +109,13 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
         ),
         title: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 18,
-              child: Image.asset('assets/logo.png', width: 24, height: 24),
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: const AnimatedLogo(size: 32, isAnimated: true),
             ),
             const SizedBox(width: 12),
             const Column(

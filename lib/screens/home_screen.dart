@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: const Text('OFFLINE', style: TextStyle(color: SahaayakTheme.warning, fontSize: 10, fontWeight: FontWeight.w900)),
           ).animate().fadeIn(),
         ) : null,
-        title: Hero(tag: 'logo', child: Image.asset('assets/logo.png', height: 32)),
+        title: const Hero(tag: 'logo', child: AnimatedLogo(size: 32)),
         actions: [
           IconButton(
             onPressed: () {

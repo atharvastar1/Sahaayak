@@ -1,8 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../theme/sahaayak_theme.dart';
 import '../services/haptic_service.dart';
 import '../models/models.dart';
+
+class AnimatedLogo extends StatelessWidget {
+  final double size;
+  final bool isAnimated;
+
+  const AnimatedLogo({
+    super.key,
+    this.size = 64,
+    this.isAnimated = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Widget logo = SvgPicture.asset(
+      'assets/file.svg',
+      width: size,
+      height: size,
+    );
+
+    if (isAnimated) {
+      return logo
+          .animate(onPlay: (controller) => controller.repeat(reverse: true))
+          .scale(
+            begin: const Offset(1, 1),
+            end: const Offset(1.1, 1.1),
+            duration: 2.seconds,
+            curve: Curves.easeInOut,
+          )
+          .shimmer(
+            duration: 3.seconds,
+            color: Colors.white.withValues(alpha: 0.2),
+          );
+    }
+
+    return logo;
+  }
+}
 
 /// Elite MNC-Standard Scheme Card with Tactile Feedback.
 class TactileSchemeCard extends StatelessWidget {

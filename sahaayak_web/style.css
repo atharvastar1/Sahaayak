@@ -26,6 +26,47 @@
     --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+@keyframes logoBreathing {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(0, 180, 216, 0.2));
+    }
+
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.4));
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(0, 180, 216, 0.2));
+    }
+}
+
+@keyframes logoShimmer {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+.logo-premium {
+    animation: logoBreathing 3s ease-in-out infinite;
+    transition: var(--transition-smooth);
+}
+
+.logo-premium:hover {
+    transform: scale(1.15) rotate(5deg);
+    cursor: pointer;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -668,6 +709,7 @@ input:checked+.slider:before {
     letter-spacing: -2.5px;
     background: linear-gradient(180deg, var(--text-main) 0%, rgba(11, 25, 58, 0.6) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.1;
 }
@@ -930,6 +972,7 @@ input:checked+.slider:before {
 .text-gradient {
     background: linear-gradient(90deg, #00B4D8 0%, #2979FF 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
