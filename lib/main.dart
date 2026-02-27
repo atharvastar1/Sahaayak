@@ -44,6 +44,14 @@ class _SahaayakAppState extends State<SahaayakApp> {
         title: 'Sahaayak AI',
         debugShowCheckedModeBanner: false,
         theme: SahaayakTheme.premiumTheme,
+        builder: (context, child) {
+          return Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 1400),
+              child: child,
+            ),
+          );
+        },
         home: const SplashScreen(),
       ),
     );

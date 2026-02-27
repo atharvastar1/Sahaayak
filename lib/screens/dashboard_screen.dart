@@ -332,8 +332,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 220,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         childAspectRatio: 1.15,

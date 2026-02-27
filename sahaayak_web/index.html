@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahaayak - The Citizen AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+</head>
+
+<body class="light-theme">
+
+    <!-- SPLASH SCREEN -->
+    <div id="screen-splash" class="screen full-center active">
+        <div class="glow-orb"></div>
+        <img src="assets/logo.png" alt="Logo" class="splash-logo">
+        <h1 class="splash-title">SAHAAYAK</h1>
+        <div class="line-loader mt-4"></div>
+    </div>
+
+    <!-- LANGUAGE SETUP SCREEN -->
+    <div id="screen-language" class="screen full-center hidden">
+        <div class="lang-container glass-panel">
+            <span class="material-symbols-rounded icon-lg text-cyan mb-2">language</span>
+            <h1 style="font-size: 32px; font-weight:900; letter-spacing:-1px;" class="text-center">Global Reach, Local
+                Voice</h1>
+            <p class="text-muted text-center mt-2 mb-5">Select your primary enterprise dialect.</p>
+
+            <div class="lang-grid">
+                <div class="lang-card" onclick="selectLanguage('en', this)">
+                    <h2>EN</h2>
+                    <p>English</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('hi', this)">
+                    <h2>HI</h2>
+                    <p>Hindi</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('mr', this)">
+                    <h2>MR</h2>
+                    <p>Marathi</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('te', this)">
+                    <h2>TE</h2>
+                    <p>Telugu</p>
+                </div>
+            </div>
+
+            <button class="btn-primary mt-6 hover-glow w-100" id="btnContinueLang" disabled
+                onclick="enterApp()">Initialize System</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <div id="app-wrapper" class="hidden">
+
+        <!-- SIDEBAR -->
+        <nav class="sidebar glass-panel">
+            <div class="brand">
+                <div class="brand-icon"><span class="material-symbols-rounded text-cyan">all_inclusive</span></div>
+                <div class="brand-text">
+                    <h2>Sahaayak</h2>
+                    <p>Enterprise AI</p>
+                </div>
+            </div>
+
+            <div class="nav-menu">
+                <p class="menu-label">CORE</p>
+                <a class="nav-item active" onclick="switchTab('home')" id="nav-home">
+                    <span class="material-symbols-rounded">graphic_eq</span> Liquid Mic
+                </a>
+                <a class="nav-item" onclick="switchTab('dashboard')" id="nav-dashboard">
+                    <span class="material-symbols-rounded">grid_view</span> Dashboard
+                </a>
+                <a class="nav-item" onclick="switchTab('vault')" id="nav-vault">
+                    <span class="material-symbols-rounded">shield_lock</span> Smart Vault
+                </a>
+                <a class="nav-item" onclick="switchTab('helpline')" id="nav-helpline">
+                    <span class="material-symbols-rounded">contact_support</span> Helpline
+                </a>
+                <a class="nav-item" onclick="switchTab('help')" id="nav-help">
+                    <span class="material-symbols-rounded">support_agent</span> Help Center
+                </a>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="engine-toggle glass-panel">
+                    <div>
+                        <p class="text-white fw-600 fs-14">Local Zero-Cloud</p>
+                        <p class="text-muted fs-12 mt-1">On-Device Processing</p>
+                    </div>
+                    <label class="premium-switch">
+                        <input type="checkbox" checked id="offlineToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN LAYOUT -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="search-bar glass-panel">
+                    <span class="material-symbols-rounded text-muted">search</span>
+                    <input type="text" placeholder="Search schemes, documents, analytics...">
+                    <div class="shortcut-key">⌘K</div>
+                </div>
+
+                <div class="topbar-actions">
+                    <div class="status-indicator">
+                        <div class="dot pulse-green" id="engineDot"></div>
+                        <span id="engineText">Secure Local Connection</span>
+                    </div>
+                    <button class="icon-btn glass-panel"><span
+                            class="material-symbols-rounded">notifications</span></button>
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Atharva&background=00B4D8&color=fff" alt="Profile">
+                    </div>
+                </div>
+            </header>
+
+            <!-- VIEW: HOME / MIC -->
+            <div id="view-home" class="view-section active">
+                <div class="hero-center flex-column">
+                    <div class="glow-orb pulse"></div>
+                    <h1 class="premium-heading">How can I assist you?</h1>
+                    <p class="premium-subheading">Speak naturally. Multi-dialect intelligence is active.</p>
+
+                    <div class="mic-orb-container mt-6" id="micBtn">
+                        <div class="ripple"></div>
+                        <div class="ripple r2"></div>
+                        <div class="mic-orb glass-panel">
+                            <span class="material-symbols-rounded text-cyan mic-icon">mic</span>
+                        </div>
+                    </div>
+                    <p class="mic-status mt-4" id="micStatus">TAP TO ACTIVATE</p>
+
+                    <!-- Processing Result -->
+                    <div class="insight-card glass-panel hidden" id="processingResult">
+                        <div class="card-header border-bottom">
+                            <span class="material-symbols-rounded text-cyan">psychology</span>
+                            <span>AI Intent Analysis</span>
+                            <span class="badge badge-cyan ml-auto">98% Confidence</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="query-text">"I am a farmer and I need help with seeds."</p>
+                            <p class="response-text mt-3">Matched with <strong>PM Kisan Samman Nidhi</strong>. You are
+                                eligible for the upcoming ₹2000 installment. Would you like to check your status?</p>
+                            <button class="btn-primary mt-4" onclick="switchTab('dashboard')">View Scheme
+                                Dashboard</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: DASHBOARD -->
+            <div id="view-dashboard" class="view-section hidden">
+                <div class="section-heading mb-4">
+                    <h1 class="page-title">Citizen Command Center</h1>
+                    <p class="text-muted mt-1">Real-time engagement, market intelligence, and predictive insights.</p>
+                </div>
+
+                <!-- NEW: Scheme News Marquee (Parity with Flutter App) -->
+                <div class="news-marquee glass-panel mb-5">
+                    <div class="live-tag">LIVE</div>
+                    <div class="marquee-scroller">
+                        <span class="m-text">📢 PM Kisan: Next installment expected by March 15th</span>
+                        <span class="m-text">⚡ Soubhagya: New connection subsidy increased for hilly regions</span>
+                        <span class="m-text">🌾 Soil Health Card: District level camps start from Monday</span>
+                        <span class="m-text">🏥 Ayushman Bharat: 50+ new private hospitals empanelled</span>
+                    </div>
+                </div>
+
+                <div class="bento-grid">
+
+                    <!-- Main Hero Widget -->
+                    <div class="bento-item hero glass-panel span-2-col span-2-row">
+                        <div class="card-header">
+                            <span class="material-symbols-rounded text-warning">auto_awesome</span>
+                            <span>High Priority Sync</span>
+                        </div>
+                        <div class="hero-content mt-4">
+                            <h2 class="display-title">3 Benefits Pending</h2>
+                            <p class="text-muted mt-2">Based on your geographic and demographic profile, you have
+                                immediate unclaimed benefits.</p>
+                            <button class="btn-primary mt-6 hover-glow">Execute Smart Match</button>
+                        </div>
+                        <div class="hero-bg-glow"></div>
+                    </div>
+
+                    <!-- Market Data Widget -->
+                    <div class="bento-item glass-panel span-2-col row-flex">
+                        <div class="market-pill">
+                            <div class="m-icon bg-cyan-dim"><span
+                                    class="material-symbols-rounded text-cyan">agriculture</span></div>
+                            <div class="m-data">
+                                <span class="m-name">Wheat (Average)</span>
+                                <span class="m-val">₹2,450 / qtl</span>
+                            </div>
+                        </div>
+                        <div class="divider-v"></div>
+                        <div class="market-pill">
+                            <div class="m-icon bg-green-dim"><span
+                                    class="material-symbols-rounded text-green">grass</span></div>
+                            <div class="m-data">
+                                <span class="m-name">Rice (Premium)</span>
+                                <span class="m-val">₹3,100 / qtl</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pulse Widget -->
+                    <div class="bento-item glass-panel flex-column space-between">
+                        <div class="card-header">
+                            <span class="material-symbols-rounded text-purple">analytics</span>
+                            <span>Network Pulse</span>
+                        </div>
+                        <div class="pulse-data mt-4">
+                            <div class="big-number text-gradient"><span id="pulseValue">85</span>%</div>
+                            <p class="text-muted text-sm mt-1">Profile Completeness</p>
+                        </div>
+                        <div class="progress-bar mt-4">
+                            <div class="fill" style="width:85%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Milestones Widget -->
+                    <div class="bento-item glass-panel span-3-col">
+                        <div class="card-header mb-4">
+                            <span class="material-symbols-rounded text-blue">timeline</span>
+                            <span>Life Event Modifiers</span>
+                        </div>
+                        <div class="milestone-container">
+                            <div class="milestone-box group hover-glow-red">
+                                <span class="material-symbols-rounded icon-lg text-red">favorite</span>
+                                <span>Marriage</span>
+                            </div>
+                            <div class="milestone-box group hover-glow-purple">
+                                <span class="material-symbols-rounded icon-lg text-purple">child_friendly</span>
+                                <span>Childbirth</span>
+                            </div>
+                            <div class="milestone-box group hover-glow-blue">
+                                <span class="material-symbols-rounded icon-lg text-blue">school</span>
+                                <span>Education</span>
+                            </div>
+                            <div class="milestone-box group hover-glow-green">
+                                <span class="material-symbols-rounded icon-lg text-green">home_work</span>
+                                <span>Housing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- VIEW: VAULT -->
+            <div id="view-vault" class="view-section hidden">
+                <div class="section-heading flex-between mb-5">
+                    <div>
+                        <h1 class="page-title">Secured Smart Vault</h1>
+                        <p class="text-muted mt-1">Hardware encrypted, zero-knowledge document repository.</p>
+                    </div>
+                    <button class="btn-primary hover-glow flex-center gap-2" id="scanBtn">
+                        <span class="material-symbols-rounded">document_scanner</span> Initialize AI OCR
+                    </button>
+                </div>
+
+                <div class="vault-grid">
+                    <div class="document-card glass-panel flex-center flex-column text-center">
+                        <div class="doc-icon bg-cyan-dim mb-4"><span
+                                class="material-symbols-rounded text-cyan text-3xl">badge</span></div>
+                        <h3 class="text-white fs-16">Aadhaar Identity</h3>
+                        <p class="text-green fs-12 fw-600 mt-2 flex-center gap-1"><span
+                                class="material-symbols-rounded fs-14">verified</span> Cryptographically Verified</p>
+                    </div>
+                    <div class="document-card glass-panel flex-center flex-column text-center">
+                        <div class="doc-icon bg-green-dim mb-4"><span
+                                class="material-symbols-rounded text-green text-3xl">account_balance_wallet</span></div>
+                        <h3 class="text-white fs-16">Ration Registry</h3>
+                        <p class="text-green fs-12 fw-600 mt-2 flex-center gap-1"><span
+                                class="material-symbols-rounded fs-14">verified</span> Cryptographically Verified</p>
+                    </div>
+                    <div
+                        class="document-card glass-panel dashed-border flex-center flex-column text-center cursor-pointer hover-glow">
+                        <div class="doc-icon mb-4"><span class="material-symbols-rounded text-muted text-3xl">add</span>
+                        </div>
+                        <h3 class="text-muted fs-16">Import New Artifact</h3>
+                    </div>
+                </div>
+
+                <!-- SCAN OVERLAY -->
+                <div id="scanOverlay" class="scan-overlay glass-panel hidden">
+                    <div class="scanner-frame">
+                        <div class="laser-beam"></div>
+                        <span class="material-symbols-rounded text-cyan text-6xl">contact_mail</span>
+                    </div>
+                    <h2 class="mt-6 text-white text-2xl fw-500 tracking-wide">Optical Intelligence Active</h2>
+                    <p class="text-cyan mt-2">Extracting and verifying cryptographic signatures...</p>
+                </div>
+
+            </div>
+
+            <!-- VIEW: HELPLINE -->
+            <div id="view-helpline" class="view-section hidden">
+                <div class="section-heading mb-5">
+                    <h1 class="page-title">National Support Grid</h1>
+                    <p class="text-muted mt-1">Multi-lingual emergency response and regional support lines.</p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Emergency Panel -->
+                    <div class="bento-item glass-panel flex-column span-3-col">
+                        <div class="card-header mb-4">
+                            <span class="material-symbols-rounded text-red">emergency</span>
+                            <span>Critical Emergency</span>
+                        </div>
+                        <div class="row-flex" style="justify-content:flex-start; gap: 24px;">
+                            <div
+                                class="help-pill glass-panel hover-glow border-red flex-center gap-2 px-4 py-3 cursor-pointer w-100">
+                                <div class="m-icon bg-red-dim"><span
+                                        class="material-symbols-rounded text-red">local_police</span></div>
+                                <div style="text-align:left; margin-left: 12px; width: 100%;">
+                                    <p class="fs-14 fw-700">Police</p>
+                                    <p class="fs-24 fw-900 text-red">100</p>
+                                </div>
+                            </div>
+                            <div
+                                class="help-pill glass-panel hover-glow border-red flex-center gap-2 px-4 py-3 cursor-pointer w-100">
+                                <div class="m-icon bg-red-dim"><span
+                                        class="material-symbols-rounded text-red">medical_services</span></div>
+                                <div style="text-align:left; margin-left: 12px; width: 100%;">
+                                    <p class="fs-14 fw-700">Ambulance</p>
+                                    <p class="fs-24 fw-900 text-red">108</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Regional Support -->
+                    <div class="bento-item glass-panel span-2-col flex-column h-100">
+                        <div class="card-header mb-4">
+                            <span class="material-symbols-rounded text-blue">public</span>
+                            <span>Regional Support Hub</span>
+                        </div>
+                        <div class="flex-column gap-2" style="flex:1;">
+                            <div class="list-item glass-panel px-3 py-2 flex-between hover-glow">
+                                <div class="flex-center gap-2">
+                                    <div class="dot bg-blue" style="width:12px;height:12px"></div>
+                                    <div style="margin-left: 12px;">
+                                        <p class="fw-700 fs-16">UP East Helpline</p>
+                                        <p class="text-cyan fs-14 fw-800">1800-111-000</p>
+                                    </div>
+                                </div>
+                                <button class="icon-btn btn-sm"><span
+                                        class="material-symbols-rounded text-green fs-16">call</span></button>
+                            </div>
+                            <div class="list-item glass-panel px-3 py-2 flex-between hover-glow">
+                                <div class="flex-center gap-2">
+                                    <div class="dot bg-purple" style="width:12px;height:12px"></div>
+                                    <div style="margin-left: 12px;">
+                                        <p class="fw-700 fs-16">Women Support</p>
+                                        <p class="text-cyan fs-14 fw-800">181</p>
+                                    </div>
+                                </div>
+                                <button class="icon-btn btn-sm"><span
+                                        class="material-symbols-rounded text-green fs-16">call</span></button>
+                            </div>
+                            <div class="list-item glass-panel px-3 py-2 flex-between hover-glow">
+                                <div class="flex-center gap-2">
+                                    <div class="dot bg-green" style="width:12px;height:12px"></div>
+                                    <div style="margin-left: 12px;">
+                                        <p class="fw-700 fs-16">Farmer Support</p>
+                                        <p class="text-cyan fs-14 fw-800">1551</p>
+                                    </div>
+                                </div>
+                                <button class="icon-btn btn-sm"><span
+                                        class="material-symbols-rounded text-green fs-16">call</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice SOS -->
+                    <div
+                        class="bento-item glass-panel bg-cyan-dim border-cyan flex-center flex-column text-center span-1-col hover-glow h-100">
+                        <span class="material-symbols-rounded text-cyan text-6xl mb-3">auto_awesome</span>
+                        <h3 class="fs-24 fw-800 text-cyan mb-2">Voice SOS Mode</h3>
+                        <p class="fs-14 fw-600 text-muted mt-2">In emergency, shout "HELP HELP" to auto-alert locals.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- VIEW: HELP CENTER -->
+            <div id="view-help" class="view-section hidden">
+                <div class="section-heading mb-5 flex-between">
+                    <div>
+                        <h1 class="page-title">Intelligence Center</h1>
+                        <p class="text-muted mt-1">FAQ, guided tutorials, and system documentation.</p>
+                    </div>
+                </div>
+
+                <div class="bento-grid">
+                    <div class="bento-item glass-panel flex-column span-2-col">
+                        <div class="card-header mb-4">
+                            <span class="material-symbols-rounded text-purple">menu_book</span>
+                            <span>Guided Troubleshooting</span>
+                        </div>
+                        <div class="flex-column gap-2 mt-2">
+                            <details class="faq-item glass-panel p-3 hover-glow">
+                                <summary class="fw-700 fs-16 cursor-pointer">How do I switch the dialect?</summary>
+                                <p class="text-muted mt-2 fs-14 fw-500">Navigate to the language chip in the top right
+                                    corner of the command center to instantly swap between Hindi, Marathi, Telugu, and
+                                    English.</p>
+                            </details>
+                            <details class="faq-item glass-panel p-3 hover-glow mt-2">
+                                <summary class="fw-700 fs-16 cursor-pointer">Why is Local Zero-Cloud recommended?
+                                </summary>
+                                <p class="text-muted mt-2 fs-14 fw-500">Local Zero-Cloud utilizes on-device inference to
+                                    analyze your personal documents without sending them to remote servers, offering
+                                    MNC-grade privacy.</p>
+                            </details>
+                            <details class="faq-item glass-panel p-3 hover-glow mt-2">
+                                <summary class="fw-700 fs-16 cursor-pointer">How are Scheme Matches derived?</summary>
+                                <p class="text-muted mt-2 fs-14 fw-500">Our deterministic pipeline correlates your
+                                    uploaded Vault documents and regional IP metadata straight against the government
+                                    benefits API.</p>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div class="bento-item glass-panel flex-column flex-center text-center span-1-col"
+                        style="background:var(--text-main); justify-content:center;">
+                        <span class="material-symbols-rounded text-white text-6xl mb-4">chat</span>
+                        <h3 class="text-white fs-24 fw-800">Support AI Agent</h3>
+                        <p class="text-muted fs-14 fw-500 mt-2 mb-4" style="color:#aaa;">Connect with a live intelligent
+                            bot for advanced queries.</p>
+                        <button class="btn-primary" style="background:white; color:var(--text-main);">Engage
+                            Agent</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
