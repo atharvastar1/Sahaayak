@@ -26,20 +26,37 @@
     --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes logoBreathing {
+@keyframes logoFloating {
     0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px rgba(0, 180, 216, 0.2));
+        transform: translateY(0);
     }
 
     50% {
-        transform: scale(1.08);
-        filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.4));
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(0, 180, 216, 0.2));
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 25px rgba(0, 180, 216, 0.5));
+        opacity: 1;
     }
 
     100% {
         transform: scale(1);
         filter: drop-shadow(0 0 5px rgba(0, 180, 216, 0.2));
+        opacity: 0.9;
     }
 }
 
@@ -58,13 +75,15 @@
 }
 
 .logo-premium {
-    animation: logoBreathing 3s ease-in-out infinite;
+    animation: logoFloating 4s ease-in-out infinite, logoPulse 3s ease-in-out infinite;
     transition: var(--transition-smooth);
+    display: inline-block;
 }
 
 .logo-premium:hover {
-    transform: scale(1.15) rotate(5deg);
+    transform: scale(1.15) rotate(5deg) !important;
     cursor: pointer;
+    filter: drop-shadow(0 0 30px rgba(0, 180, 216, 0.7));
 }
 
 * {

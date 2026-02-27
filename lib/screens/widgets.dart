@@ -21,21 +21,34 @@ class AnimatedLogo extends StatelessWidget {
       'assets/file.svg',
       width: size,
       height: size,
+      placeholderBuilder: (context) => Container(
+        width: size,
+        height: size,
+        decoration: const BoxDecoration(
+          color: Colors.white10,
+          shape: BoxShape.circle,
+        ),
+      ),
     );
 
     if (isAnimated) {
       return logo
           .animate(onPlay: (controller) => controller.repeat(reverse: true))
+          .moveY(begin: -4, end: 4, duration: 2.seconds, curve: Curves.easeInOut)
           .scale(
             begin: const Offset(1, 1),
-            end: const Offset(1.1, 1.1),
+            end: const Offset(1.05, 1.05),
             duration: 2.seconds,
             curve: Curves.easeInOut,
           )
+          .then() // Chain specialized effects
           .shimmer(
             duration: 3.seconds,
-            color: Colors.white.withValues(alpha: 0.2),
-          );
+            color: Colors.white.withValues(alpha: 0.3),
+          )
+          .animate() // This one is for the entrance
+          .fadeIn(duration: 800.ms)
+          .scale(begin: const Offset(0.8, 0.8), curve: Curves.elasticOut, duration: 1.seconds);
     }
 
     return logo;
