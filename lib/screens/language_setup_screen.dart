@@ -1,9 +1,10 @@
-import '../services/language_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/sahaayak_theme.dart';
+import '../services/language_manager.dart';
 import '../services/voice_service.dart';
 import 'shell_screen.dart';
+import 'widgets.dart';
 
 class LanguageSetupScreen extends StatefulWidget {
   const LanguageSetupScreen({super.key});
@@ -54,11 +55,10 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.language_rounded, color: SahaayakTheme.primary, size: 48)
-                            .animate().scale(delay: 200.ms, curve: Curves.elasticOut),
+                        const AnimatedLogo(size: 80, isAnimated: true),
                         const SizedBox(height: 32),
                         const Text(
-                          'Sahaayak AI',
+                          'Sahaayak BharatBot',
                           style: TextStyle(
                             fontWeight: FontWeight.w800, 
                             fontSize: 48, 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../theme/sahaayak_theme.dart';
 import 'language_setup_screen.dart';
+import 'widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -65,13 +66,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Display the official logo image
-                Image.asset(
-                  'assets/logo.png',
-                  width: 220,
-                  height: 220,
-                  fit: BoxFit.contain,
-                ),
+                const AnimatedLogo(size: 150),
                 const SizedBox(height: 48),
                 const Text(
                   'SAHAAYAK AI',
