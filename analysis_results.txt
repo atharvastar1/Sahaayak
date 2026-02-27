@@ -1,0 +1,5 @@
+Analyzing flutter_sahaayak...                                   
+
+   info • 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre • lib/screens/settings_screen.dart:202:9 • deprecated_member_use
+
+1 issue found. (ran in 4.9s)

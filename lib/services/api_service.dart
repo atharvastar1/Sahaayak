@@ -31,8 +31,8 @@ class ApiService {
     }
   }
 
-  /// Sends audio file to backend for STT
-  Future<String> uploadAudio(String filePath) async {
+  /// Sends audio file to backend for STT (Whisper)
+  Future<Map<String, String>> uploadAudio(String filePath) async {
     var request = http.MultipartRequest('POST', Uri.parse('$_baseUrl/stt'));
     request.files.add(await http.MultipartFile.fromPath('audio', filePath));
     
@@ -41,7 +41,10 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data['text'];
+      return {
+        'text': data['text'] as String,
+        'language': data['detected_language'] as String,
+      };
     } else {
       throw Exception('Failed to convert speech to text');
     }

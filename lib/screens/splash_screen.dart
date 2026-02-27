@@ -20,19 +20,19 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 2000),
     );
     
     _fade = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.6, curve: Curves.easeIn)),
+      CurvedAnimation(parent: _controller, curve: const Interval(0.2, 0.8, curve: Curves.easeIn)),
     );
-    _scale = Tween<double>(begin: 0.8, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.8, curve: Curves.easeOutBack)),
+    _scale = Tween<double>(begin: 0.9, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: const Interval(0.2, 1.0, curve: Curves.easeOutBack)),
     );
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 4), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: SahaayakTheme.background,
       body: Center(
         child: FadeTransition(
           opacity: _fade,
@@ -65,26 +65,31 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Display the official logo image
                 Image.asset(
                   'assets/logo.png',
-                  width: 180,
-                  height: 180,
+                  width: 220,
+                  height: 220,
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 32),
-                Text(
-                  'SAHAAYAK',
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: SahaayakTheme.primaryBlue,
-                    letterSpacing: 2,
-                    fontSize: 40,
+                const SizedBox(height: 48),
+                const Text(
+                  'SAHAAYAK AI',
+                  style: TextStyle(
+                    color: Color(0xFF1D1D1F),
+                    letterSpacing: 6,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Voice AI for Bharat',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: SahaayakTheme.textSecondary,
-                    fontWeight: FontWeight.w600,
+                  'VOICE • TRUST • BHARAT',
+                  style: TextStyle(
+                    color: SahaayakTheme.primaryBlue.withValues(alpha: 0.4),
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 3,
+                    fontSize: 10,
                   ),
                 ),
               ],

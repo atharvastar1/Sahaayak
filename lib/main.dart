@@ -1,12 +1,13 @@
-import 'services/language_manager.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'services/voice_service.dart';
+import 'services/language_manager.dart';
 import 'screens/splash_screen.dart';
 import 'theme/sahaayak_theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await VoiceService.init();
   
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

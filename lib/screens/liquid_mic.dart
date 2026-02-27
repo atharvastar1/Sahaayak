@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/sahaayak_theme.dart';
+import '../services/haptic_service.dart';
 
 class LiquidMicButton extends StatefulWidget {
   final bool isListening;
@@ -17,119 +19,180 @@ class LiquidMicButton extends StatefulWidget {
 }
 
 class _LiquidMicButtonState extends State<LiquidMicButton> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late AnimationController _pulseController;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _pulseController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(milliseconds: 2000),
     );
-    if (widget.isListening) {
-      _controller.repeat();
-    }
+    if (widget.isListening) _pulseController.repeat();
   }
 
   @override
   void didUpdateWidget(LiquidMicButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isListening && !oldWidget.isListening) {
-      _controller.repeat();
+      _pulseController.repeat();
     } else if (!widget.isListening && oldWidget.isListening) {
-      _controller.stop();
+      _pulseController.stop();
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _pulseController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTapDown: (_) {
+        HapticService.light();
+        setState(() {});
+      },
+      onTapUp: (_) => setState(() {}),
+      onTap: () {
+        HapticService.medium();
+        widget.onTap();
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [
+          // 1. LIFE-PULSE AURA (Ethereal Glow)
           if (widget.isListening)
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return CustomPaint(
-                  painter: LiquidPainter(_controller.value),
-                  size: const Size(220, 220),
-                );
-              },
-            ),
+            ...List.generate(2, (index) {
+              return AnimatedBuilder(
+                animation: _pulseController,
+                builder: (context, child) {
+                  final progress = (_pulseController.value + (index * 0.5)) % 1.0;
+                  return Container(
+                    width: 140 + (progress * 160),
+                    height: 140 + (progress * 160),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: SahaayakTheme.primary.withValues(alpha: 0.15 * (1.0 - progress)),
+                          blurRadius: 40,
+                          spreadRadius: 20 * progress,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
+
+          // 2. SILICON ORB BASE (Tactile Depth)
           AnimatedContainer(
-            duration: const Duration(milliseconds: 400),
+            duration: 400.ms,
+            width: 160,
+            height: 160,
+            decoration: SahaayakTheme.siliconOrb(
+              glowColor: widget.isListening ? SahaayakTheme.primary : null,
+            ),
+          ),
+
+          // 3. INTERNAL LIQUID CORE (Animated Aura)
+          AnimatedContainer(
+            duration: 800.ms,
             width: 140,
             height: 140,
             decoration: BoxDecoration(
-              gradient: widget.isListening ? SahaayakTheme.appleGradient : null,
-              color: widget.isListening ? null : Colors.white,
               shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: (widget.isListening ? SahaayakTheme.primaryBlue : Colors.black).withValues(alpha: 0.15),
-                  blurRadius: 40,
-                  offset: const Offset(0, 15),
-                ),
-              ],
+              gradient: widget.isListening 
+                  ? SahaayakTheme.aiAura 
+                  : SahaayakTheme.appleGradient,
             ),
-            child: Icon(
-              widget.isListening ? Icons.stop_rounded : Icons.mic_rounded,
-              size: 64,
-              color: widget.isListening ? Colors.white : SahaayakTheme.primaryBlue,
+            child: widget.isListening 
+              ? _buildLiquidWaves()
+              : const Center(
+                  child: Icon(
+                    Icons.mic_rounded,
+                    size: 56,
+                    color: Colors.white,
+                  ),
+                ),
+          ).animate(target: widget.isListening ? 1 : 0)
+           .scale(begin: const Offset(1, 1), end: const Offset(1.05, 1.05), curve: Curves.easeInOut),
+
+          // 4. GLASS SHINE (Top Layer highlighting)
+          IgnorePointer(
+            child: Container(
+              width: 130,
+              height: 130,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white.withValues(alpha: 0.4),
+                    Colors.white.withValues(alpha: 0.0),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildLiquidWaves() {
+    return Stack(
+      children: [
+        const Center(
+          child: Icon(
+            Icons.stop_rounded,
+            size: 48,
+            color: Colors.white,
+          ),
+        ),
+        // Simple liquid simulation using animated containers or icons
+        Positioned.fill(
+          child: CustomPaint(
+            painter: _WavePainter(
+              animation: _pulseController,
+              color: Colors.white.withValues(alpha: 0.2),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-class LiquidPainter extends CustomPainter {
-  final double progress;
-  LiquidPainter(this.progress);
+class _WavePainter extends CustomPainter {
+  final Animation<double> animation;
+  final Color color;
+
+  _WavePainter({required this.animation, required this.color}) : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final paint = Paint()
-      ..shader = SahaayakTheme.appleGradient.createShader(Offset.zero & size)
-      ..style = PaintingStyle.fill;
-
+    final paint = Paint()..color = color;
     final path = Path();
-    final double radius = size.width / 2.5;
     
-    // Create organic blob shape using sine waves 
-    const int points = 120;
-    for (int i = 0; i < points; i++) {
-       double angle = (i / points) * 2 * math.pi;
-       double variance = 10 * math.sin(angle * 4 + progress * 2 * math.pi) +
-                         8 * math.sin(angle * 7 - progress * 4 * math.pi);
-       
-       double currentRadius = radius + variance;
-       double x = center.dx + currentRadius * math.cos(angle);
-       double y = center.dy + currentRadius * math.sin(angle);
-       
-       if (i == 0) {
-         path.moveTo(x, y);
-       } else {
-         path.lineTo(x, y);
-       }
+    const waveHeight = 10.0;
+    final speed = animation.value * 2 * math.pi;
+    
+    path.moveTo(0, size.height * 0.6);
+    for (double i = 0; i <= size.width; i++) {
+      path.lineTo(i, size.height * 0.6 + math.sin(speed + i * 0.05) * waveHeight);
     }
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
     path.close();
     
-    // Draw multiple layers with different opacities for "rich" look
-    canvas.drawPath(path, Paint()..shader = paint.shader!..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15));
-    canvas.drawPath(path, Paint()..shader = paint.shader!..color = Colors.white.withValues(alpha: 0.2));
+    canvas.drawPath(path, paint);
   }
 
   @override
-  bool shouldRepaint(LiquidPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
+

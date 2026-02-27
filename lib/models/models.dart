@@ -5,6 +5,7 @@ class Scheme {
   final String eligibility;
   final String benefits;
   final String? link;
+  final String? category;
 
   Scheme({
     required this.id,
@@ -13,6 +14,7 @@ class Scheme {
     required this.eligibility,
     required this.benefits,
     this.link,
+    this.category,
   });
 
   factory Scheme.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class Scheme {
       eligibility: json['eligibility'],
       benefits: json['benefits'],
       link: json['link'],
+      category: json['category'],
     );
   }
 
@@ -34,6 +37,7 @@ class Scheme {
       'eligibility': eligibility,
       'benefits': benefits,
       'link': link,
+      'category': category,
     };
   }
 }

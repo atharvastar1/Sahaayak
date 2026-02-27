@@ -1,5 +1,4 @@
 import '../services/language_manager.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/sahaayak_theme.dart';
@@ -28,153 +27,205 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
   }
 
   final List<Map<String, dynamic>> _languages = [
-    {'name': 'English', 'code': 'en', 'label': 'English', 'icon': '🌍', 'sub': 'Global'},
-    {'name': 'हिंदी', 'code': 'hi', 'label': 'Hindi', 'icon': '🇮🇳', 'sub': 'North India'},
-    {'name': 'বাংলা', 'code': 'bn', 'label': 'Bengali', 'icon': '🇧🇩', 'sub': 'East India'},
-    {'name': 'తెలుగు', 'code': 'te', 'label': 'Telugu', 'icon': '🛕', 'sub': 'South India'},
-    {'name': 'मराठी', 'code': 'mr', 'label': 'Marathi', 'icon': '🚩', 'sub': 'West India'},
-    {'name': 'தமிழ்', 'code': 'ta', 'label': 'Tamil', 'icon': '🏛️', 'sub': 'South India'},
-    {'name': 'اردو', 'code': 'ur', 'label': 'Urdu', 'icon': '🕌', 'sub': 'Nationwide'},
-    {'name': 'ગુજરાતી', 'code': 'gu', 'label': 'Gujarati', 'icon': '🦁', 'sub': 'West India'},
-    {'name': 'ಕನ್ನಡ', 'code': 'kn', 'label': 'Kannada', 'icon': '🐘', 'sub': 'South India'},
+    {'name': 'English', 'code': 'en', 'label': 'English', 'icon': 'AN', 'sub': 'International'},
+    {'name': 'हिंदी', 'code': 'hi', 'label': 'Hindi', 'icon': 'अ', 'sub': 'Bharat'},
+    {'name': 'मराठी', 'code': 'mr', 'label': 'Marathi', 'icon': 'म', 'sub': 'Bharat'},
+    {'name': 'తెలుగు', 'code': 'te', 'label': 'Telugu', 'icon': 'తె', 'sub': 'Bharat'},
+    {'name': 'தமிழ்', 'code': 'ta', 'label': 'Tamil', 'icon': 'த', 'sub': 'Bharat'},
+    {'name': 'ગુજરાતી', 'code': 'gu', 'label': 'Gujarati', 'icon': 'ગુ', 'sub': 'Bharat'},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Select Language',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: SahaayakTheme.primaryBlue, letterSpacing: 1),
-                    ).animate().fadeIn(),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'अपनी भाषा चुनें',
-                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 34, letterSpacing: -1),
-                    ).animate().fadeIn(delay: const Duration(milliseconds: 100)).slideX(begin: -0.1),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'Sahaayak will talk to you in this language.',
-                      style: TextStyle(color: SahaayakTheme.textSecondary, fontSize: 17),
-                    ).animate().fadeIn(delay: const Duration(milliseconds: 200)),
-                  ],
+      backgroundColor: SahaayakTheme.background,
+      body: Stack(
+        children: [
+          // Subtle accent background
+          _buildSubtleAccents(),
+          
+          SafeArea(
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 60, 32, 48),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.language_rounded, color: SahaayakTheme.primary, size: 48)
+                            .animate().scale(delay: 200.ms, curve: Curves.elasticOut),
+                        const SizedBox(height: 32),
+                        const Text(
+                          'Sahaayak AI',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800, 
+                            fontSize: 48, 
+                            letterSpacing: -2.5, 
+                            color: SahaayakTheme.primaryDark,
+                            height: 1.0,
+                          ),
+                        ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.1),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Choose your preferred language to begin your journey.',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: SahaayakTheme.textSecondary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).animate().fadeIn(delay: 500.ms),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 0.85,
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  sliver: SliverGrid(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      childAspectRatio: 1.1,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final lang = _languages[index];
+                        final isSelected = _selectedLang == lang['code'];
+                        return _buildModernLangCard(lang, isSelected);
+                      },
+                      childCount: _languages.length,
+                    ),
+                  ),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final lang = _languages[index];
-                    final isSelected = _selectedLang == lang['code'];
-                    return _buildLanguageCard(lang, isSelected);
-                  },
-                  childCount: _languages.length,
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
-          ],
-        ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
-          child: ElevatedButton(
-            onPressed: _selectedLang == null ? null : () {
-              final languageManager = LanguageManager.of(context);
-              if (languageManager != null) {
-                 languageManager.onLanguageChanged(_selectedLang!);
-              }
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShellScreen()));
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: SahaayakTheme.primaryBlue,
-              foregroundColor: Colors.white,
-              elevation: 0,
-              minimumSize: const Size(double.infinity, 64),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              disabledBackgroundColor: SahaayakTheme.offlineGrey.withValues(alpha: 0.2),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Get Started', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                SizedBox(width: 8),
-                Icon(Icons.arrow_forward_rounded),
+                const SliverToBoxAdapter(child: SizedBox(height: 120)),
               ],
             ),
           ),
-        ),
+          
+          // Fixed Bottom Action
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _buildActionBottomBar(),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildLanguageCard(Map<String, dynamic> lang, bool isSelected) {
+  Widget _buildSubtleAccents() {
+    return Stack(
+      children: [
+        Positioned(
+          top: -50,
+          left: -50,
+          child: Container(
+            width: 300,
+            height: 300,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: SahaayakTheme.primary.withValues(alpha: 0.03),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildModernLangCard(Map<String, dynamic> lang, bool isSelected) {
     return GestureDetector(
       onTap: () {
         setState(() => _selectedLang = lang['code']);
         VoiceService.speak(lang['name'], lang['code']);
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isSelected ? SahaayakTheme.primaryBlue : SahaayakTheme.surface,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isSelected ? SahaayakTheme.primaryBlue : Colors.black.withValues(alpha: 0.05),
-            width: 2,
-          ),
-          boxShadow: isSelected ? [
-            BoxShadow(color: SahaayakTheme.primaryBlue.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10))
-          ] : [],
-        ),
+        duration: 400.ms,
+        curve: Curves.easeOutQuart,
+        padding: const EdgeInsets.all(24),
+        decoration: isSelected 
+          ? BoxDecoration(
+              color: SahaayakTheme.primaryDark,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.2),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                )
+              ],
+            )
+          : SahaayakTheme.premiumCard(radius: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(lang['icon'], style: const TextStyle(fontSize: 20)),
+            Text(
+              lang['icon'], 
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.w800,
+                color: isSelected ? Colors.white : SahaayakTheme.primary,
+              ),
+            ),
             const Spacer(),
             Text(
               lang['name'],
               style: TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 16,
-                color: isSelected ? Colors.white : SahaayakTheme.textMain,
+                fontSize: 18,
+                color: isSelected ? Colors.white : SahaayakTheme.primaryDark,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 2),
             Text(
               lang['sub'],
               style: TextStyle(
                 fontSize: 11,
-                fontWeight: FontWeight.w500,
-                color: isSelected ? Colors.white.withValues(alpha: 0.8) : SahaayakTheme.textSecondary,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+                color: isSelected ? Colors.white.withValues(alpha: 0.5) : SahaayakTheme.textSecondary,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
-      ).animate(target: isSelected ? 1 : 0).scale(begin: const Offset(1, 1), end: const Offset(1.03, 1.03)),
+      ).animate(target: isSelected ? 1 : 0).scale(begin: const Offset(1, 1), end: const Offset(1.05, 1.05)),
     );
   }
+
+  Widget _buildActionBottomBar() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(32, 24, 32, 48),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            SahaayakTheme.background.withValues(alpha: 0.0),
+            SahaayakTheme.background,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: const [0.0, 0.4],
+        ),
+      ),
+      child: ElevatedButton(
+        onPressed: _selectedLang == null ? null : () {
+          final languageManager = LanguageManager.of(context);
+          if (languageManager != null) {
+             languageManager.onLanguageChanged(_selectedLang!);
+          }
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShellScreen()));
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: SahaayakTheme.primaryDark,
+          minimumSize: const Size(double.infinity, 72),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 0,
+        ),
+        child: const Text(
+          'CONTINUE', 
+          style: TextStyle(letterSpacing: 1, fontWeight: FontWeight.w800),
+        ),
+      ),
+    ).animate().fadeIn(delay: 800.ms);
+  }
 }
+
