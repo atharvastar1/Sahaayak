@@ -122,3 +122,38 @@ setInterval(() => {
         pulseEl.innerText = val;
     }
 }, 4000);
+
+// WhatsApp Simulation Logic
+let waFlowStep = 0;
+function simulateWhatsAppFlow() {
+    const chatBody = document.getElementById('waChatBody');
+    if (!chatBody) return;
+
+    if (waFlowStep === 0) {
+        waFlowStep++;
+        const myMsg = document.createElement('div');
+        myMsg.innerHTML = `<p class="fs-14 fw-500">I need help with seeds. I am a farmer in UP.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">10:01 AM</span>`;
+        myMsg.style = "background:#D9FDD3; padding:8px 12px; border-radius:12px; border-top-right-radius:0; max-width:80%; align-self:flex-end; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+        chatBody.appendChild(myMsg);
+
+        setTimeout(() => {
+            const typingMsg = document.createElement('div');
+            typingMsg.id = "waTyping";
+            typingMsg.innerHTML = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14"><i>typing...</i></p>`;
+            typingMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+            chatBody.appendChild(typingMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            setTimeout(() => {
+                const typing = document.getElementById('waTyping');
+                if (typing) typing.remove();
+
+                const replyMsg = document.createElement('div');
+                replyMsg.innerHTML = `<span class="fw-700 text-green fs-14" style="color:#008069">Sahaayak AI</span><p class="mt-1 text-main fs-14">You are eligible for the <b>PM Kisan Samman Nidhi</b> scheme! I have automatically registered your profile. You will receive ₹2000 in your linked bank account.</p><p class="mt-2 text-main fs-14">You also qualify for a UP State Seed Subsidy. Type <b>YES</b> to apply.</p><span style="font-size:11px; color:#999; float:right; margin-top:4px;">10:01 AM</span>`;
+                replyMsg.style = "background:white; padding:8px 12px; border-radius:12px; border-top-left-radius:0; max-width:80%; align-self:flex-start; margin-bottom:12px; box-shadow:0 1px 2px rgba(0,0,0,0.1);";
+                chatBody.appendChild(replyMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1800);
+        }, 500);
+    }
+}
