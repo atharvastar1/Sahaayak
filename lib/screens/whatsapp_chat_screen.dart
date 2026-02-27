@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../theme/sahaayak_theme.dart';
 import '../services/haptic_service.dart';
 
 class WhatsAppChatScreen extends StatefulWidget {
@@ -115,15 +114,15 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
               child: Image.asset('assets/logo.png', width: 24, height: 24),
             ),
             const SizedBox(width: 12),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Sahaayak AI Assistant', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
+                Text('Sahaayak AI Assistant', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
                 Row(
                   children: [
-                    const Icon(Icons.verified_rounded, color: Color(0xFFD9FDD3), size: 12),
-                    const SizedBox(width: 4),
-                    const Text('Official Government API', style: TextStyle(color: Color(0xFFD9FDD3), fontSize: 12)),
+                    Icon(Icons.verified_rounded, color: Color(0xFFD9FDD3), size: 12),
+                    SizedBox(width: 4),
+                    Text('Official Government API', style: TextStyle(color: Color(0xFFD9FDD3), fontSize: 12)),
                   ],
                 ),
               ],

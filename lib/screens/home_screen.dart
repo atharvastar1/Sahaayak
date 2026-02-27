@@ -14,6 +14,7 @@ import '../services/feedback_engine.dart';
 import '../services/voice_service.dart';
 import 'widgets.dart';
 import '../services/recording_service.dart';
+import 'whatsapp_chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AIResponse? _response;
   final String _lastWords = "";
   List<AIResponse> _history = [];
-  bool _isTextMode = false;
 
   @override
   void initState() {
@@ -85,9 +85,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           IconButton(
             onPressed: () {
               HapticService.light();
-              setState(() => _isTextMode = !_isTextMode);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const WhatsAppChatScreen()));
             },
-            icon: Icon(_isTextMode ? Icons.mic_rounded : Icons.keyboard_rounded),
+            icon: const Icon(Icons.chat_rounded),
             style: IconButton.styleFrom(
               backgroundColor: Colors.white.withValues(alpha: 0.5),
               foregroundColor: SahaayakTheme.primary,
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
         ),
         const Spacer(),
-        if (_isTextMode) _buildTextInput() else _buildMicSection(),
+        _buildMicSection(),
         const Spacer(),
         if (_history.isNotEmpty) _buildRecentInsights() else _buildQuickOptions(),
         const SizedBox(height: 40),
@@ -191,45 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildTextInput() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      padding: const EdgeInsets.all(8),
-      decoration: SahaayakTheme.premiumCard(radius: 24),
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(
-                  hintText: 'Type your question...',
-                  border: InputBorder.none,
-                ),
-                onSubmitted: (val) {
-                  if (val.isNotEmpty) {
-                    _handleQuery(val);
-                    _textController.clear();
-                  }
-                },
-              ),
-            ),
-          ),
-          IconButton.filled(
-            onPressed: () {
-              if (_textController.text.isNotEmpty) {
-                _handleQuery(_textController.text);
-                _textController.clear();
-              }
-            },
-            icon: const Icon(Icons.send_rounded),
-            style: IconButton.styleFrom(backgroundColor: SahaayakTheme.primary),
-          ),
-        ],
-      ),
-    ).animate().scale(duration: 400.ms, curve: Curves.easeOutBack);
-  }
+
 
   Widget _buildMicSection() {
     final langCode = LanguageManager.of(context)?.currentLanguage ?? 'en';
