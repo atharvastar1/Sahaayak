@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Miscellaneous
 *.class
 *.log
@@ -46,3 +47,24 @@ app.*.map.json
 *.apk
 *.aab
 
+=======
+# Virtual Environment
+venv/
+env/
+
+# Environment Variables (Keep Secrets Safe!)
+.env
+
+# Large Data Files (Models, Vectors, Parquets)
+data/*.bin
+data/*.parquet
+data/*.pt
+*.safetensors
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+>>>>>>> 363041d (feat: production ready backend with caching, auth, and rate limiting)
