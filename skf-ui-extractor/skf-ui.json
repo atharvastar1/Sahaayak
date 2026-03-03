@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "title": "A Fighting Friction Initiative | SKF",
+    "description": "The space program that never leaves Earth",
+    "url": "https://www.skf.com/group/fighting-friction/01"
+  },
+  "headings": [
+    "A Fighting Friction Initiative",
+    "HARNESSING MOON ENERGY FROM EARTH",
+    "LUNA 12",
+    "9500 kWh",
+    "Average moon energy generated per day",
+    "The technology behind Luna 12",
+    "A shared mission to make the most of the resources we already have on Earth",
+    "The Faroe Islands",
+    "Minesto",
+    "SKF",
+    "HARNESSING MOON ENERGY FROM EARTH",
+    "Discover the untapped potential of tidal energy",
+    "Discover the untapped potential of tidal energy",
+    "Global potential",
+    "North America",
+    "United Kingdom",
+    "Indonesia",
+    "Learn more about the power of the ocean",
+    "SKF in ocean energy",
+    "Harnessing wave energy"
+  ],
+  "links": [
+    {
+      "text": "Back to SKF.com",
+      "href": "https://www.skf.com/group/"
+    },
+    {
+      "text": "The Faroe Islands SEV, the main power supplier on the Faroe Islands, are working towards 100% renewable energy by 2030. Visit Faroe Islands",
+      "href": "https://www.faroeislands.fo/economy-business/energy"
+    },
+    {
+      "text": "Minesto Minesto enables renewable electricity from the ocean, and can be installed in areas where no other known technology can operate cost effectively. Visit Minesto",
+      "href": "https://minesto.com/"
+    },
+    {
+      "text": "SKF At SKF we're focused on making the most of the resources we already have. By fighting friction, we're contributing to a world where we can all do more with less. About SKF",
+      "href": "https://www.skf.com/group"
+    },
+    {
+      "text": "SKF in ocean energy",
+      "href": "https://www.skf.com/group/newsroom/news-and-stories/going-with-the-flow"
+    },
+    {
+      "text": "Harnessing wave energy",
+      "href": "https://www.skf.com/group/newsroom/news-and-stories/riding-the-renewables-wave"
+    },
+    {
+      "text": "www.minesto.com",
+      "href": "https://minesto.com/our-technology/environmental-impact/"
+    },
+    {
+      "text": "Vattenfall",
+      "href": "https://www.vattenfall.se/fokus/tips-rad/vad-ar-normal-elforbrukning"
+    },
+    {
+      "text": "www.minesto.com",
+      "href": "https://minesto.com/"
+    },
+    {
+      "text": "(alt. How is bearing selection affecting your industry’s CO2 footprint? | SKF)",
+      "href": "https://www.skf.com/group/organisation/sustainability/achieving-net-zero/co2-dashboard"
+    },
+    {
+      "text": "Terms of Use",
+      "href": "https://www.skf.com/group/footer/terms-and-conditions"
+    },
+    {
+      "text": "Privacy Policy",
+      "href": "https://www.skf.com/group/footer/privacy-policy"
+    },
+    {
+      "text": "Site ownership",
+      "href": "https://www.skf.com/group/footer/site-ownership"
+    },
+    {
+      "text": "General conditions of sales",
+      "href": "https://www.skf.com/group/footer/general-conditions-of-sales"
+    },
+    {
+      "text": "Cookies",
+      "href": "https://www.skf.com/group/footer/cookies"
+    }
+  ],
+  "buttons": [
+    "See campaign film",
+    "See campaign film",
+    "Cookie settings"
+  ],
+  "images": [
+    {
+      "alt": "Faroe Islands",
+      "src": "https://www.skf.com/fighting-friction/01/assets/logos/faroe-islands.svg"
+    },
+    {
+      "alt": "The Faroe Islands - Visit Faroe Islands",
+      "src": "https://www.skf.com/fighting-friction/01/assets/images/the-faroe-islands.jpg"
+    },
+    {
+      "alt": "Minesto - Visit Minesto",
+      "src": "https://www.skf.com/fighting-friction/01/assets/images/minesto.jpg"
+    },
+    {
+      "alt": "SKF - About SKF",
+      "src": "https://www.skf.com/fighting-friction/01/assets/images/skf.jpg"
+    },
+    {
+      "alt": "SKF in ocean energyarticle image",
+      "src": "https://www.skf.com/fighting-friction/01/assets/images/fisp-ocean-energy.png"
+    },
+    {
+      "alt": "Harnessing wave energyarticle image",
+      "src": "https://www.skf.com/fighting-friction/01/assets/images/fisp-harness-wave-energy.png"
+    }
+  ],
+  "sections": [
+    {
+      "id": null,
+      "class": "relative flex h-[100svh] items-start overflow-hidden pt-[6.25rem] text-white tablet:pt-[9.5625rem] desktop:items-center desktop:pt-0 max-desktop:landscape:h-auto max-desktop:landscape:pt-20 px-[0.9375rem] tablet:px-[1.25rem] desktop:px-30v"
+    },
+    {
+      "id": null,
+      "class": "h-[100svh]"
+    },
+    {
+      "id": null,
+      "class": "pointer-events-none h-[300svh]"
+    },
+    {
+      "id": "app-luna12-information",
+      "class": "pointer-events-none h-[100svh]"
+    },
+    {
+      "id": null,
+      "class": "pointer-events-none relative h-[200svh] w-full overflow-hidden pb-[40svh] opacity-0"
+    },
+    {
+      "id": null,
+      "class": "pointer-events-none relative h-[200svh] w-full overflow-hidden pb-[10svh] opacity-0"
+    },
+    {
+      "id": null,
+      "class": "pointer-events-none relative h-[200svh] w-full overflow-hidden"
+    },
+    {
+      "id": null,
+      "class": "pointer-events-none h-[200svh]"
+    },
+    {
+      "id": "app-technology-behind-luna",
+      "class": "h-[250svh]"
+    },
+    {
+      "id": null,
+      "class": "grid grid-cols-6 gap-x-4 bg-white px-0 pb-[5.625rem] pt-[3.75rem] text-black tablet:grid-cols-12 tablet:gap-x-[1.375rem] tablet:gap-y-[3.125rem] tablet:px-[1.25rem] tablet:pb-[6.25rem] tablet:pt-20 desktop:gap-x-[1.25rem] desktop:px-[1.875rem] desktop:pb-[9.375rem] desktop-lg:gap-x-9 desktop-lg:pb-[12.5rem] desktop-lg:pt-[3.75rem] desktop-lg:text-4048"
+    },
+    {
+      "id": null,
+      "class": "relative flex aspect-[375/500] overflow-hidden tablet:aspect-[834/999] desktop:aspect-video"
+    },
+    {
+      "id": null,
+      "class": "grid grid-cols-6 gap-x-4 bg-white text-black max-tablet:gap-y-10 tablet:grid-cols-12 tablet:gap-[1.375rem] desktop:gap-x-30v desktop-lg:gap-x-9 py-[5.625rem] tablet:px-[1.875rem] tablet:py-[6.25rem] desktop:py-[9.375rem] desktop-lg:py-[12.5rem]"
+    }
+  ]
+}

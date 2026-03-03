@@ -1,61 +1,16 @@
-<<<<<<< HEAD
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+# Node
+node_modules/
+dist/
+build/
 
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
-
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/build/
-/android/.gradle/
-**/build/
-*.apk
-*.aab
-
-=======
-# Virtual Environment
+# Python Virtual Environment
 venv/
 env/
 
-# Environment Variables (Keep Secrets Safe!)
+# Environment Variables
 .env
 
-# Large Data Files (Models, Vectors, Parquets)
+# Large Data Files
 data/*.bin
 data/*.parquet
 data/*.pt
@@ -67,4 +22,24 @@ __pycache__/
 
 # Logs
 *.log
->>>>>>> 363041d (feat: production ready backend with caching, auth, and rate limiting)
+
+# Flutter
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/coverage/
+
+# Android
+/android/app/build/
+/android/.gradle/
+**/build/
+*.apk
+*.aab
+
+# Symbolication
+app.*.symbols
+
+# Obfuscation
+app.*.map.json
