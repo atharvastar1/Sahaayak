@@ -34,8 +34,8 @@ from slowapi.errors import RateLimitExceeded
 from dotenv import load_dotenv
 
 from schemas import ChatRequest, ChatResponse, SchemeResult, HealthResponse, ErrorResponse
-from retriever import retrieve, SCHEMES_LOADED, MODELS_READY, warmup
-from llm import generate_explanation, detect_language
+from retriever import retrieve_async, SCHEMES_LOADED, MODELS_READY, warmup
+from llm import generate_explanation, detect_language, get_active_llm_engine
 from tts import text_to_speech_base64
 from cache import response_cache, session_memory
 from logger import get_logger, Timer
@@ -157,12 +157,30 @@ async def log_requests(request: Request, call_next):
 def health_check():
     """Health check endpoint — use this for AWS ALB/EC2 health checks."""
     return HealthResponse(
-        status      = "ok" if MODELS_READY else "degraded",
-        environment = APP_ENV,
+        status         = "ok" if MODELS_READY else "degraded",
+        environment    = APP_ENV,
         schemes_loaded = SCHEMES_LOADED,
         models_ready   = MODELS_READY,
         cache_size     = response_cache.size(),
+        llm_engine     = get_active_llm_engine(),
     )
+
+
+@app.get("/engine", tags=["System"])
+def engine_info():
+    """
+    Returns the active LLM engine info.
+    Frontend uses this to display the AWS Bedrock / Groq badge.
+    """
+    engine = get_active_llm_engine()
+    return {
+        "engine":      engine,
+        "primary":     "Amazon Bedrock",
+        "model":       __import__('os').getenv('BEDROCK_MODEL_ID', 'amazon.nova-lite-v1:0') if engine == 'bedrock' else 'llama-3.3-70b-versatile',
+        "provider":    "AWS" if engine == 'bedrock' else 'Groq',
+        "aws_region":  __import__('os').getenv('AWS_REGION', 'ap-south-1'),
+        "status":      "active" if engine == 'bedrock' else 'fallback',
+    }
 
 
 @app.post(
@@ -197,11 +215,12 @@ async def chat(request: Request, req: ChatRequest):
         return ChatResponse(**cached, request_id=request_id, cached=True)
 
     # ── 2. Language detection ──────────────────────────────────────────────────
-    language = detect_language(req.message)
+    language_hint = getattr(req, "language_hint", "") or ""
+    language = detect_language(req.message, language_hint)
 
-    # ── 3. RAG retrieval ───────────────────────────────────────────────────────
+    # ── 3. RAG retrieval (with auto-translation for non-English queries) ─────────
     with Timer() as t_rag:
-        raw_schemes = retrieve(query=req.message, top_k=5)
+        raw_schemes = await retrieve_async(query=req.message, language=language, top_k=5)
     log.info("RAG complete", extra={"ctx_request_id": request_id, "ctx_rag_ms": t_rag.elapsed_ms, "ctx_results": len(raw_schemes)})
 
     schemes_out = [
@@ -223,6 +242,7 @@ async def chat(request: Request, req: ChatRequest):
             schemes    = raw_schemes,
             language   = language,
             session_id = req.session_id,
+            life_event = getattr(req, "life_event", ""),
         )
     log.info("LLM complete", extra={"ctx_request_id": request_id, "ctx_llm_ms": t_llm.elapsed_ms})
 

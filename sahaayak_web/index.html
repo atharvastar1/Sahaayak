@@ -27,33 +27,109 @@
     <div id="screen-language" class="screen full-center hidden">
         <div class="lang-container glass-panel">
             <span class="material-symbols-rounded icon-lg text-cyan mb-2">language</span>
-            <h1 style="font-size: 32px; font-weight:900; letter-spacing:-1px;" class="text-center">Global Reach, Local
-                Voice</h1>
-            <p class="text-muted text-center mt-2 mb-5">Select your primary enterprise dialect.</p>
+            <h1 style="font-size: 32px; font-weight:900; letter-spacing:-1px;" class="text-center">Bharat Ki Awaaz</h1>
+            <p class="text-muted text-center mt-2 mb-4">Select your language — सभी भारतीय भाषाएं उपलब्ध हैं</p>
 
-            <div class="lang-grid">
+            <div class="lang-grid-scroll">
                 <div class="lang-card" onclick="selectLanguage('en', this)">
                     <h2>EN</h2>
                     <p>English</p>
                 </div>
                 <div class="lang-card" onclick="selectLanguage('hi', this)">
-                    <h2>HI</h2>
-                    <p>Hindi</p>
+                    <h2>हि</h2>
+                    <p>हिंदी</p>
                 </div>
                 <div class="lang-card" onclick="selectLanguage('mr', this)">
-                    <h2>MR</h2>
-                    <p>Marathi</p>
+                    <h2>म</h2>
+                    <p>मराठी</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('pa', this)">
+                    <h2>ਪੰ</h2>
+                    <p>ਪੰਜਾਬੀ</p>
                 </div>
                 <div class="lang-card" onclick="selectLanguage('te', this)">
-                    <h2>TE</h2>
-                    <p>Telugu</p>
+                    <h2>తె</h2>
+                    <p>తెలుగు</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('ta', this)">
+                    <h2>த</h2>
+                    <p>தமிழ்</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('kn', this)">
+                    <h2>ಕ</h2>
+                    <p>ಕನ್ನಡ</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('ml', this)">
+                    <h2>മ</h2>
+                    <p>മലയാളം</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('bn', this)">
+                    <h2>বা</h2>
+                    <p>বাংলা</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('gu', this)">
+                    <h2>ગ</h2>
+                    <p>ગુજરાતી</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('or', this)">
+                    <h2>ଓ</h2>
+                    <p>ଓଡ଼ିଆ</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('as', this)">
+                    <h2>অ</h2>
+                    <p>অসমীয়া</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('ur', this)">
+                    <h2>اردو</h2>
+                    <p>Urdu</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('ne', this)">
+                    <h2>ने</h2>
+                    <p>नेपाली</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('sd', this)">
+                    <h2>سن</h2>
+                    <p>Sindhi</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('ks', this)">
+                    <h2>کش</h2>
+                    <p>Kashmiri</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('mai', this)">
+                    <h2>मै</h2>
+                    <p>मैथिली</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('kok', this)">
+                    <h2>को</h2>
+                    <p>Konkani</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('doi', this)">
+                    <h2>डो</h2>
+                    <p>Dogri</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('sa', this)">
+                    <h2>सं</h2>
+                    <p>Sanskrit</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('mni', this)">
+                    <h2>ꯃꯅꯤ</h2>
+                    <p>Manipuri</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('sat', this)">
+                    <h2>ᱥᱟ</h2>
+                    <p>Santali</p>
+                </div>
+                <div class="lang-card" onclick="selectLanguage('brx', this)">
+                    <h2>ब'</h2>
+                    <p>Bodo</p>
                 </div>
             </div>
 
-            <button class="btn-primary mt-6 hover-glow w-100" id="btnContinueLang" disabled
-                onclick="enterApp()">Initialize System</button>
+            <button class="btn-primary mt-5 hover-glow w-100" id="btnContinueLang" disabled
+                onclick="enterApp()">Initialize System · ਸ਼ੁਰੂ ਕਰੋ · शुरू करें</button>
         </div>
     </div>
+
 
     <!-- MAIN APP WRAPPER -->
     <div id="app-wrapper" class="hidden">
@@ -83,6 +159,9 @@
                 <a class="nav-item" onclick="switchTab('helpline')" id="nav-helpline">
                     <span class="material-symbols-rounded">contact_support</span> Helpline
                 </a>
+                <a class="nav-item" onclick="switchTab('architecture')" id="nav-architecture">
+                    <span class="material-symbols-rounded">account_tree</span> Architecture
+                </a>
                 <a class="nav-item" onclick="switchTab('help')" id="nav-help">
                     <span class="material-symbols-rounded">support_agent</span> Help Center
                 </a>
@@ -90,6 +169,16 @@
             </div>
 
             <div class="sidebar-footer">
+                <!-- AWS Engine Status Badge -->
+                <div class="aws-engine-badge glass-panel mb-3" id="awsEngineBadge">
+                    <div class="flex-center gap-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                            alt="AWS" style="height:12px; filter:brightness(0) invert(1);">
+                        <span class="fs-10 fw-800 tracking-wider">BEDROCK</span>
+                    </div>
+                    <div class="engine-status-dot pulse-amber" id="llmStatusDot"></div>
+                </div>
+
                 <div class="engine-toggle glass-panel">
                     <div>
                         <p class="text-white fw-600 fs-14">Local Zero-Cloud</p>
@@ -132,17 +221,53 @@
             <div id="view-home" class="view-section active">
                 <div class="hero-center flex-column">
                     <div class="glow-orb pulse"></div>
-                    <h1 class="premium-heading">How can I assist you?</h1>
-                    <p class="premium-subheading">Speak naturally. Multi-dialect intelligence is active.</p>
+                    <h1 class="premium-heading">Aap Kaise Hain?</h1>
+                    <p class="premium-subheading">I am your assistant. Select your situation or just speak below.</p>
+
+                    <!-- Life Event Situation Cards (Rural Literacy Focus) -->
+                    <div class="situation-grid mt-5">
+                        <div class="situation-card glass-panel" onclick="selectLifeEvent('farmer', this)">
+                            <span class="material-symbols-rounded text-green">agriculture</span>
+                            <p>Kisan (Farmer)</p>
+                        </div>
+                        <div class="situation-card glass-panel" onclick="selectLifeEvent('student', this)">
+                            <span class="material-symbols-rounded text-cyan">school</span>
+                            <p>Chhatra (Student)</p>
+                        </div>
+                        <div class="situation-card glass-panel" onclick="selectLifeEvent('woman', this)">
+                            <span class="material-symbols-rounded text-pink">woman_2</span>
+                            <p>Mahila (Woman)</p>
+                        </div>
+                        <div class="situation-card glass-panel" onclick="selectLifeEvent('elderly', this)">
+                            <span class="material-symbols-rounded text-amber">elderly</span>
+                            <p>Vridh (Elderly)</p>
+                        </div>
+                        <div class="situation-card glass-panel" onclick="selectLifeEvent('worker', this)">
+                            <span class="material-symbols-rounded text-purple">engineering</span>
+                            <p>Shramik (Worker)</p>
+                        </div>
+                    </div>
+
+                    <!-- Dialect Normalization Hint -->
+                    <div class="dialect-hint mt-6">
+                        <p class="fs-12 text-muted mb-2">Speaking in a local dialect? (Optional)</p>
+                        <div class="dialect-chips">
+                            <span class="chip" onclick="setDialectHint('Bhojpuri', this)">Bhojpuri</span>
+                            <span class="chip" onclick="setDialectHint('Ahirani', this)">Ahirani</span>
+                            <span class="chip" onclick="setDialectHint('Bundeli', this)">Bundeli</span>
+                            <span class="chip" onclick="setDialectHint('Magahi', this)">Magahi</span>
+                            <span class="chip" onclick="setDialectHint('Clear', this)">None</span>
+                        </div>
+                    </div>
 
                     <div class="mic-orb-container mt-6" id="micBtn">
                         <div class="ripple"></div>
                         <div class="ripple r2"></div>
                         <div class="mic-orb glass-panel">
-                            <span class="material-symbols-rounded text-cyan mic-icon">mic</span>
+                            <span class="material-symbols-rounded text-cyan mic-icon">mic_external_on</span>
                         </div>
                     </div>
-                    <p class="mic-status mt-4" id="micStatus">TAP TO ACTIVATE</p>
+                    <p class="mic-status mt-4" id="micStatus">बोलने के लिए छुएं (TAP TO SPEAK)</p>
 
                     <!-- Processing Result -->
                     <div class="insight-card glass-panel hidden" id="processingResult">
@@ -446,6 +571,79 @@
                             bot for advanced queries.</p>
                         <button class="btn-primary" style="background:white; color:var(--text-main);">Engage
                             Agent</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: ARCHITECTURE (AWS Compliance) -->
+            <div id="view-architecture" class="view-section hidden">
+                <div class="section-heading mb-5">
+                    <h1 class="page-title">AWS GenAI Stack</h1>
+                    <p class="text-muted mt-1">Enterprise-grade infrastructure compliant with AI for Bharat standards.
+                    </p>
+                </div>
+
+                <div class="arch-card glass-panel p-5">
+                    <div class="flex-between mb-6">
+                        <div class="flex-column">
+                            <h3 class="text-cyan fs-20 fw-800">Hybrid RAG Pipeline</h3>
+                            <p class="text-muted fs-14 mt-1">Multi-modal orchestration via Amazon Bedrock</p>
+                        </div>
+                        <div class="badge badge-cyan p-2 px-4">AWS COMPLIANT</div>
+                    </div>
+
+                    <!-- Simplified Mermaid-style SVG/Graphic for the dashboard -->
+                    <div class="arch-diagram mt-4">
+                        <div class="node-row">
+                            <div class="node-box glass-panel border-cyan">
+                                <span class="material-symbols-rounded text-cyan">mic</span>
+                                <p>Voice Input</p>
+                            </div>
+                            <div class="node-arrow">→</div>
+                            <div class="node-box glass-panel border-purple">
+                                <span class="material-symbols-rounded text-purple">translate</span>
+                                <p>Bhashini / Whisper</p>
+                            </div>
+                        </div>
+
+                        <div class="node-connector-v"></div>
+
+                        <div class="node-row center">
+                            <div class="node-box glass-panel highlight-glow"
+                                style="width:240px; height:120px; border-color:var(--aws-orange);">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+                                    alt="AWS" style="height:24px; margin-bottom:12px;">
+                                <h4 class="text-white fs-16">Amazon Bedrock</h4>
+                                <p class="text-muted fs-12">Nova Lite | Claude 3</p>
+                            </div>
+                        </div>
+
+                        <div class="node-connector-v"></div>
+
+                        <div class="node-row">
+                            <div class="node-box glass-panel border-green">
+                                <span class="material-symbols-rounded text-green">database</span>
+                                <p>RDS / FAISS RAG</p>
+                            </div>
+                            <div class="node-arrow">→</div>
+                            <div class="node-box glass-panel border-blue">
+                                <span class="material-symbols-rounded text-blue">volume_up</span>
+                                <p>TTS Output</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arch-details mt-8 grid-2">
+                        <div class="detail-item glass-panel p-4">
+                            <h4 class="text-white fw-700 mb-2">Scalability</h4>
+                            <p class="text-muted fs-13">Leveraging EC2 Auto-Scaling and Bedrock Provisioned Throughput
+                                for Bharat-scale demand.</p>
+                        </div>
+                        <div class="detail-item glass-panel p-4">
+                            <h4 class="text-white fw-700 mb-2">Sovereignty</h4>
+                            <p class="text-muted fs-13">All data processed within AWS Mumbai (ap-south-1) for national
+                                data compliance.</p>
+                        </div>
                     </div>
                 </div>
             </div>

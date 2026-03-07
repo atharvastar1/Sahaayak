@@ -2,30 +2,66 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/models.dart';
 
+// [N5 FIX] Generate a unique session ID once per app lifecycle
+String _generateSessionId() {
+  final now = DateTime.now().millisecondsSinceEpoch;
+  final rand = (now * 1103515245 + 12345) & 0x7FFFFFFF;
+  return 'flutter-${now.toRadixString(16)}-${rand.toRadixString(16)}';
+}
+
 class ApiService {
   ApiService._internal();
   static final ApiService _instance = ApiService._internal();
   factory ApiService() => _instance;
 
-  // Use 10.0.2.2 for Android Emulator, 127.0.0.1 for iOS/Desktop
-  // Use 10.0.2.2 for Android Emulator, localhost for Web/iOS
-  final String _baseUrl = const bool.fromEnvironment('dart.library.html') 
-    ? 'http://localhost:8000' 
-    : 'http://10.0.2.2:8000';
+  // [N5 FIX] Unique session ID generated once per app launch
+  final String sessionId = _generateSessionId();
 
-  /// Process text query through the backend pipeline (Normalization + Matching)
+  // Use 10.0.2.2 for Android Emulator, localhost for iOS/Web
+  final String _baseUrl = const bool.fromEnvironment('dart.library.html')
+      ? 'http://localhost:8000'
+      : 'http://10.0.2.2:8000';
+
+  static const String _apiKey = 'PROTOTYPE_MASTER_KEY';
+
+  /// [C2 FIX] Calls /chat with correct production schema.
+  /// Sends language_hint so backend responds in the user's chosen language.
   Future<AIResponse> processVoice(String text, {String language = 'en'}) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/process'),
-      headers: {'Content-Type': 'application/json'},
+      Uri.parse('$_baseUrl/chat'),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': _apiKey,
+      },
       body: jsonEncode({
-        'text': text,
-        'language': language,
+        'message': text,
+        'session_id': sessionId,
+        'language_hint': language, // [C2 FIX]
       }),
     );
 
     if (response.statusCode == 200) {
-      return AIResponse.fromJson(jsonDecode(response.body));
+      final data = jsonDecode(response.body);
+      // Map the production /chat response schema → AIResponse model
+      final schemes = (data['schemes'] as List? ?? []).map((s) => Scheme(
+        id: s['scheme_id'] ?? '',
+        name: s['scheme_name'] ?? '',
+        description: s['benefits'] ?? '',
+        eligibility: s['eligibility'] ?? '',
+        benefits: s['benefits'] ?? '',
+        category: s['category'],
+      )).toList();
+
+      return AIResponse(
+        requestId: data['request_id'] ?? '',
+        detectedDialect: data['language_detected'] ?? language,
+        normalizedText: text, // [M4 FIX] keep original user text
+        aiMessage: data['text'] ?? '',
+        suggestedSchemes: schemes,
+        audioUrl: data['audio_base64'] != null
+            ? 'base64:${data['audio_base64']}'
+            : null,
+      );
     } else {
       throw Exception('Failed to process message: ${response.body}');
     }
@@ -34,8 +70,9 @@ class ApiService {
   /// Sends audio file to backend for STT (Whisper)
   Future<Map<String, String>> uploadAudio(String filePath) async {
     var request = http.MultipartRequest('POST', Uri.parse('$_baseUrl/stt'));
+    request.headers['X-API-Key'] = _apiKey;
     request.files.add(await http.MultipartFile.fromPath('audio', filePath));
-    
+
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
 
@@ -50,24 +87,7 @@ class ApiService {
     }
   }
 
-  /// Gets TTS audio URL for the response message
-  Future<String> getSpeech(String text) async {
-    final response = await http.post(
-      Uri.parse('$_baseUrl/tts'),
-      body: {'text': text},
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data['audio_url'];
-    } else {
-      throw Exception('Failed to get speech synthesis');
-    }
-  }
-
   Future<void> sendFeedback(String requestId, int rating) async {
-    // In a real app, this would be a POST to /feedback
-    // debug: print('✅ Feedback Sent to Backend | ID: $requestId | Rating: $rating');
+    // Feedback endpoint — future implementation
   }
 }
-

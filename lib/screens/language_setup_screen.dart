@@ -31,6 +31,7 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
     {'name': 'English', 'code': 'en', 'label': 'English', 'icon': 'AN', 'sub': 'International'},
     {'name': 'हिंदी', 'code': 'hi', 'label': 'Hindi', 'icon': 'अ', 'sub': 'Bharat'},
     {'name': 'मराठी', 'code': 'mr', 'label': 'Marathi', 'icon': 'म', 'sub': 'Bharat'},
+    {'name': 'ਪੰਜਾਬੀ', 'code': 'pa', 'label': 'Punjabi', 'icon': 'ਪ', 'sub': 'Bharat'}, // [M2 FIX]
     {'name': 'తెలుగు', 'code': 'te', 'label': 'Telugu', 'icon': 'తె', 'sub': 'Bharat'},
     {'name': 'தமிழ்', 'code': 'ta', 'label': 'Tamil', 'icon': 'த', 'sub': 'Bharat'},
     {'name': 'ગુજરાતી', 'code': 'gu', 'label': 'Gujarati', 'icon': 'ગુ', 'sub': 'Bharat'},

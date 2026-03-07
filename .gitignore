@@ -43,3 +43,8 @@ app.*.symbols
 
 # Obfuscation
 app.*.map.json
+
+.DS_Store
+**/ .DS_Store
+# Data
+sahaayak_backend/data/*

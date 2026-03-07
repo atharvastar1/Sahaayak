@@ -50,15 +50,69 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  // [C1 FIX] Show a real query dialog instead of using a hardcoded string.
+  // Pre-fills with a localized prompt matching the user's selected language.
   Future<void> _startListening() async {
-    setState(() => _state = AppState.listening);
     HapticService.heavy();
-    
-    // Zero-Backend Simulation Mode
-    await Future.delayed(2.seconds);
-    if (_state == AppState.listening) {
-      _handleQuery("I am a farmer looking for seeds");
-    }
+    final langCode = LanguageManager.of(context)?.currentLanguage ?? 'en';
+
+    // Language-specific default prompts to guide the user
+    const prompts = {
+      'hi': 'मुझे किसान योजना के बारे में बताओ',
+      'mr': 'मला शेतकरी योजनांची माहिती सांगा',
+      'pa': 'ਮੈਨੂੰ ਕਿਸਾਨ ਯੋਜਨਾ ਬਾਰੇ ਦੱਸੋ',
+      'te': 'రైతు పథకాల గురించి చెప్పండి',
+      'ta': 'விவசாயி திட்டங்கள் பற்றி சொல்லுங்கள்',
+      'gu': 'ખેડૂત યોજનાઓ વિશે જણાવો',
+      'en': 'I am a farmer and need help with seeds and loans',
+    };
+
+    if (!mounted) return;
+    final query = await showDialog<String>(
+      context: context,
+      builder: (ctx) {
+        final controller = TextEditingController(text: prompts[langCode] ?? prompts['en']);
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1a1a2e),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Row(
+            children: [
+              Icon(Icons.mic_rounded, color: Color(0xFF00B4D8), size: 22),
+              SizedBox(width: 8),
+              Text('Liquid Mic', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 18)),
+            ],
+          ),
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            maxLines: 3,
+            style: const TextStyle(color: Colors.white, fontSize: 15),
+            decoration: InputDecoration(
+              hintText: 'Type your query...',
+              hintStyle: const TextStyle(color: Colors.grey),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF00B4D8))),
+              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF2a2a4a))),
+              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF00B4D8))),
+              filled: true,
+              fillColor: const Color(0xFF0d0d1a),
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel', style: TextStyle(color: Colors.grey))),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00B4D8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+              onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+              child: const Text('Submit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (query == null || query.isEmpty) return;
+    setState(() => _state = AppState.listening);
+    await Future.delayed(300.ms);
+    _handleQuery(query);
   }
 
 
@@ -433,6 +487,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           _response!.aiMessage,
           style: Theme.of(context).textTheme.displayMedium,
         ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.05),
+        // [O1 FIX] Show audio unavailable indicator when TTS failed
+        if (_response!.audioUrl == null)
+          Container(
+            margin: const EdgeInsets.only(top: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.orange.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('🔇', style: TextStyle(fontSize: 14)),
+                SizedBox(width: 6),
+                Text('Voice Unavailable', style: TextStyle(color: Colors.orange, fontSize: 12, fontWeight: FontWeight.w700)),
+              ],
+            ),
+          ).animate().fadeIn(delay: 300.ms),
         const SizedBox(height: 48),
         
         Text(

@@ -273,7 +273,33 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
           children: [
             IconButton(
               icon: const Icon(Icons.add_rounded, color: Color(0xFF54656F), size: 28),
-              onPressed: () {},
+              // [N3 FIX] Show attachment options bottom sheet
+              onPressed: () {
+                HapticService.light();
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (ctx) => Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF1a1a2e),
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Attach', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 18)),
+                        const SizedBox(height: 20),
+                        _buildAttachOption(context, Icons.image_rounded, 'Upload Image', 'Coming soon'),
+                        _buildAttachOption(context, Icons.location_on_rounded, 'Share Location', 'Coming soon'),
+                        _buildAttachOption(context, Icons.bolt_rounded, 'Quick Query', 'Coming soon'),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
             Expanded(
               child: Container(
@@ -312,6 +338,46 @@ class _WhatsAppChatScreenState extends State<WhatsAppChatScreen> {
                   size: 24
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // [N3 FIX] Helper for attachment bottom sheet options
+  Widget _buildAttachOption(BuildContext ctx, IconData icon, String label, String note) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(ctx);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$label — $note'),
+            backgroundColor: const Color(0xFF1a1a2e),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFF00B4D8).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: const Color(0xFF00B4D8), size: 22),
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15)),
+                Text(note, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              ],
             ),
           ],
         ),

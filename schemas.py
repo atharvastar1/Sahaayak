@@ -13,6 +13,8 @@ from typing import List, Optional
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=500)
     session_id: str = Field(..., min_length=1, max_length=100)
+    language_hint: Optional[str] = Field(default="", max_length=5)  # e.g. "hi", "mr", "pa", "en"
+    life_event: Optional[str] = Field(default="", max_length=50) # e.g., 'farmer', 'student', 'worker'
 
     @field_validator("message")
     @classmethod
@@ -62,6 +64,7 @@ class HealthResponse(BaseModel):
     schemes_loaded: int
     models_ready: bool
     cache_size: int
+    llm_engine: str = "groq"   # "bedrock" when AWS is active, "groq" otherwise
 
 
 class ErrorResponse(BaseModel):

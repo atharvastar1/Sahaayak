@@ -1,0 +1,299 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Sahaayak — AI for Bharat Hackathon
+  AWS infrastructure for voice-first civic AI assistant.
+  Services: EC2 (backend), S3 (audio/logs), RDS PostgreSQL (schemes DB),
+  Lambda (async TTS), Bedrock (LLM), API Gateway, ElastiCache.
+
+# ── Parameters ─────────────────────────────────────────────────────────────────
+Parameters:
+  Environment:
+    Type: String
+    Default: development
+    AllowedValues: [development, staging, production]
+    Description: Deployment environment
+
+  InstanceType:
+    Type: String
+    Default: t3.medium
+    AllowedValues: [t3.small, t3.medium, t3.large, c5.xlarge]
+    Description: EC2 instance type for the Sahaayak API server
+
+  DBInstanceClass:
+    Type: String
+    Default: db.t3.micro
+    Description: RDS PostgreSQL instance class
+
+  BedrockRegion:
+    Type: String
+    Default: ap-south-1
+    Description: AWS region for Amazon Bedrock (must support Nova Lite)
+
+  BedrockModelId:
+    Type: String
+    Default: amazon.nova-lite-v1:0
+    AllowedValues:
+      - amazon.nova-lite-v1:0
+      - amazon.nova-pro-v1:0
+      - anthropic.claude-3-haiku-20240307-v1:0
+
+  SahaayakAPIKey:
+    Type: String
+    NoEcho: true
+    Description: API key for Sahaayak backend authentication
+
+  GroqAPIKey:
+    Type: String
+    NoEcho: true
+    Description: Groq API key (Bedrock fallback LLM)
+
+# ── Resources ──────────────────────────────────────────────────────────────────
+Resources:
+
+  # ── S3 Buckets ───────────────────────────────────────────────────────────────
+  AudioBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "sahaayak-audio-${Environment}-${AWS::AccountId}"
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteAudioAfter24Hours
+            Status: Enabled
+            ExpirationInDays: 1
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  DatasetsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "sahaayak-datasets-${Environment}-${AWS::AccountId}"
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+
+  # ── Secrets Manager ──────────────────────────────────────────────────────────
+  SahaayakSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub "sahaayak/${Environment}/secrets"
+      SecretString: !Sub |
+        {
+          "SAHAAYAK_API_KEY": "${SahaayakAPIKey}",
+          "GROQ_API_KEY": "${GroqAPIKey}",
+          "BEDROCK_MODEL_ID": "${BedrockModelId}",
+          "AWS_REGION": "${BedrockRegion}"
+        }
+
+  # ── IAM Role for EC2 (Bedrock access) ────────────────────────────────────────
+  SahaayakInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "SahaayakEC2Role-${Environment}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: BedrockAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource:
+                  - !Sub "arn:aws:bedrock:${BedrockRegion}::foundation-model/amazon.nova-lite-v1:0"
+                  - !Sub "arn:aws:bedrock:${BedrockRegion}::foundation-model/amazon.nova-pro-v1:0"
+                  - !Sub "arn:aws:bedrock:${BedrockRegion}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0"
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource:
+                  - !Sub "${AudioBucket.Arn}/*"
+                  - !Sub "${DatasetsBucket.Arn}/*"
+        - PolicyName: SecretsAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: secretsmanager:GetSecretValue
+                Resource: !Ref SahaayakSecrets
+
+  SahaayakInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles: [!Ref SahaayakInstanceRole]
+
+  # ── Security Group ───────────────────────────────────────────────────────────
+  SahaayakSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Sahaayak API Server
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8000
+          ToPort: 8000
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0   # Restrict to your IP in production
+
+  # ── EC2 Launch Template ──────────────────────────────────────────────────────
+  SahaayakLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateName: !Sub "sahaayak-api-${Environment}"
+      LaunchTemplateData:
+        InstanceType: !Ref InstanceType
+        IamInstanceProfile:
+          Arn: !GetAtt SahaayakInstanceProfile.Arn
+        SecurityGroupIds: [!Ref SahaayakSecurityGroup]
+        UserData:
+          Fn::Base64: !Sub |
+            #!/bin/bash
+            set -e
+            yum update -y
+            yum install -y python3 python3-pip git
+
+            # Pull secrets from Secrets Manager
+            SECRET=$(aws secretsmanager get-secret-value \
+              --secret-id sahaayak/${Environment}/secrets \
+              --region ${AWS::Region} \
+              --query SecretString --output text)
+
+            export SAHAAYAK_API_KEY=$(echo $SECRET | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['SAHAAYAK_API_KEY'])")
+            export GROQ_API_KEY=$(echo $SECRET | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['GROQ_API_KEY'])")
+            export BEDROCK_MODEL_ID="${BedrockModelId}"
+            export AWS_REGION="${BedrockRegion}"
+            export APP_ENV="${Environment}"
+
+            # Clone & install
+            git clone https://github.com/atharvastar1/Sahaayak.git /opt/sahaayak
+            cd /opt/sahaayak
+            pip3 install -r requirements.txt
+
+            # Pull datasets from S3
+            aws s3 sync s3://sahaayak-datasets-${Environment}-${AWS::AccountId}/data/ ./data/
+
+            # Start API
+            uvicorn main:app --host 0.0.0.0 --port 8000 --workers 1 &
+
+  # ── RDS PostgreSQL ───────────────────────────────────────────────────────────
+  SahaayakDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBName: sahaayak
+      DBInstanceIdentifier: !Sub "sahaayak-db-${Environment}"
+      DBInstanceClass: !Ref DBInstanceClass
+      Engine: postgres
+      EngineVersion: "15.4"
+      MasterUsername: sahaayak_admin
+      MasterUserPassword: !Sub "{{resolve:secretsmanager:sahaayak/${Environment}/secrets:SecretString:DB_PASSWORD}}"
+      AllocatedStorage: "20"
+      StorageType: gp2
+      StorageEncrypted: true
+      MultiAZ: !If [IsProd, true, false]
+      DeletionProtection: !If [IsProd, true, false]
+      Tags:
+        - Key: Project
+          Value: Sahaayak
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ── Lambda for Async TTS ─────────────────────────────────────────────────────
+  AsyncTTSFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "sahaayak-async-tts-${Environment}"
+      Runtime: python3.12
+      Handler: index.handler
+      Role: !GetAtt TTSLambdaRole.Arn
+      Timeout: 30
+      MemorySize: 512
+      Environment:
+        Variables:
+          AUDIO_BUCKET: !Ref AudioBucket
+          APP_ENV: !Ref Environment
+      Code:
+        ZipFile: |
+          import boto3, os, io, base64
+          from gtts import gTTS
+
+          s3 = boto3.client('s3')
+          BUCKET = os.environ['AUDIO_BUCKET']
+
+          def handler(event, context):
+              text = event.get('text', '')
+              lang = event.get('language', 'en')
+              key  = event.get('key', f"audio/{context.aws_request_id}.mp3")
+
+              tts = gTTS(text=text, lang=lang, slow=False)
+              buf = io.BytesIO()
+              tts.write_to_fp(buf)
+              buf.seek(0)
+
+              s3.put_object(Bucket=BUCKET, Key=key, Body=buf.read(), ContentType='audio/mpeg')
+              return {'s3_key': key, 'bucket': BUCKET}
+
+  TTSLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3Write
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: [s3:PutObject, s3:GetObject]
+                Resource: !Sub "${AudioBucket.Arn}/*"
+
+# ── Conditions ─────────────────────────────────────────────────────────────────
+Conditions:
+  IsProd: !Equals [!Ref Environment, production]
+
+# ── Outputs ────────────────────────────────────────────────────────────────────
+Outputs:
+  AudioBucketName:
+    Value: !Ref AudioBucket
+    Description: S3 bucket for audio files
+
+  DatasetsBucketName:
+    Value: !Ref DatasetsBucket
+    Description: S3 bucket for scheme datasets
+
+  DBEndpoint:
+    Value: !GetAtt SahaayakDB.Endpoint.Address
+    Description: PostgreSQL endpoint
+
+  TTSFunctionArn:
+    Value: !GetAtt AsyncTTSFunction.Arn
+    Description: Async TTS Lambda ARN
+
+  LaunchTemplateId:
+    Value: !Ref SahaayakLaunchTemplate
+    Description: EC2 launch template for Sahaayak API
