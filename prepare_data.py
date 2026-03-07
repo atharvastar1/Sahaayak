@@ -10,22 +10,33 @@ from llm_embeddings import get_embeddings, bedrock_embeddings_available
 os.makedirs("data", exist_ok=True)
 
 # 1. Load the CSV
-csv_path = "data/schemes.csv"
+csv_path = "data/updated_data.csv"
 if not os.path.exists(csv_path):
-    print("CSV not found at data/schemes.csv. Please pull or copy it first.")
-    exit(1)
+    print("CSV not found at data/updated_data.csv. Falling back to schemes.csv...")
+    csv_path = "data/schemes.csv"
+    if not os.path.exists(csv_path):
+        print("No data source found. Please ensure data/updated_data.csv exists.")
+        exit(1)
 
 df_raw = pd.read_csv(csv_path)
 
 # 2. Rename columns to match retriever.py expectations
-# (id,name,description,eligibility,benefits,link,category) -> (scheme_id, scheme_name, benefits, eligibility, schemeCategory)
 df = pd.DataFrame()
-df["scheme_id"] = df_raw["id"]
-df["scheme_name"] = df_raw["name"]
-df["benefits"] = df_raw["benefits"]
-df["eligibility"] = df_raw["eligibility"]
-df["schemeCategory"] = df_raw["category"]
-df["description"] = df_raw["description"]
+if "slug" in df_raw.columns:
+    df["scheme_id"] = df_raw["slug"]
+    df["scheme_name"] = df_raw["scheme_name"]
+    df["benefits"] = df_raw["benefits"]
+    df["eligibility"] = df_raw["eligibility"]
+    df["schemeCategory"] = df_raw["schemeCategory"]
+    df["description"] = df_raw["details"]
+else:
+    # Fallback for the small schemes.csv
+    df["scheme_id"] = df_raw["id"]
+    df["scheme_name"] = df_raw["name"]
+    df["benefits"] = df_raw["benefits"]
+    df["eligibility"] = df_raw["eligibility"]
+    df["schemeCategory"] = df_raw["category"]
+    df["description"] = df_raw["description"]
 
 # 3. Create combined_text for retrieval
 df["combined_text"] = df["scheme_name"] + " " + df["description"] + " " + df["benefits"] + " " + df["eligibility"]
