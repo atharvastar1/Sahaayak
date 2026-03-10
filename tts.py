@@ -15,7 +15,7 @@ from logger import get_logger
 from llm_polly import generate_polly_audio_base64, polly_available
 
 log = get_logger("tts")
-TTS_TIMEOUT = int(os.getenv("TTS_TIMEOUT_SECONDS", 10))
+TTS_TIMEOUT = int(os.getenv("TTS_TIMEOUT_SECONDS", 18))
 
 # Thread pool for running blocking gTTS in async context
 _executor = ThreadPoolExecutor(max_workers=2)

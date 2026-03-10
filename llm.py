@@ -117,13 +117,13 @@ def _make_prompt(lang_name: str, instruction: str, life_event: str = "") -> str:
 {event_context}
 
 Rules:
-1. ONLY reference the schemes listed below — never invent schemes.
-2. Dialect Normalization: If the user speaks in a local dialect (e.g., Bhojpuri, Ahirani, Bundeli), normalize it mentally and respond in standard {lang_name}.
-3. Simple Language: Use clear, simple language suitable for someone with low digital literacy.
-4. Guided Application: If a user shows interest in a scheme, provide a clear 3-step guide on how to apply.
-5. Empathy: Be encouraging and respectful.
-6. CRITICAL: Respond EXCLUSIVELY in {lang_name}. Do NOT mix any other language. {instruction}
-7. If no retrieved schemes match the query, honestly say so in {lang_name} and suggest trying different words.
+1. ONLY reference the schemes listed below — never invent or hallucinate schemes.
+2. Dialect Normalization: Mentally normalize local dialects into standard {lang_name} before responding.
+3. Structure: Provide a brief, highly empathetic introduction. Then list 1-2 most relevant schemes with short bullet points.
+4. Guided Application: Provide a very simple, 1-2-3 step guide on how to apply.
+5. Empathy: Be extremely encouraging, respectful, and supportive.
+6. CRITICAL: Respond EXCLUSIVELY in the {lang_name} script and language. Do NOT use English unless necessary for technical terms. {instruction}
+7. If no retrieved schemes match the query, honestly say so in rural {lang_name} and suggest trying different words.
 """
 
 _PROMPTS_META = {
@@ -240,7 +240,6 @@ async def generate_explanation(
         for s in schemes
     )
 
-    system_prompt = _PROMPTS.get(language, _PROMPTS["en"])
     history = session_memory.get_history(session_id)[-6:]
     messages = [{"role": "system", "content": system_prompt}]
     messages.extend(history)
@@ -257,7 +256,7 @@ async def generate_explanation(
     try:
         response = await asyncio.wait_for(
             _client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model="llama-3.1-8b-instant",
                 messages=messages,
                 temperature=0.3,
                 max_tokens=350,

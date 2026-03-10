@@ -1,0 +1,16 @@
+{
+    "name": "Sahaayak: Citizen AI",
+    "short_name": "Sahaayak",
+    "description": "Rural India Government Scheme Assistant. Secure, local, and multilingual.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#00B4D8",
+    "icons": [
+        {
+            "src": "assets/file.svg",
+            "sizes": "192x192 512x512",
+            "type": "image/svg+xml"
+        }
+    ]
+}

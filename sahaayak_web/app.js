@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = window.location.origin;
 const API_KEY = 'PROTOTYPE_MASTER_KEY';
 
 // [N5 FIX] Generate a unique session ID per page load instead of hardcoded value
@@ -557,11 +557,33 @@ function initSearch() {
     });
 
     searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') { dropdown.style.display = 'none'; searchInput.value = ''; }
+        if (e.key === 'Escape') {
+            dropdown.style.display = 'none';
+            searchInput.value = '';
+        } else if (e.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                dropdown.style.display = 'none';
+                switchTab('whatsapp');
+                const waInput = document.getElementById('waInputField');
+                if (waInput) {
+                    waInput.value = query;
+                    waInput.dispatchEvent(new Event('input'));
+                    setTimeout(() => simulateWhatsAppFlow(), 300);
+                }
+            }
+        }
     });
 
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.search-bar')) dropdown.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
     });
 }
 
@@ -575,6 +597,7 @@ function selectScheme(name) {
     if (waInput) {
         waInput.value = `Tell me about ${name}`;
         waInput.dispatchEvent(new Event('input'));
+        setTimeout(() => simulateWhatsAppFlow(), 300);
     }
 }
 
@@ -748,7 +771,13 @@ function simulateWhatsAppFlow() {
                     replyMsg.innerHTML = `
                     <span class="fw-700 fs-14" style="color:#008069">Sahaayak BharatBot</span>
                     <p class="mt-1 text-main fs-14">${escapeHtml(data.text)}${audioTag}</p>
-                    <span style="font-size:11px;color:#999;float:right;margin-top:4px;">${replyTime}</span>`;
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:8px;">
+                        <div style="display:flex; gap:12px;">
+                            <span class="material-symbols-rounded cursor-pointer text-muted hover-glow-green" style="font-size:18px; transition:color 0.2s;" onclick="this.style.color='#10b981'; showToast('✅ Feedback recorded for RLHF')">thumb_up</span>
+                            <span class="material-symbols-rounded cursor-pointer text-muted hover-glow-red" style="font-size:18px; transition:color 0.2s;" onclick="this.style.color='#ef4444'; showToast('🚩 Translation error reported')">thumb_down</span>
+                        </div>
+                        <span style="font-size:11px;color:#999;">${replyTime}</span>
+                    </div>`;
                     if (data.audio_base64) playAudio(data.audio_base64);
                     chatBody.appendChild(replyMsg);
                     chatBody.scrollTop = chatBody.scrollHeight;
@@ -765,9 +794,21 @@ function simulateWhatsAppFlow() {
 // ─────────────────────────────────────────────────────────────────────────────
 // AUDIO PLAYBACK
 // ─────────────────────────────────────────────────────────────────────────────
+const globalAudio = new Audio();
+
+document.addEventListener('click', () => {
+    if (!globalAudio.src) {
+        globalAudio.src = "data:audio/mp3;base64,//NExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+        globalAudio.play().catch(() => { });
+    }
+}, { once: true });
+
 function playAudio(base64Data) {
-    const audio = new Audio("data:audio/mp3;base64," + base64Data);
-    audio.play().catch(e => console.warn("Audio playback blocked or failed:", e));
+    globalAudio.src = "data:audio/mp3;base64," + base64Data;
+    globalAudio.play().catch(e => {
+        console.warn("Audio playback blocked or failed:", e);
+        showToast("🔇 Audio blocked by browser. Please tap anywhere to allow.");
+    });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

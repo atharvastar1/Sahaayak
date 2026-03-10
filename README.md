@@ -1,7 +1,15 @@
-<<<<<<< HEAD
+---
+title: Sahaayak API
+emoji: ✨
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
+
 # Sahaayak - The Citizen AI 🇮🇳
 
-Sahaayak is a next-generation AI assistant designed to bridge the digital divide for rural India. By combining multi-dialect voice intelligence with a premium, accessible UI, Sahaayak empowers every citizen to navigate government schemes and services with ease.
+Sahaayak is a voice-first AI civic assistant designed to improve access to government schemes and public services for citizens in rural and underserved communities. The platform combines multi-dialect voice intelligence, AI-based scheme matching, and scalable backend infrastructure to help users navigate government services using natural voice interaction.
 
 ## 🌟 Key Features
 
@@ -43,7 +51,7 @@ Sahaayak is a next-generation AI assistant designed to bridge the digital divide
 
 ---
 *Built with ❤️ for Bharat.*
-=======
+
 # Sahaayak Backend — Production
 
 Voice-first AI civic assistant for rural India.  
@@ -51,30 +59,113 @@ Team Percepta | AWS AI for Bharat Hackathon
 
 ---
 
-## Quick Start (Local)
+# Project Overview
 
-```bash
-pip install -r requirements.txt
-cp .env .env.local   # fill in your keys
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
+Many citizens in rural India face barriers when accessing government schemes due to language differences, low digital literacy, and limited internet connectivity. Sahaayak addresses these challenges through a voice-driven AI interface capable of understanding regional dialects and providing step-by-step assistance.
 
-## Production (AWS EC2)
-
-```bash
-# On your local machine — copy files to EC2
-scp -r ./sahaayak-backend-prod ubuntu@YOUR_EC2_IP:/opt/sahaayak
-
-# On EC2
-chmod +x /opt/sahaayak/deploy.sh
-bash /opt/sahaayak/deploy.sh
-```
+The system allows users to speak in their native dialect, receive scheme recommendations based on eligibility, and get guidance through the application process.
 
 ---
 
-## API
+# Key Features
 
-### POST /chat
+## Voice-First Interaction
+Citizens interact with the platform using voice input instead of typing.
+
+## Dialect Normalization
+AI models detect and normalize regional dialects into standard language.
+
+## AI-Based Scheme Matching
+The system analyzes user queries and recommends relevant government schemes.
+
+## Guided Application Assistant
+Users receive step-by-step instructions to complete applications.
+
+## Community-Driven Feedback
+User feedback improves the AI model through reinforcement learning.
+
+## Low-Bandwidth Optimization
+The system is designed to function in areas with limited internet connectivity.
+
+## Life-Event Assistance
+Schemes are suggested based on life situations such as farming, education, or employment.
+
+## Secure and Privacy-Focused Design
+User data is handled with minimal storage and secure communication.
+
+---
+
+# System Components
+
+### Mobile Application
+Flutter-based voice interface enabling speech interaction.
+
+### Web Dashboard
+Web interface for monitoring usage analytics and insights.
+
+### Backend API
+FastAPI backend responsible for AI processing, scheme retrieval, and response generation.
+
+---
+
+# Technology Stack
+
+## Frontend
+- Flutter (Mobile)
+- HTML
+- CSS
+- JavaScript
+
+## Backend
+- Python
+- FastAPI
+
+## Artificial Intelligence
+- Whisper Speech-to-Text
+- Groq LLM
+- BGE Embeddings
+- FAISS Vector Search
+- BM25 Retrieval
+- CrossEncoder Reranking
+
+## Text-to-Speech
+- gTTS
+
+## Cloud Infrastructure
+- AWS EC2
+- AWS S3
+- AWS RDS
+
+---
+
+# Backend Architecture
+
+The backend uses a Retrieval Augmented Generation (RAG) pipeline.
+
+Workflow:
+
+User Voice Input  
+→ Speech-to-Text  
+→ Dialect Normalization  
+→ Query Embedding  
+→ Vector Search (FAISS)  
+→ BM25 Retrieval  
+→ CrossEncoder Reranking  
+→ LLM Response Generation  
+→ Text-to-Speech Output
+
+This ensures responses are grounded in verified government scheme data.
+
+---
+
+# API
+
+## POST /chat
+
+Processes user queries and returns both text and voice responses.
+
+Example request:
+
 ```bash
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
@@ -82,20 +173,26 @@ curl -X POST http://localhost:8000/chat \
   -d '{"message": "kisan ko loan chahiye", "session_id": "user-123"}'
 ```
 
-Response:
+Example response:
+
 ```json
 {
   "request_id": "a1b2c3d4",
   "session_id": "user-123",
   "text": "Aapke liye PM-KISAN aur Kisan Credit Card...",
   "audio_base64": "<base64 MP3>",
-  "schemes": [...],
+  "schemes": [],
   "language_detected": "hi",
   "cached": false
 }
 ```
 
-### GET /health
+---
+
+## GET /health
+
+Returns service health information.
+
 ```json
 {
   "status": "ok",
@@ -108,38 +205,66 @@ Response:
 
 ---
 
-## Production Features
+# Production Features
 
-| Feature | Implementation |
-|---|---|
-| API Auth | `X-API-Key` header (`SAHAAYAK_API_KEY` in .env) |
-| Rate Limiting | 30 req/min per IP (slowapi) |
-| CORS | Locked to `ALLOWED_ORIGINS` in .env |
-| Request Logging | Structured JSON → CloudWatch-ready |
-| Request IDs | Every request gets `X-Request-ID` header |
-| Response Cache | LRU + TTL (200 entries, 1hr default) |
-| Session Memory | Last 10 turns per session_id |
-| LLM Timeout | 15s hard timeout on Groq calls |
-| TTS Timeout | 10s hard timeout on gTTS |
-| Model Warmup | Runs dummy query on startup |
-| Graceful Shutdown | Cache cleared, logs flushed |
+| Feature | Description |
+|------|------|
+| API Authentication | X-API-Key header authentication |
+| Rate Limiting | 30 requests per minute per IP |
+| CORS Control | Allowed origins configured via environment variables |
+| Structured Logging | JSON logs compatible with AWS CloudWatch |
+| Request Tracking | Unique request ID generated for each request |
+| Response Caching | LRU cache with TTL |
+| Session Memory | Stores last 10 interactions per session |
+| Timeout Handling | LLM and TTS timeout protection |
+| Model Warmup | AI models initialized during startup |
+| Graceful Shutdown | Cache cleared and logs flushed |
 
 ---
 
-## File Structure
+# Local Development
+
+Install dependencies and run the backend server.
+
+```bash
+pip install -r requirements.txt
+cp .env .env.local
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+---
+
+# Production Deployment (AWS EC2)
+
+Copy files to EC2.
+
+```bash
+scp -r ./sahaayak-backend-prod ubuntu@YOUR_EC2_IP:/opt/sahaayak
+```
+
+On EC2 run:
+
+```bash
+chmod +x /opt/sahaayak/deploy.sh
+bash /opt/sahaayak/deploy.sh
+```
+
+---
+
+# File Structure
 
 ```
 sahaayak-backend-prod/
-├── main.py          # FastAPI app — all middleware and routes
-├── retriever.py     # BGE + FAISS + BM25 + CrossEncoder RAG
-├── llm.py           # Async Groq LLM with session memory
-├── tts.py           # Async gTTS with timeout
-├── schemas.py       # Pydantic request/response models
-├── cache.py         # LRU response cache + session memory
-├── logger.py        # Structured JSON logger
-├── deploy.sh        # EC2 one-shot deployment script
+├── main.py
+├── retriever.py
+├── llm.py
+├── tts.py
+├── schemas.py
+├── cache.py
+├── logger.py
+├── deploy.sh
 ├── requirements.txt
-└── .env             # All secrets (never commit)
+└── .env
     data/
     ├── faiss_bge_cosine.bin
     └── schemes_processed.parquet
@@ -147,14 +272,18 @@ sahaayak-backend-prod/
 
 ---
 
-## Generate your API key
+# Generate API Key
 
 ```bash
 python -c "import secrets; print(secrets.token_hex(32))"
 ```
-Set this as `SAHAAYAK_API_KEY` in `.env` and as `X-API-Key` in your frontend.
+
+Add the key in `.env`
+
+```
+SAHAAYAK_API_KEY=your_generated_key
+```
 
 ---
 
 Team Percepta | License: MIT
->>>>>>> 363041d (feat: production ready backend with caching, auth, and rate limiting)

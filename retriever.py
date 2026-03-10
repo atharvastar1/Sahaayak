@@ -34,7 +34,7 @@ CFG = {
     "BIENCODER_TOP_K":    50,
     "RERANK_TOP_K":       5,
     "QUERY_PREFIX":       "Represent this sentence for searching relevant passages: ",
-    "MIN_DENSE_SCORE":    0.35,   # Lowered from 0.45 to catch more candidates
+    "MIN_DENSE_SCORE":    0.40,   # Increased to 0.40 to prevent distant matches
     "DENSE_WEIGHT":       0.70,
     "BM25_WEIGHT":        0.30,
     "RERANK_FIELDS":      ["scheme_name", "benefits", "eligibility"],

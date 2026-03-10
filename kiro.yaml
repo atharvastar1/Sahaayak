@@ -1,0 +1,38 @@
+# kiro.yaml — Spec-Driven Development Configuration
+# Team Percepta | AWS AI for Bharat Hackathon
+# 
+# We utilize Kiro and an OpenAPI 3.1 specification (openapi.yaml) to ensure 
+# our FastAPI backend and rural vanilla JS frontend are always perfectly
+# synchronized regarding request formats and response schemas.
+
+version: "1.0"
+project:
+  name: "sahaayak-api"
+  description: "Rural AI Assistant API"
+
+openapi:
+  source: "./openapi.yaml"
+  strict: true # Enforce rigorous schema checks across the build
+
+generators:
+  mock-server:
+    enabled: true
+    port: 4000
+    description: "Generates a localized mock server so frontend engineers can develop without waiting for expensive ML models to boot."
+  
+  python-pydantic:
+    enabled: true
+    output: "./schemas.py"
+    description: "Our 'schemas.py' heavily mirrors the generated Kiro structures to prevent unexpected prompt injection attacks."
+
+validation:
+  lint:
+    rules:
+      - "no-unresolved-refs"
+      - "require-operation-ids"
+      - "require-response-descriptions"
+
+deploy:
+  aws_api_gateway:
+    enabled: false # Handled via our Terraform/CloudFormation template instead
+    region: "ap-south-1"

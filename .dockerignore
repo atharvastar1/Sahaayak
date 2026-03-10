@@ -1,0 +1,23 @@
+# Exclude Flutter source and non-essential build folders to keep Docker image small
+android/
+ios/
+lib/
+macos/
+windows/
+linux/
+test/
+tests/
+.git/
+.gitignore
+.env
+*.log
+deploy*/
+ssm*/
+policy.json
+nacl.json
+sg_egress.json
+prepare_data.py
+sahaayak_web/assets/ (optional: maybe keep if assets are needed)
+pubspec.*
+analysis_options.yaml
+# Keep data/ and sahaayak_web/ and main.py files

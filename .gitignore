@@ -11,9 +11,7 @@ env/
 .env
 
 # Large Data Files
-data/*.bin
-data/*.parquet
-data/*.pt
+*.pt
 *.safetensors
 
 # Python Cache

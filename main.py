@@ -46,7 +46,7 @@ log = get_logger("main")
 # ── Config from env ────────────────────────────────────────────────────────────
 APP_ENV          = os.getenv("APP_ENV", "development")
 SAHAAYAK_API_KEY = os.getenv("SAHAAYAK_API_KEY", "")
-RATE_LIMIT       = os.getenv("RATE_LIMIT_PER_MINUTE", "30")
+RATE_LIMIT       = os.getenv("RATE_LIMIT_PER_MINUTE", "150")
 RAW_ORIGINS      = os.getenv("ALLOWED_ORIGINS", "*")
 ALLOWED_ORIGINS  = [o.strip() for o in RAW_ORIGINS.split(",") if o.strip()]
 
@@ -95,7 +95,10 @@ async def lifespan(app: FastAPI):
     log.info("Cache cleared. Shutdown complete.")
 
 
-# ── App init ───────────────────────────────────────────────────────────────────
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
+
+# App init
 app = FastAPI(
     title="Sahaayak API",
     description="Voice-first AI civic assistant — government scheme discovery for rural India",
@@ -104,6 +107,17 @@ app = FastAPI(
     redoc_url=None,
     lifespan=lifespan,
 )
+
+# [NEW] Serve static frontend files
+# Mounted at /app so it doesn't conflict with root redirects if needed, 
+# but we'll mount it at the root later or redirect.
+if os.path.exists("sahaayak_web"):
+    app.mount("/site", StaticFiles(directory="sahaayak_web", html=True), name="site")
+
+@app.get("/", include_in_schema=False)
+async def root_redirect():
+    """Redirect root to the frontend site."""
+    return RedirectResponse(url="/site/index.html")
 
 # Register rate limit error handler
 app.state.limiter = limiter

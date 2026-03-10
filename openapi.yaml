@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Sahaayak Production API
+  description: Voice-first AI civic assistant — government scheme discovery for rural India (Spec-Driven Development with Kiro)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local Development Server
+  - url: https://atharvastar1-sahaayak-api.hf.space
+    description: Hugging Face Production Container
+paths:
+  /chat:
+    post:
+      summary: Retrieve schemes and generate native language response
+      operationId: chat
+      tags:
+        - Core
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response containing text, audio string, and referenced schemes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limit exceeded
+        '503':
+          description: Models are still loading
+  /health:
+    get:
+      summary: System health check
+      operationId: healthCheck
+      tags:
+        - System
+      responses:
+        '200':
+          description: Returns system and model status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /engine:
+    get:
+      summary: LLM Engine Information
+      operationId: engineInfo
+      tags:
+        - System
+      responses:
+        '200':
+          description: Returns details of the active language model (Bedrock vs Fallback)
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - session_id
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: "The user query (e.g., in Hindi, English, Marathi)"
+        session_id:
+          type: string
+          minLength: 1
+          maxLength: 100
+        language_hint:
+          type: string
+          maxLength: 5
+        life_event:
+          type: string
+          maxLength: 50
+    SchemeResult:
+      type: object
+      properties:
+        rank:
+          type: integer
+        scheme_name:
+          type: string
+        category:
+          type: string
+        benefits:
+          type: string
+        eligibility:
+          type: string
+        scheme_id:
+          type: string
+    ChatResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+        session_id:
+          type: string
+        text:
+          type: string
+        audio_base64:
+          type: string
+          nullable: true
+        schemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemeResult'
+        language_detected:
+          type: string
+        cached:
+          type: boolean
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        environment:
+          type: string
+        schemes_loaded:
+          type: integer
+        models_ready:
+          type: boolean
+        cache_size:
+          type: integer
+        llm_engine:
+          type: string

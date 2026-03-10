@@ -5,7 +5,7 @@
 set -e
 
 # ── Config ─────────────────────────────────────────────────────────────────────
-STACK_NAME="sahaayak-stack"
+STACK_NAME="sahaayak-final-hq"
 ENV="development"
 REGION="ap-south-1"  # Mumbai (supports Amazon Nova Lite)
 BUCKET_PREFIX="sahaayak-deploy"
@@ -47,7 +47,8 @@ aws cloudformation deploy \
         Environment=${ENV} \
         BedrockRegion=${REGION} \
         SahaayakAPIKey="PROTOTYPE_MASTER_KEY" \
-        GroqAPIKey="${GROQ_API_KEY:-MISSING_SET_ENV_VAR}"
+        GroqAPIKey="${GROQ_API_KEY}" \
+        DBPassword="${DB_PASSWORD:-SahaayakRoot2025!}"
 
 # 6. Final Status
 echo "----------------------------------------------------------------"

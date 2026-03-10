@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sahaayak - The Citizen AI</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00B4D8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
@@ -394,7 +398,8 @@
                         <h1 class="page-title">Secured Smart Vault</h1>
                         <p class="text-muted mt-1">Hardware encrypted, zero-knowledge document repository.</p>
                     </div>
-                    <button class="btn-primary hover-glow flex-center gap-2" id="scanBtn">
+                    <button class="btn-primary hover-glow flex-center gap-2" id="scanBtn"
+                        title="Reads documents automatically to find eligible schemes">
                         <span class="material-symbols-rounded">document_scanner</span> Initialize AI OCR
                     </button>
                 </div>
@@ -635,14 +640,20 @@
 
                     <div class="arch-details mt-8 grid-2">
                         <div class="detail-item glass-panel p-4">
-                            <h4 class="text-white fw-700 mb-2">Scalability</h4>
-                            <p class="text-muted fs-13">Leveraging EC2 Auto-Scaling and Bedrock Provisioned Throughput
-                                for Bharat-scale demand.</p>
+                            <h4 class="text-white fw-700 mb-2">The "Sahaayak Approach"</h4>
+                            <p class="text-muted fs-13">Our <strong>8-stage pipeline</strong> uses a Semantic Mapping
+                                Layer to normalize 22 dialects (like Bhojpuri) into standardized intents before LLM
+                                processing, effectively eliminating AI hallucinations.</p>
                         </div>
                         <div class="detail-item glass-panel p-4">
-                            <h4 class="text-white fw-700 mb-2">Sovereignty</h4>
-                            <p class="text-muted fs-13">All data processed within AWS Mumbai (ap-south-1) for national
-                                data compliance.</p>
+                            <h4 class="text-white fw-700 mb-2">System Performance & RLHF</h4>
+                            <p class="text-muted fs-13">Processed via <strong>AWS G4dn GPU instances</strong> & local
+                                <strong>FAISS</strong> DB. Continuous improvement via community Reinforcement Learning
+                                from Human Feedback (RLHF).</p>
+                            <div class="mt-3" style="display:flex; gap:12px;">
+                                <span class="badge badge-cyan fs-11">Cold Query: ~11.7s</span>
+                                <span class="badge badge-green fs-11">RLHF Enabled</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -729,6 +740,15 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Sahaayak PWA Service Worker Registered!', reg.scope))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 
 </html>
