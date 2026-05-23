@@ -60,11 +60,11 @@ class _ShellScreenState extends State<ShellScreen> {
           width: 72,
           height: 72,
           decoration: BoxDecoration(
-            color: SahaayakTheme.primary,
+            gradient: SahaayakTheme.aiAura,
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: SahaayakTheme.primary.withValues(alpha: 0.3),
+                color: SahaayakTheme.accentAI.withValues(alpha: 0.3),
                 blurRadius: 30,
                 offset: const Offset(0, 15),
               ),
@@ -115,23 +115,23 @@ class _ShellScreenState extends State<ShellScreen> {
         curve: Curves.easeOutQuart,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? SahaayakTheme.primaryDark : Colors.transparent,
-          borderRadius: BorderRadius.circular(30),
+          color: isSelected ? SahaayakTheme.primaryContainer : Colors.transparent,
+          borderRadius: BorderRadius.circular(100), // Pill shape
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               isSelected ? activeIcon : icon,
-              color: isSelected ? Colors.white : SahaayakTheme.textSecondary,
+              color: isSelected ? SahaayakTheme.onPrimaryContainer : SahaayakTheme.textSecondary,
               size: 26,
             ),
             if (isSelected) ...[
               const SizedBox(width: 8),
               Text(
                 label,
-                style: const TextStyle(
-                  color: Colors.white, 
+                style: TextStyle(
+                  color: SahaayakTheme.onPrimaryContainer, 
                   fontWeight: FontWeight.w800, 
                   fontSize: 14, 
                   letterSpacing: 0.5,

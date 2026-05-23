@@ -23,22 +23,11 @@ log = get_logger("llm")
 _client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
 LLM_TIMEOUT = int(os.getenv("LLM_TIMEOUT_SECONDS", 20))
 
-# ── Bedrock integration (primary LLM engine) ───────────────────────────────────
-try:
-    from llm_bedrock import generate_explanation_bedrock, bedrock_available
-    _BEDROCK_IMPORTED = True
-except ImportError:
-    _BEDROCK_IMPORTED = False
-    def bedrock_available(): return False
-    async def generate_explanation_bedrock(*args, **kwargs): return None
-
-
 def get_active_llm_engine() -> str:
     """
     Returns the name of the LLM engine that will be used for this request.
-    Used by /health and /engine endpoints for AWS compliance visibility.
     """
-    return "bedrock" if (_BEDROCK_IMPORTED and bedrock_available()) else "groq"
+    return "groq"
 
 
 # ── Language detection ─────────────────────────────────────────────────────────
@@ -222,18 +211,7 @@ async def generate_explanation(
     if not schemes:
         return _FALLBACKS.get(language, _FALLBACKS["en"])
 
-    # ── 1. Try Bedrock ─────────────────────────────────────────────────────────
-    bedrock_result = await generate_explanation_bedrock(
-        query=query, schemes=schemes, language=language, session_id=session_id
-    )
-    if bedrock_result:
-        log.info("LLM engine: bedrock", extra={"ctx_session": session_id})
-        if session_id:
-            session_memory.add_turn(session_id, "user", query)
-            session_memory.add_turn(session_id, "assistant", bedrock_result)
-        return bedrock_result
-
-    log.info("LLM engine: groq (bedrock unavailable/fallback)", extra={"ctx_session": session_id})
+    log.info("LLM engine: groq", extra={"ctx_session": session_id})
 
     context = "\n".join(
         f"Scheme: {s['scheme_name']}\nBenefits: {s['benefits']}\nEligibility: {s['eligibility']}\n"

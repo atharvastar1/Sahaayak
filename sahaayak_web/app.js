@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-const API_BASE = window.location.origin;
+const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:8000' : window.location.origin;
 const API_KEY = 'PROTOTYPE_MASTER_KEY';
 
 // [N5 FIX] Generate a unique session ID per page load instead of hardcoded value
@@ -35,8 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // [O2 FIX] Wire WhatsApp input icon toggle
     initWaInputToggle();
 
-    // ── AWS ENGINE STATUS CHECK ──────────────────────────────────────────────
+    // ── ENGINE STATUS CHECK ──────────────────────────────────────────────────
     checkEngineStatus();
+
+    // ── VOICE FAB & MODAL WIRING ─────────────────────────────────────────────
+    initVoiceFabModal();
 
     // ── REGISTER SERVICE WORKER (Offline Resilience) ─────────────────────────
     if ('serviceWorker' in navigator) {
@@ -45,6 +48,57 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.error("SW Registration Failed", err));
     }
 });
+
+// ── VOICE FAB + MODAL ─────────────────────────────────────────────────────────
+function openVoiceModal() {
+    const overlay = document.getElementById('voiceModalOverlay');
+    if (overlay) {
+        overlay.classList.remove('hidden');
+        // Trigger mic on home screen orb if visible
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn) micBtn.click();
+    }
+}
+
+function closeVoiceModal() {
+    const overlay = document.getElementById('voiceModalOverlay');
+    if (overlay) overlay.classList.add('hidden');
+}
+
+function initVoiceFabModal() {
+    const fab = document.getElementById('voiceFab');
+    const closeBtn = document.getElementById('voiceModalClose');
+    const stopBtn = document.getElementById('voiceModalStop');
+    const retryBtn = document.getElementById('voiceModalRetry');
+
+    if (fab) fab.addEventListener('click', openVoiceModal);
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        closeVoiceModal();
+        // Also stop any ongoing recording
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn && micBtn.classList.contains('listening')) micBtn.click();
+    });
+    if (stopBtn) stopBtn.addEventListener('click', () => {
+        closeVoiceModal();
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn && micBtn.classList.contains('listening')) micBtn.click();
+    });
+    if (retryBtn) retryBtn.addEventListener('click', () => {
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn) micBtn.click();
+    });
+}
+
+// Patch updateTranscriptInModal — called from speech recognition to feed live text
+function updateVoiceModalTranscript(text, isFinal) {
+    const el = document.getElementById('voiceModalText');
+    if (!el) return;
+    el.style.opacity = '1';
+    el.style.fontStyle = 'normal';
+    el.textContent = `"${text}"`;
+    const statusEl = document.getElementById('voiceModalStatus');
+    if (statusEl) statusEl.textContent = isFinal ? 'Processing...' : 'Listening... Suno';
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LANGUAGE SELECTION  [C2 FIX] — currentLanguage is now sent to backend
@@ -142,7 +196,7 @@ function switchTab(tabId) {
         targetView.classList.add('active');
     }
 
-    // [AWS FIX] Refresh engine status when switching to dashboard or home
+    // [ENGINE FIX] Refresh engine status when switching to dashboard or home
     if (tabId === 'home' || tabId === 'dashboard' || tabId === 'architecture') {
         checkEngineStatus();
     }
@@ -212,13 +266,19 @@ function startSpeechRecognition() {
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
+        const isFinal = event.results[0].isFinal;
+        // Update the voice modal overlay if open
+        updateVoiceModalTranscript(transcript, isFinal);
         micStatus.innerText = "CAPTURED";
         submitMicQuery(transcript);
+        // Close modal after a short delay once result is captured
+        setTimeout(closeVoiceModal, 1200);
     };
 
     recognition.onerror = (event) => {
         console.error("Speech Error:", event.error);
         micBtn.classList.remove('listening');
+        closeVoiceModal();
         if (event.error === 'not-allowed') {
             showToast("❌ Mic access denied. Falling back to text.");
         } else {
@@ -230,7 +290,7 @@ function startSpeechRecognition() {
     recognition.onend = () => {
         micBtn.classList.remove('listening');
         if (micStatus.innerText === "LISTENING...") {
-            micStatus.innerText = "TAP TO ACTIVATE";
+            micStatus.innerText = "बोलने के लिए छुएं · TAP TO SPEAK";
         }
     };
 
@@ -241,6 +301,7 @@ function startSpeechRecognition() {
         showMicDialog(LANG_PROMPTS[currentLanguage] || LANG_PROMPTS.en, submitMicQuery);
     }
 }
+
 
 // Custom modal dialog — replaces window.prompt() which is blocked on file:// URLs
 function showMicDialog(defaultText, onSubmit) {
@@ -486,26 +547,27 @@ function fetchHealthAndUpdatePulse() {
         });
 }
 
-// ── AWS ENGINE STATUS ─────────────────────────────────────────────────────────
+// ── ENGINE STATUS ─────────────────────────────────────────────────────────────
 function checkEngineStatus() {
-    const badge = document.getElementById('awsEngineBadge');
+    const badge = document.getElementById('engineBadge');
     const dot = document.getElementById('llmStatusDot');
     if (!badge || !dot) return;
 
     fetch(`${API_BASE}/engine`)
         .then(res => res.json())
         .then(data => {
-            if (data.engine === 'bedrock') {
-                badge.style.background = "rgba(255, 153, 0, 0.15)";
-                badge.style.borderColor = "rgba(255, 153, 0, 0.4)";
-                dot.className = 'engine-status-dot pulse-amber';
-                console.log("LLM Engine: Amazon Bedrock (Active)");
-            } else {
-                badge.style.background = "rgba(123, 97, 255, 0.1)";
-                badge.style.borderColor = "rgba(123, 97, 255, 0.2)";
+            if (data.engine === 'groq') {
+                badge.style.background = "rgba(123, 97, 255, 0.15)";
+                badge.style.borderColor = "rgba(123, 97, 255, 0.4)";
                 dot.className = 'engine-status-dot pulse-purple';
                 dot.style.background = "var(--purple)";
-                console.log("LLM Engine: Groq (Fallback)");
+                console.log("LLM Engine: Groq Cloud Inference (Active)");
+            } else {
+                badge.style.background = "rgba(0, 122, 255, 0.15)";
+                badge.style.borderColor = "rgba(0, 122, 255, 0.4)";
+                dot.className = 'engine-status-dot pulse-blue';
+                dot.style.background = "var(--blue)";
+                console.log("LLM Engine: " + data.engine + " (Active)");
             }
         })
         .catch(() => {

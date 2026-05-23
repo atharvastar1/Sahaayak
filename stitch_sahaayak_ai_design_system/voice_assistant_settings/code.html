@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice Settings - Jan Seva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#6d797e",
+                        "surface-dim": "#ced9ff",
+                        "secondary-fixed": "#e5deff",
+                        "surface-bright": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "inverse-primary": "#4cd6fb",
+                        "surface-container-high": "#e2e7ff",
+                        "secondary": "#5b3cdd",
+                        "outline-variant": "#bcc9ce",
+                        "on-tertiary-container": "#00442d",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed": "#1a0063",
+                        "primary-fixed": "#b3ebff",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "primary-container": "#00b4d8",
+                        "on-surface-variant": "#3d494d",
+                        "on-surface": "#0c1a3b",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-container-highest": "#dae2ff",
+                        "surface-variant": "#dae2ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#006c49",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-container": "#7459f7",
+                        "inverse-on-surface": "#eef0ff",
+                        "tertiary-container": "#19bc84",
+                        "primary": "#00677d",
+                        "on-error-container": "#93000a",
+                        "background": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "surface-tint": "#00677d",
+                        "on-background": "#0c1a3b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "on-primary-container": "#00414f",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#232f51",
+                        "surface-container": "#eaedff",
+                        "on-primary-fixed": "#001f27",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "tap-target-min": "48px",
+                        "gutter": "16px",
+                        "margin-desktop": "64px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "body-md": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; }
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08);
+        }
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00b4d8;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #00b4d8;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-sm flex justify-between items-center w-full px-margin-mobile h-tap-target-min fixed top-0 z-50">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center text-primary active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Voice Settings</h1>
+<div class="w-tap-target-min"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content -->
+<main class="pt-[80px] pb-margin-mobile px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto space-y-lg">
+<!-- Primary Language Section -->
+<section class="glass-card rounded-xl p-md">
+<h2 class="font-headline-md text-headline-md mb-sm text-on-surface">Primary Language</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Select your preferred language for voice interaction.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+<!-- Active Chip -->
+<button class="h-tap-target-min rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center justify-center border-2 border-primary-container active:scale-95 transition-all">
+                    Hindi
+                </button>
+<!-- Inactive Chips -->
+<button class="h-tap-target-min rounded-full bg-surface-container-lowest text-on-surface-variant font-label-lg text-label-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                    Marathi
+                </button>
+<button class="h-tap-target-min rounded-full bg-surface-container-lowest text-on-surface-variant font-label-lg text-label-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                    Bhojpuri
+                </button>
+<button class="h-tap-target-min rounded-full bg-surface-container-lowest text-on-surface-variant font-label-lg text-label-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                    Tamil
+                </button>
+</div>
+</section>
+<!-- Voice Profile Section -->
+<section class="glass-card rounded-xl p-md">
+<h2 class="font-headline-md text-headline-md mb-sm text-on-surface">Voice Profile</h2>
+<div class="flex flex-col md:flex-row gap-md items-start md:items-center justify-between">
+<div class="flex gap-sm w-full md:w-auto">
+<button class="h-tap-target-min flex-1 md:flex-none px-lg rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center justify-center border-2 border-primary-container active:scale-95 transition-all">
+<span class="material-symbols-outlined mr-xs">face_3</span> Female
+                    </button>
+<button class="h-tap-target-min flex-1 md:flex-none px-lg rounded-xl bg-surface-container-lowest text-on-surface-variant font-label-lg text-label-lg flex items-center justify-center border border-outline-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined mr-xs">face</span> Male
+                    </button>
+</div>
+<button class="h-tap-target-min px-lg rounded-full bg-secondary-container text-on-secondary-container font-label-lg text-label-lg flex items-center justify-center active:scale-95 transition-all w-full md:w-auto">
+<span class="material-symbols-outlined mr-xs" style="font-variation-settings: 'FILL' 1;">play_circle</span> Play Sample
+                </button>
+</div>
+</section>
+<!-- Response Speed Section -->
+<section class="glass-card rounded-xl p-md">
+<h2 class="font-headline-md text-headline-md mb-sm text-on-surface">Response Speed</h2>
+<div class="py-md px-sm">
+<input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary-container" max="100" min="0" type="range" value="50"/>
+<div class="flex justify-between mt-sm font-label-sm text-label-sm text-on-surface-variant">
+<span>Slow</span>
+<span>Normal</span>
+<span>Fast</span>
+</div>
+</div>
+</section>
+<!-- Accessibility Section -->
+<section class="glass-card rounded-xl p-md space-y-md">
+<h2 class="font-headline-md text-headline-md mb-sm text-on-surface">Accessibility</h2>
+<div class="flex justify-between items-center h-tap-target-min">
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Haptic Feedback</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">Vibrate on voice interactions</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-primary-container z-10 transition-transform duration-200 ease-in-out transform translate-x-6" id="haptic-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary-container cursor-pointer" for="haptic-toggle"></label>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant/30 w-full"></div>
+<div class="flex justify-between items-center h-tap-target-min">
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Visual Captions</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">Display text while speaking</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-primary-container z-10 transition-transform duration-200 ease-in-out transform translate-x-6" id="captions-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary-container cursor-pointer" for="captions-toggle"></label>
+</div>
+</div>
+</section>
+<!-- Groq Inference Mode -->
+<section class="glass-card rounded-xl p-md mb-xl">
+<div class="flex justify-between items-start">
+<div class="pr-md">
+<h2 class="font-headline-md text-headline-md mb-xs text-on-surface flex items-center">
+<span class="material-symbols-outlined text-primary-container mr-xs" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        Ultra-Fast Mode
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Uses low-latency processing for immediate responses. Turn off for slightly slower, highly accurate complex answers.</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in mt-sm">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-primary-container z-10 transition-transform duration-200 ease-in-out transform translate-x-6" id="groq-toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-primary-container cursor-pointer" for="groq-toggle"></label>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple vanilla JS for toggle visual logic without needing external libraries
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                if(this.checked) {
+                    this.classList.add('translate-x-6', 'border-primary-container');
+                    this.classList.remove('translate-x-0', 'border-outline-variant');
+                    this.nextElementSibling.classList.add('bg-primary-container');
+                    this.nextElementSibling.classList.remove('bg-surface-variant');
+                } else {
+                    this.classList.remove('translate-x-6', 'border-primary-container');
+                    this.classList.add('translate-x-0', 'border-outline-variant');
+                    this.nextElementSibling.classList.remove('bg-primary-container');
+                    this.nextElementSibling.classList.add('bg-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>

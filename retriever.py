@@ -21,8 +21,6 @@ from groq import AsyncGroq
 from dotenv import load_dotenv
 
 from logger import get_logger, Timer
-from llm_embeddings import get_embedding, bedrock_embeddings_available
-from llm_bedrock import bedrock_available, generate_explanation_bedrock
 
 load_dotenv()
 log = get_logger("retriever")
@@ -41,19 +39,10 @@ CFG = {
     "RERANK_MAX_CHARS":   400,
 }
 
-INDEX_PATH_BGE   = "data/faiss_bge_cosine.bin"
-INDEX_PATH_TITAN = "data/faiss_titan_cosine.bin"
-DATA_PATH        = "data/schemes_processed.parquet"
+INDEX_PATH   = "data/faiss_bge_cosine.bin"
+DATA_PATH    = "data/schemes_processed.parquet"
 
-# Determine which index to use (Bedrock Titan preferred for AWS Compliance)
-if os.path.exists(INDEX_PATH_TITAN) and bedrock_embeddings_available():
-    INDEX_PATH = INDEX_PATH_TITAN
-    EMBEDDING_MODE = "titan"
-    log.info("RAG Engine: Using AWS Bedrock Titan Embeddings")
-else:
-    INDEX_PATH = INDEX_PATH_BGE
-    EMBEDDING_MODE = "bge"
-    log.info("RAG Engine: Using Local BGE Embeddings (Fallback)")
+log.info("RAG Engine: Using Local BGE Embeddings")
 
 # ── Groq client for query translation ─────────────────────────────────────────
 _groq = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
@@ -62,11 +51,8 @@ _groq = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
 _translation_cache: Dict[str, str] = {}
 
 # ── Load on startup ────────────────────────────────────────────────────────────
-# Bi-encoder only needed for local BGE mode
-bi_encoder = None
-if EMBEDDING_MODE == "bge":
-    log.info("Loading bi-encoder...")
-    bi_encoder = SentenceTransformer(CFG["BIENCODER_MODEL"])
+log.info("Loading bi-encoder...")
+bi_encoder = SentenceTransformer(CFG["BIENCODER_MODEL"])
 
 log.info("Loading cross-encoder...")
 cross_encoder = CrossEncoder(CFG["CROSSENCODER_MODEL"])
@@ -104,20 +90,7 @@ async def translate_to_english(query: str, language: str) -> str:
         return _translation_cache[cache_key]
 
     try:
-        # Prioritize Bedrock for translation if available (AWS Native)
-        if bedrock_available():
-            prompt = (
-                f"You are a precise translator. Translate the following Indian language query to English. "
-                f"Output ONLY the English translation — no explanation, no prefix, no quotes. "
-                f"Query: {query}"
-            )
-            translated = await generate_explanation_bedrock(prompt, [], "en")
-            if translated and not translated.startswith("Error"):
-                _translation_cache[cache_key] = translated.strip()
-                log.info(f"Translated (Bedrock) [{language}] '{query[:60]}' → '{translated[:60]}'")
-                return translated.strip()
-
-        # Fallback to Groq if Bedrock fails or is unavailable
+        # Translate query using Groq
         response = await asyncio.wait_for(
             _groq.chat.completions.create(
                 model="llama-3.1-8b-instant",
@@ -176,17 +149,10 @@ def retrieve(query: str, original_query: str = "", top_k: int = CFG["RERANK_TOP_
     biencoder_top_k = CFG["BIENCODER_TOP_K"]
 
     # Stage 1: Dense retrieval (English only)
-    if EMBEDDING_MODE == "titan":
-        # Bedrock Titan Embeddings
-        q_emb_raw = get_embedding(query)
-        if q_emb_raw is None: return []
-        q_emb = np.array([q_emb_raw]).astype("float32")
-    else:
-        # Local BGE Embeddings
-        prefixed_query = CFG["QUERY_PREFIX"] + query
-        q_emb = bi_encoder.encode(
-            [prefixed_query], normalize_embeddings=True, convert_to_numpy=True
-        ).astype("float32")
+    prefixed_query = CFG["QUERY_PREFIX"] + query
+    q_emb = bi_encoder.encode(
+        [prefixed_query], normalize_embeddings=True, convert_to_numpy=True
+    ).astype("float32")
 
     raw_scores, raw_indices = index.search(q_emb, biencoder_top_k)
 

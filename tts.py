@@ -12,7 +12,6 @@ from concurrent.futures import ThreadPoolExecutor
 from gtts import gTTS
 
 from logger import get_logger
-from llm_polly import generate_polly_audio_base64, polly_available
 
 log = get_logger("tts")
 TTS_TIMEOUT = int(os.getenv("TTS_TIMEOUT_SECONDS", 18))
@@ -39,25 +38,11 @@ async def text_to_speech_base64(text: str, language: str = "en") -> Optional[str
     Async wrapper around gTTS with hard timeout.
     Returns base64 MP3 string or None on failure/timeout.
     """
-    # Map internal codes to gTTS supported codes
-    # hi=Hindi, mr=Marathi, pa=Punjabi (Gurmukhi), en=English
-    lang_map = {
-        "hi": "hi",
-        "mr": "mr",
-        "pa": "pa",
-        "en": "en"
-    }
-    gtts_lang = lang_map.get(language, "en")
+    # Use the language code directly as standard ISO codes are supported by gTTS
+    gtts_lang = language
 
     try:
-        # Prioritize Amazon Polly (AWS Native)
-        if polly_available():
-            polly_result = generate_polly_audio_base64(text, language)
-            if polly_result:
-                log.info(f"TTS complete via Amazon Polly [{language}]")
-                return polly_result
-
-        # Fallback to gTTS
+        # Generate speech audio using gTTS
         loop   = asyncio.get_event_loop()
         result = await asyncio.wait_for(
             loop.run_in_executor(_executor, _generate_audio, text, gtts_lang),

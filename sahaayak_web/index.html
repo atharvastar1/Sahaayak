@@ -4,26 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sahaayak - The Citizen AI</title>
+    <title>Sahaayak AI — Citizen Services for Every Indian</title>
+    <meta name="description" content="Voice-first AI assistant for accessing government schemes and services in your local language. Sahaayak AI bridges rural India with digital citizen services.">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00B4D8">
+    <meta name="theme-color" content="#00677d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <!-- Outfit font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Material Symbols Outlined (FILL=1 for legibility) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0&display=swap" rel="stylesheet">
+    <!-- Material Symbols Rounded (legacy — kept for existing icons) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <style>
+        /* Override: make outlined icons behave like filled */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-flex;
+            vertical-align: middle;
+        }
+        /* Soft splash ambient blobs */
+        #screen-splash {
+            background: #faf8ff;
+        }
+    </style>
 </head>
 
 <body class="light-theme">
 
     <!-- SPLASH SCREEN -->
     <div id="screen-splash" class="screen full-center active">
-        <div class="glow-orb"></div>
-        <div class="glow-orb-2"></div>
-        <img src="assets/file.svg" alt="Logo" class="splash-logo logo-premium">
+        <!-- Soft ambient blobs matching new palette -->
+        <div style="position:absolute;top:-10%;left:-20%;width:480px;height:480px;background:var(--primary-fixed);border-radius:50%;mix-blend-mode:multiply;filter:blur(80px);opacity:0.5;pointer-events:none;"></div>
+        <div style="position:absolute;bottom:-10%;right:-10%;width:380px;height:380px;background:var(--secondary-fixed);border-radius:50%;mix-blend-mode:multiply;filter:blur(80px);opacity:0.4;pointer-events:none;"></div>
+        <img src="assets/file.svg" alt="Sahaayak Logo" class="splash-logo logo-premium">
         <h1 class="splash-title">SAHAAYAK</h1>
+        <p style="font-size:13px;font-weight:600;color:var(--on-surface-variant);letter-spacing:0.05em;margin-top:8px;z-index:2;opacity:0;animation:fadeIn 1s 0.4s forwards;">AI-Powered Citizen Services</p>
         <div class="line-loader mt-4"></div>
     </div>
 
@@ -139,13 +158,14 @@
     <div id="app-wrapper" class="hidden">
 
         <!-- SIDEBAR -->
-        <nav class="sidebar glass-panel">
+        <nav class="sidebar">
             <div class="brand">
-                <div class="brand-icon"><img src="assets/file.svg" alt="Sahaayak" class="logo-premium"
-                        style="width:24px;height:24px;"></div>
+                <div class="brand-icon">
+                    <span class="material-symbols-rounded" style="font-size:26px;color:var(--on-primary-container);">spa</span>
+                </div>
                 <div class="brand-text">
-                    <h2>Sahaayak</h2>
-                    <p>Enterprise AI</p>
+                    <h2>Sahaayak AI</h2>
+                    <p>Citizen Services</p>
                 </div>
             </div>
 
@@ -173,14 +193,13 @@
             </div>
 
             <div class="sidebar-footer">
-                <!-- AWS Engine Status Badge -->
-                <div class="aws-engine-badge glass-panel mb-3" id="awsEngineBadge">
+                <!-- Groq Engine Status Badge -->
+                <div class="engine-badge glass-panel mb-3" id="engineBadge">
                     <div class="flex-center gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-                            alt="AWS" style="height:12px; filter:brightness(0) invert(1);">
-                        <span class="fs-10 fw-800 tracking-wider">BEDROCK</span>
+                        <span class="material-symbols-rounded text-purple" style="font-size:14px;">cloud</span>
+                        <span class="fs-10 fw-800 tracking-wider text-purple">GROQ ENGINE</span>
                     </div>
-                    <div class="engine-status-dot pulse-amber" id="llmStatusDot"></div>
+                    <div class="engine-status-dot pulse-purple" id="llmStatusDot"></div>
                 </div>
 
                 <div class="engine-toggle glass-panel">
@@ -265,13 +284,18 @@
                     </div>
 
                     <div class="mic-orb-container mt-6" id="micBtn">
+                        <!-- Three layered pulse rings from design spec -->
+                        <div class="pulse-ring-orb"></div>
+                        <div class="pulse-ring-orb"></div>
+                        <div class="pulse-ring-orb"></div>
+                        <!-- legacy ripples for listening state -->
                         <div class="ripple"></div>
                         <div class="ripple r2"></div>
-                        <div class="mic-orb glass-panel">
-                            <span class="material-symbols-rounded text-cyan mic-icon">mic_external_on</span>
+                        <div class="mic-orb">
+                            <span class="material-symbols-rounded mic-icon">mic</span>
                         </div>
                     </div>
-                    <p class="mic-status mt-4" id="micStatus">बोलने के लिए छुएं (TAP TO SPEAK)</p>
+                    <p class="mic-status" id="micStatus">बोलने के लिए छुएं · TAP TO SPEAK</p>
 
                     <!-- Processing Result -->
                     <div class="insight-card glass-panel hidden" id="processingResult">
@@ -284,12 +308,61 @@
                             <p class="query-text">"I am a farmer and I need help with seeds."</p>
                             <p class="response-text mt-3">Matched with <strong>PM Kisan Samman Nidhi</strong>. You are
                                 eligible for the upcoming ₹2000 installment. Would you like to check your status?</p>
-                            <button class="btn-primary mt-4" onclick="switchTab('dashboard')">View Scheme
-                                Dashboard</button>
+                            <button class="btn-primary mt-4" onclick="switchTab('dashboard')">
+                                <span class="material-symbols-rounded" style="font-size:18px;">dashboard</span>
+                                View Scheme Dashboard
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+    <!-- ──────────────────────────────────────────────────────────────
+         VOICE INPUT MODAL OVERLAY (Full-screen, backdrop blur)
+         ────────────────────────────────────────────────────────────── -->
+    <div id="voiceModalOverlay" class="voice-modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Voice Input">
+        <!-- Close button -->
+        <button class="voice-modal-close" id="voiceModalClose" aria-label="Close voice input">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+
+        <!-- Animated orb with pulse rings -->
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:16px;">
+            <div class="voice-modal-orb" id="voiceModalOrb">
+                <div class="pulse-ring-orb"></div>
+                <div class="pulse-ring-orb"></div>
+                <div class="pulse-ring-orb"></div>
+                <span class="material-symbols-rounded" style="font-size:52px;color:white;z-index:1;">mic</span>
+            </div>
+            <h2 id="voiceModalStatus" style="font-size:24px;font-weight:600;color:var(--on-surface);animation:pulse 2s ease infinite;">
+                Listening... Suno
+            </h2>
+        </div>
+
+        <!-- Live transcription area -->
+        <div class="voice-modal-transcription" id="voiceModalTranscription">
+            <p id="voiceModalText" style="opacity:0.6;font-style:italic;">Speak now in your preferred language...</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="voice-modal-actions">
+            <button class="btn-stop" id="voiceModalStop">
+                <span class="material-symbols-rounded" style="font-size:20px;">stop_circle</span>
+                Stop
+            </button>
+            <button class="btn-retry" id="voiceModalRetry">
+                <span class="material-symbols-rounded" style="font-size:20px;">refresh</span>
+                Retry
+            </button>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────────────
+         PERSISTENT VOICE FAB (Floating Action Button)
+         ────────────────────────────────────────────────────────────── -->
+    <button class="voice-fab" id="voiceFab" aria-label="Open Voice Input">
+        <span class="material-symbols-rounded" style="font-size:32px;color:white;">mic</span>
+    </button>
 
             <!-- VIEW: DASHBOARD -->
             <div id="view-dashboard" class="view-section hidden">
@@ -580,11 +653,11 @@
                 </div>
             </div>
 
-            <!-- VIEW: ARCHITECTURE (AWS Compliance) -->
+            <!-- VIEW: ARCHITECTURE (Groq/Hybrid RAG Pipeline) -->
             <div id="view-architecture" class="view-section hidden">
                 <div class="section-heading mb-5">
-                    <h1 class="page-title">AWS GenAI Stack</h1>
-                    <p class="text-muted mt-1">Enterprise-grade infrastructure compliant with AI for Bharat standards.
+                    <h1 class="page-title">GenAI Architecture Stack</h1>
+                    <p class="text-muted mt-1">High-performance vector retrieval and cloud inference standards.
                     </p>
                 </div>
 
@@ -592,9 +665,9 @@
                     <div class="flex-between mb-6">
                         <div class="flex-column">
                             <h3 class="text-cyan fs-20 fw-800">Hybrid RAG Pipeline</h3>
-                            <p class="text-muted fs-14 mt-1">Multi-modal orchestration via Amazon Bedrock</p>
+                            <p class="text-muted fs-14 mt-1">High-speed hybrid pipeline via Groq Cloud Inference</p>
                         </div>
-                        <div class="badge badge-cyan p-2 px-4">AWS COMPLIANT</div>
+                        <div class="badge badge-cyan p-2 px-4">HYBRID RAG COMPLIANT</div>
                     </div>
 
                     <!-- Simplified Mermaid-style SVG/Graphic for the dashboard -->
@@ -615,11 +688,10 @@
 
                         <div class="node-row center">
                             <div class="node-box glass-panel highlight-glow"
-                                style="width:240px; height:120px; border-color:var(--aws-orange);">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-                                    alt="AWS" style="height:24px; margin-bottom:12px;">
-                                <h4 class="text-white fs-16">Amazon Bedrock</h4>
-                                <p class="text-muted fs-12">Nova Lite | Claude 3</p>
+                                style="width:240px; height:120px; border-color:var(--purple);">
+                                <span class="material-symbols-rounded text-purple" style="font-size: 32px; margin-bottom: 8px;">cloud</span>
+                                <h4 class="text-white fs-16">Groq Inference Engine</h4>
+                                <p class="text-muted fs-12">Llama 3.3 | Llama 3.1</p>
                             </div>
                         </div>
 
@@ -628,12 +700,12 @@
                         <div class="node-row">
                             <div class="node-box glass-panel border-green">
                                 <span class="material-symbols-rounded text-green">database</span>
-                                <p>RDS / FAISS RAG</p>
+                                <p>Local FAISS Vector DB</p>
                             </div>
                             <div class="node-arrow">→</div>
                             <div class="node-box glass-panel border-blue">
                                 <span class="material-symbols-rounded text-blue">volume_up</span>
-                                <p>TTS Output</p>
+                                <p>TTS Output (gTTS)</p>
                             </div>
                         </div>
                     </div>
@@ -647,9 +719,10 @@
                         </div>
                         <div class="detail-item glass-panel p-4">
                             <h4 class="text-white fw-700 mb-2">System Performance & RLHF</h4>
-                            <p class="text-muted fs-13">Processed via <strong>AWS G4dn GPU instances</strong> & local
-                                <strong>FAISS</strong> DB. Continuous improvement via community Reinforcement Learning
-                                from Human Feedback (RLHF).</p>
+                            <p class="text-muted fs-13">Processed via local <strong>FAISS</strong> DB & high-speed
+                                <strong>Groq</strong> cloud inference. Continuous improvement via community Reinforcement Learning
+                                from Human Feedback (RLHF).
+                            </p>
                             <div class="mt-3" style="display:flex; gap:12px;">
                                 <span class="badge badge-cyan fs-11">Cold Query: ~11.7s</span>
                                 <span class="badge badge-green fs-11">RLHF Enabled</span>

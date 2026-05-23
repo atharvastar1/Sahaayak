@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - System Settings &amp; Audit Logs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001f27",
+                        "on-tertiary-container": "#00442d",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-surface-variant": "#3d494d",
+                        "on-primary-container": "#00414f",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#006c49",
+                        "surface-container-highest": "#dae2ff",
+                        "secondary-fixed": "#e5deff",
+                        "primary-fixed": "#b3ebff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error": "#ba1a1a",
+                        "outline": "#6d797e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2ff",
+                        "inverse-surface": "#232f51",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#00677d",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ced9ff",
+                        "surface-tint": "#00677d",
+                        "inverse-primary": "#4cd6fb",
+                        "secondary-container": "#7459f7",
+                        "on-secondary-fixed": "#1a0063",
+                        "secondary": "#5b3cdd",
+                        "on-surface": "#0c1a3b",
+                        "tertiary-container": "#19bc84",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "primary-container": "#00b4d8",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0c1a3b",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#bcc9ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "tap-target-min": "48px",
+                        "margin-mobile": "20px",
+                        "lg": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-lg": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 58, 0.05), 0 2px 4px -1px rgba(11, 25, 58, 0.03);
+        }
+        
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08);
+        }
+        
+        /* Switch styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00B4D8;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #00B4D8;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col bg-surface-container-lowest/80 dark:bg-inverse-surface/90 backdrop-blur-2xl border-r border-white/20 dark:border-outline-variant/10 shadow-lg shadow-on-surface/8 fixed left-0 top-0 h-full py-lg z-50 overflow-y-auto docked left-0 w-64 translate-x-1 duration-200 ease-in-out">
+<div class="px-lg mb-xl">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed-dim tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+</div>
+</div>
+<div class="flex-1 px-sm flex flex-col gap-sm">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-lg text-label-lg">Applications</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-lg text-label-lg">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+</div>
+<div class="mt-auto px-sm flex flex-col gap-sm">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg text-label-lg">Support</span>
+</a>
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar (Mobile & Desktop) -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-white/40 dark:border-outline-variant/20 shadow-md shadow-on-surface/5 flex items-center justify-between px-margin-mobile md:px-margin-desktop h-tap-target-min w-full z-40 sticky top-0 docked full-width scale-98 active:scale-95 duration-150">
+<div class="flex items-center gap-md">
+<button class="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary-container/10 transition-colors duration-200">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md md:font-headline-lg md:text-headline-lg font-bold text-primary dark:text-primary-fixed-dim hidden md:block">System Settings</h2>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim md:hidden block">Sahaayak AI</h2>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full hover:bg-primary-container/10 transition-colors duration-200 flex items-center justify-center text-on-surface-variant dark:text-outline">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer hover:bg-primary-container/10 transition-colors duration-200">
+<img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFRKD0NZ1zY-lOq3Nemcbgj3fcNAgWmB1PFmYyMAzd3kGEKw8ANjXWpOTnfAQwH6JQFOc6emNWBrA__KZjKCM1SVSfE_15aELvIIEm7mxkmzpj05yX2vfptwcnJRZtNiQQC7pizxjzRdPcRQIPN65_kzCYi1qI9_Ve3FA9H099BZWStYrv6pQFvqInJkJLfcbogu5SJgoR6DBtpczFPlp7iYe-IzmXwXtu7QpQaQc_XHMoVrp-W3hKX9C9nbw6CF-9vjD6AbJ4ZQM"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<div class="max-w-5xl mx-auto space-y-xl">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface md:hidden">System Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Configure global parameters and monitor administrative actions.</p>
+</div>
+<div class="flex gap-sm">
+<button class="h-tap-target-min px-lg rounded-full bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="restart_alt">restart_alt</span>
+                            Reset Defaults
+                        </button>
+<button class="h-tap-target-min px-lg rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg hover:brightness-110 transition-all shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+                            Save Changes
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Core Settings (Left Column) -->
+<div class="md:col-span-8 space-y-lg">
+<!-- AI Configuration Card -->
+<div class="glass-card rounded-xl p-lg">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant/30 pb-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="smart_toy">smart_toy</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">AI &amp; Automation</h3>
+</div>
+<div class="space-y-lg">
+<!-- Setting Item 1 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="flex-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">AI Document Clarity Thresholds</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Minimum confidence score required for auto-approval of scanned IDs.</p>
+</div>
+<div class="w-full sm:w-48">
+<div class="flex items-center gap-sm">
+<input class="w-full accent-secondary h-2 bg-surface-container-high rounded-full appearance-none cursor-pointer" max="100" min="50" type="range" value="85"/>
+<span class="font-label-lg text-label-lg text-secondary min-w-[3ch]">85%</span>
+</div>
+</div>
+</div>
+<!-- Setting Item 2 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md pt-md border-t border-outline-variant/20">
+<div class="flex-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">Voice Assistant Sensitivity</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Adjust the wake-word detection sensitivity for the persistent voice FAB.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm rounded-lg border border-outline text-on-surface-variant hover:bg-surface-container-high font-label-sm text-label-sm transition-colors">Low</button>
+<button class="px-md py-sm rounded-lg bg-secondary text-on-secondary font-label-sm text-label-sm shadow-sm transition-colors">Medium</button>
+<button class="px-md py-sm rounded-lg border border-outline text-on-surface-variant hover:bg-surface-container-high font-label-sm text-label-sm transition-colors">High</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Security Settings Card -->
+<div class="glass-card rounded-xl p-lg">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant/30 pb-sm">
+<span class="material-symbols-outlined text-error" data-icon="security">security</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Security &amp; Access</h3>
+</div>
+<div class="space-y-lg">
+<!-- Setting Item 3 -->
+<div class="flex items-center justify-between gap-md">
+<div class="flex-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">MFA Enforcement</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Require Multi-Factor Authentication for all Admin and Sub-Admin accounts.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-surface-container-high peer-focus:outline-none rounded-full peer dark:bg-surface-variant peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Setting Item 4 -->
+<div class="flex items-center justify-between gap-md pt-md border-t border-outline-variant/20">
+<div class="flex-1">
+<h4 class="font-label-lg text-label-lg text-on-surface">Session Timeout</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Automatically log out inactive administrative sessions.</p>
+</div>
+<select class="bg-surface border-2 border-outline-variant text-on-surface text-label-lg font-label-lg rounded-lg focus:ring-secondary focus:border-secondary block p-2.5 h-tap-target-min">
+<option>15 Minutes</option>
+<option selected="">30 Minutes</option>
+<option>1 Hour</option>
+<option>Never</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- System Status (Right Column) -->
+<div class="md:col-span-4 space-y-lg">
+<div class="glass-panel rounded-xl p-lg flex flex-col gap-md h-full">
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-outline-variant/30 pb-sm">System Health</h3>
+<div class="flex items-center justify-between bg-surface-container-low rounded-lg p-md border border-outline-variant/20">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="check_circle">check_circle</span>
+<span class="font-label-lg text-label-lg text-on-surface">API Gateway</span>
+</div>
+<span class="bg-tertiary text-on-tertiary text-xs font-bold px-2 py-1 rounded">ONLINE</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low rounded-lg p-md border border-outline-variant/20">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="check_circle">check_circle</span>
+<span class="font-label-lg text-label-lg text-on-surface">Database Cluster</span>
+</div>
+<span class="bg-tertiary text-on-tertiary text-xs font-bold px-2 py-1 rounded">ONLINE</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low rounded-lg p-md border border-outline-variant/20">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<span class="font-label-lg text-label-lg text-on-surface">Storage Vault</span>
+</div>
+<span class="bg-error text-on-error text-xs font-bold px-2 py-1 rounded">85% FULL</span>
+</div>
+<div class="mt-auto pt-md text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Last backup: Today, 03:00 AM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit Log Section -->
+<div class="glass-card rounded-xl overflow-hidden mt-xl">
+<div class="p-lg border-b border-outline-variant/30 flex items-center justify-between bg-surface/50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="manage_search">manage_search</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Audit Log</h3>
+</div>
+<div class="flex gap-sm">
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant" title="Filter">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant" title="Download CSV">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-lg text-label-lg border-b border-outline-variant/30">
+<th class="p-md font-semibold">Timestamp</th>
+<th class="p-md font-semibold">Admin ID</th>
+<th class="p-md font-semibold">Action</th>
+<th class="p-md font-semibold">Target Entity</th>
+<th class="p-md font-semibold">Details</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md whitespace-nowrap text-on-surface-variant text-sm">2023-10-27 14:32:10</td>
+<td class="p-md font-medium text-primary">ADM-9021</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest px-2 py-1 rounded-md text-sm font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span> Modified Role
+                                        </span>
+</td>
+<td class="p-md">User: USR-4412</td>
+<td class="p-md text-sm text-on-surface-variant">Changed from 'Applicant' to 'Field Agent'</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md whitespace-nowrap text-on-surface-variant text-sm">2023-10-27 11:15:45</td>
+<td class="p-md font-medium text-primary">ADM-7734</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest px-2 py-1 rounded-md text-sm font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="policy">policy</span> Updated Policy
+                                        </span>
+</td>
+<td class="p-md">System Settings</td>
+<td class="p-md text-sm text-on-surface-variant">Enabled MFA Enforcement globally</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md whitespace-nowrap text-on-surface-variant text-sm">2023-10-26 16:50:02</td>
+<td class="p-md font-medium text-primary">SYS-AUTO</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-error-container text-on-error-container px-2 py-1 rounded-md text-sm font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="block">block</span> Revoked Access
+                                        </span>
+</td>
+<td class="p-md">Agent: AGT-1109</td>
+<td class="p-md text-sm text-on-surface-variant">Automated revocation due to inactivity (90 days)</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md whitespace-nowrap text-on-surface-variant text-sm">2023-10-26 09:22:18</td>
+<td class="p-md font-medium text-primary">ADM-9021</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-md text-sm font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_circle">add_circle</span> Created Role
+                                        </span>
+</td>
+<td class="p-md">Permission Group</td>
+<td class="p-md text-sm text-on-surface-variant">Created new group 'Regional Auditor'</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm flex justify-center border-t border-outline-variant/20 bg-surface/30">
+<button class="text-primary font-label-lg text-label-lg hover:underline py-sm px-md rounded-full hover:bg-primary-container/10 transition-colors">
+                            View Full History
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Persistent Voice FAB -->
+<button class="fixed bottom-lg right-lg w-14 h-14 bg-gradient-to-br from-secondary to-secondary-container text-on-secondary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50 animate-pulse border-2 border-white/20" title="Voice Command">
+<span class="material-symbols-outlined text-[28px]" data-icon="mic">mic</span>
+</button>
+</body></html>

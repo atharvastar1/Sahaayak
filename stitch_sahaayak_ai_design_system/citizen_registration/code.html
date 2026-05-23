@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jan Seva - Citizen Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001f27",
+                        "on-tertiary-container": "#00442d",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-surface-variant": "#3d494d",
+                        "on-primary-container": "#00414f",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#006c49",
+                        "surface-container-highest": "#dae2ff",
+                        "secondary-fixed": "#e5deff",
+                        "primary-fixed": "#b3ebff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error": "#ba1a1a",
+                        "outline": "#6d797e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2ff",
+                        "inverse-surface": "#232f51",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#00677d",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ced9ff",
+                        "surface-tint": "#00677d",
+                        "inverse-primary": "#4cd6fb",
+                        "secondary-container": "#7459f7",
+                        "on-secondary-fixed": "#1a0063",
+                        "secondary": "#5b3cdd",
+                        "on-surface": "#0c1a3b",
+                        "tertiary-container": "#19bc84",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "primary-container": "#00b4d8",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0c1a3b",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#bcc9ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "tap-target-min": "48px",
+                        "margin-mobile": "20px",
+                        "lg": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-lg": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen relative font-body-md text-body-md overflow-x-hidden md:hidden">
+<!-- Decorative Background Elements for Soft Premium Feel -->
+<div class="fixed top-[-100px] left-[-50px] w-64 h-64 bg-primary-fixed-dim/30 rounded-full blur-3xl z-0 pointer-events-none"></div>
+<div class="fixed bottom-[-50px] right-[-50px] w-80 h-80 bg-secondary-fixed-dim/20 rounded-full blur-3xl z-0 pointer-events-none"></div>
+<!-- Top App Bar (From Shared Components JSON) -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl docked full-width top-0 border-b border-white/40 dark:border-outline-variant shadow-sm flex justify-between items-center w-full px-margin-mobile h-tap-target-min fixed z-50">
+<button aria-label="Menu" class="text-primary dark:text-primary-fixed-dim active:scale-95 duration-200 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full p-1">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant text-center flex-1">
+            Jan Seva
+        </div>
+<button aria-label="User Profile" class="w-8 h-8 rounded-full overflow-hidden active:scale-95 duration-200 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkhngPX8Xi7TI1xo48DmK2MZwF3ZpmCXRXvrxG-ViF9TTQ3Z_qIR82R-8ifo-6_-5oLhW_Qgc7GsM4baPpyj4-FUK44eHkD6hldZIF4TyDmii-T7dGaNqAPm15w1ty82uoYP1qBGwSJknccYAxrURLQ75c1xak5IOfS-bACJqTLzBm9uxDcGLmzA1T9yFIuf4cZ1zbNn-qmUQOFsSzJseEwec6AkO5J2M0UCyqt5G45-o4rVMjM-RsVaypWt28JxCpIuhVeMkJHis"/>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] pb-[100px] px-margin-mobile relative z-10">
+<!-- Greeting Section -->
+<div class="mb-lg mt-sm">
+<div class="flex items-center gap-2 mb-xs text-primary">
+<span class="material-symbols-outlined text-3xl">handshake</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Namaste!</h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Let's set up your citizen profile for quick access to government services.</p>
+</div>
+<!-- Registration Form Card (Glassmorphism) -->
+<div class="glass-card rounded-[24px] p-md mb-lg shadow-[0_8px_20px_rgba(11,25,58,0.04)] relative overflow-hidden">
+<!-- Subtle inner border highlight -->
+<div class="absolute inset-0 rounded-[24px] border border-white/60 pointer-events-none"></div>
+<form class="flex flex-col gap-lg relative z-10">
+<!-- Full Name Input -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="fullName">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full h-tap-target-min bg-white rounded-xl pl-12 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline-variant border-none ring-1 ring-outline/20 focus:ring-2 focus:ring-primary-container outline-none transition-shadow" id="fullName" placeholder="Enter as per Aadhaar" type="text"/>
+</div>
+</div>
+<!-- Aadhaar Input -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-lg text-label-lg text-on-surface" for="aadhaar">Aadhaar Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">badge</span>
+<input class="w-full h-tap-target-min bg-white rounded-xl pl-12 pr-12 font-body-md text-body-md text-on-surface placeholder:text-outline-variant border-none ring-1 ring-outline/20 focus:ring-2 focus:ring-primary-container outline-none transition-shadow tracking-widest" id="aadhaar" placeholder="XXXX XXXX XXXX" type="number"/>
+<!-- Verification Status Indicator (Pending) -->
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant" title="Pending Verification">hourglass_empty</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Your data is secured with government standards.</p>
+</div>
+<!-- Language Selection Grid -->
+<div class="flex flex-col gap-xs mt-sm">
+<label class="font-headline-md text-headline-md text-on-surface mb-2">Preferred Language</label>
+<div class="grid grid-cols-2 gap-sm">
+<!-- Language Option 1 (Selected) -->
+<button class="relative h-[80px] rounded-xl border-2 border-primary-container bg-primary-fixed/20 flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-primary-container absolute top-2 right-2 text-sm">check_circle</span>
+<span class="font-headline-md text-headline-md text-on-surface">हिंदी</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hindi</span>
+</button>
+<!-- Language Option 2 -->
+<button class="relative h-[80px] rounded-xl border border-outline/20 bg-white flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform hover:bg-surface-container-low" type="button">
+<span class="font-headline-md text-headline-md text-on-surface">English</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">English</span>
+</button>
+<!-- Language Option 3 -->
+<button class="relative h-[80px] rounded-xl border border-outline/20 bg-white flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform hover:bg-surface-container-low" type="button">
+<span class="font-headline-md text-headline-md text-on-surface">मराठी</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Marathi</span>
+</button>
+<!-- Language Option 4 -->
+<button class="relative h-[80px] rounded-xl border border-outline/20 bg-white flex flex-col items-center justify-center gap-1 active:scale-95 transition-transform hover:bg-surface-container-low" type="button">
+<span class="font-headline-md text-headline-md text-on-surface">বাংলা</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bengali</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-tap-target-min bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(11,25,58,0.08)] active:scale-95 transition-transform hover:bg-primary">
+<span>Complete Profile</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</main>
+<!-- Note: BottomNavBar is suppressed as this is a transactional/onboarding screen per instructions. -->
+<!-- Persistent Voice Assistant FAB (Contextual for Semi-literate users) -->
+<button class="fixed bottom-lg right-margin-mobile w-[64px] h-[64px] rounded-full bg-gradient-to-br from-secondary to-secondary-container text-on-secondary shadow-[0_8px_24px_rgba(11,25,58,0.15)] flex items-center justify-center z-50 animate-[pulse_3s_infinite] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[32px]">mic</span>
+</button>
+</body></html>

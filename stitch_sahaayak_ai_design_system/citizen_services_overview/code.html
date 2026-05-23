@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - Citizen Services Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Subtle page background pattern */
+        .bg-glass-pattern {
+            background-color: #f2f3ff;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0.03) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,0.03) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,0.03) 0, transparent 50%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#faf8ff",
+                        "secondary-container": "#7459f7",
+                        "surface-tint": "#00677d",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-low": "#f2f3ff",
+                        "secondary-fixed": "#e5deff",
+                        "surface-variant": "#dae2ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#232f51",
+                        "inverse-primary": "#4cd6fb",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#19bc84",
+                        "on-tertiary-fixed": "#002113",
+                        "on-primary-fixed": "#001f27",
+                        "surface-container-highest": "#dae2ff",
+                        "primary": "#00677d",
+                        "outline-variant": "#bcc9ce",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#b3ebff",
+                        "on-surface": "#0c1a3b",
+                        "surface-dim": "#ced9ff",
+                        "background": "#faf8ff",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#006c49",
+                        "surface": "#faf8ff",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary": "#5b3cdd",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#3d494d",
+                        "on-secondary-fixed": "#1a0063",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container": "#eaedff",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0c1a3b",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "primary-container": "#00b4d8",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "outline": "#6d797e",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#00442d",
+                        "on-primary-container": "#00414f"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    },
+                    spacing: {
+                        sm: "8px",
+                        lg: "24px",
+                        md: "16px",
+                        "margin-mobile": "20px",
+                        gutter: "16px",
+                        xs: "4px",
+                        "tap-target-min": "48px",
+                        base: "8px",
+                        xl: "32px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }],
+                        "label-sm": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                        "label-lg": ["16px", { lineHeight: "24px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-md": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "body-lg": ["20px", { lineHeight: "30px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-glass-pattern text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col md:flex-row overflow-hidden" data-alt="A soft, abstract gradient background utilizing light blue and silver tones, creating a serene, modern, and accessible digital canvas suitable for a government-grade service application in light mode.">
+<!-- SideNavBar (Hidden on Mobile, Flex on Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full py-lg z-50 overflow-y-auto w-64 bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/20 shadow-lg shadow-on-surface/8">
+<!-- Header -->
+<div class="px-lg mb-xl flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 28px;">robot_2</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 px-sm flex flex-col gap-xs">
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-lg text-label-lg">Applications</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-lg text-label-lg">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="px-sm flex flex-col gap-xs mt-auto pt-lg border-t border-outline-variant/20 mx-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg text-label-lg">Support</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col h-screen md:pl-64 relative">
+<!-- TopAppBar -->
+<header class="fixed top-0 inset-x-0 md:left-64 z-40 bg-surface/80 backdrop-blur-xl bg-surface/70 border-b border-white/40 shadow-md shadow-on-surface/5">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-tap-target-min w-full">
+<!-- Mobile Brand -->
+<div class="md:hidden font-headline-md text-headline-md font-bold text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined">menu</span>
+                    Sahaayak AI
+                </div>
+<!-- Desktop Search Placeholder -->
+<div class="hidden md:flex flex-1 max-w-md">
+<div class="w-full h-10 bg-surface-container rounded-full flex items-center px-md text-on-surface-variant border border-outline-variant/30 focus-within:border-secondary-container focus-within:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined mr-sm text-[20px]">search</span>
+<input class="bg-transparent border-none outline-none w-full font-body-md text-[16px] text-on-surface placeholder:text-outline-variant focus:ring-0" placeholder="Search services..." type="text"/>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-primary-container/10 transition-colors duration-200 scale-98 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-primary-container/10 transition-colors duration-200 scale-98 active:scale-95 md:hidden">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold shadow-sm border border-white/50 ml-sm cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto pt-[80px] pb-xl px-margin-mobile md:px-margin-desktop">
+<!-- Page Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Citizen Services Catalog</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Explore and access critical government schemes tailored for your community. Tap any service to view eligibility and apply with AI assistance.</p>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- Category Card: Agriculture -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl border border-white/40 shadow-sm rounded-[1.5rem] p-lg flex flex-col gap-md transition-transform duration-300 hover:shadow-md">
+<div class="flex items-center gap-md mb-sm">
+<div class="w-14 h-14 rounded-2xl bg-[#e6f4ea] text-[#137333] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 32px;">agriculture</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Agriculture &amp; Rural</h3>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<!-- Scheme Item -->
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">PM-KISAN Samman Nidhi</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">Direct income support of ₹6,000 per year for farmer families.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+<!-- Scheme Item -->
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">Pradhan Mantri Fasal Bima</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">Comprehensive crop insurance scheme against natural calamities.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+</div>
+<button class="h-tap-target-min w-full rounded-xl bg-primary-container/10 text-primary-container font-label-lg flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors mt-sm">
+                        View all 12 Agriculture Services
+                    </button>
+</div>
+<!-- Category Card: Healthcare -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl border border-white/40 shadow-sm rounded-[1.5rem] p-lg flex flex-col gap-md transition-transform duration-300 hover:shadow-md">
+<div class="flex items-center gap-md mb-sm">
+<div class="w-14 h-14 rounded-2xl bg-[#fce8e6] text-[#c5221f] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 32px;">local_hospital</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Healthcare</h3>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">Ayushman Bharat PM-JAY</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">Health cover of ₹5 lakhs per family per year for secondary care.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">Jan Aushadhi Kendra</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">Locate nearby stores for affordable generic medicines.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+</div>
+<button class="h-tap-target-min w-full rounded-xl bg-primary-container/10 text-primary-container font-label-lg flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors mt-sm">
+                        View all 8 Healthcare Services
+                    </button>
+</div>
+<!-- Category Card: Education -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl border border-white/40 shadow-sm rounded-[1.5rem] p-lg flex flex-col gap-md transition-transform duration-300 hover:shadow-md">
+<div class="flex items-center gap-md mb-sm">
+<div class="w-14 h-14 rounded-2xl bg-[#e8f0fe] text-[#1967d2] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 32px;">school</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Education &amp; Skills</h3>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">National Scholarship Portal</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">Single window for applying to central and state scholarships.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+</div>
+<button class="h-tap-target-min w-full rounded-xl bg-primary-container/10 text-primary-container font-label-lg flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors mt-sm">
+                        View all 15 Education Services
+                    </button>
+</div>
+<!-- Category Card: Women Empowerment -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl border border-white/40 shadow-sm rounded-[1.5rem] p-lg flex flex-col gap-md transition-transform duration-300 hover:shadow-md">
+<div class="flex items-center gap-md mb-sm">
+<div class="w-14 h-14 rounded-2xl bg-[#fce8f3] text-[#c2185b] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 32px;">diversity_1</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Women Empowerment</h3>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<div class="bg-surface-container/40 rounded-xl p-md border border-white/50 hover:bg-surface-container/80 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-xs">
+<h4 class="font-label-lg text-label-lg text-on-surface">Sukanya Samriddhi Yojana</h4>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<p class="font-body-md text-[15px] leading-snug text-on-surface-variant mb-md">High-interest savings scheme for the future of a girl child.</p>
+<button class="h-10 px-md rounded-full bg-white text-primary border border-outline-variant/30 font-label-sm flex items-center justify-center gap-xs hover:bg-surface-container-low w-full sm:w-auto">
+<span class="material-symbols-outlined text-[18px]">info</span> Learn More
+                            </button>
+</div>
+</div>
+<button class="h-tap-target-min w-full rounded-xl bg-primary-container/10 text-primary-container font-label-lg flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-colors mt-sm">
+                        View all 9 Empowerment Services
+                    </button>
+</div>
+</div>
+</div>
+<!-- Persistent Voice FAB -->
+<button class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop w-16 h-16 rounded-full bg-gradient-to-tr from-secondary-container to-secondary shadow-[0_8px_20px_rgba(11,25,58,0.15)] flex items-center justify-center text-on-secondary-container z-50 hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 32px;">mic</span>
+</button>
+</main>
+</body></html>

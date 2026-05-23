@@ -102,7 +102,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             fontWeight: FontWeight.w800, 
             fontSize: 28, 
             letterSpacing: -1,
-            color: SahaayakTheme.primaryDark
+            color: SahaayakTheme.textBody
           ),
         ),
       ),
@@ -128,7 +128,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             decoration: SahaayakTheme.bentoCard(radius: 20),
             child: Row(
               children: [
-                Icon(item['icon'] as IconData, color: SahaayakTheme.primaryBlue, size: 20),
+                Icon(item['icon'] as IconData, color: SahaayakTheme.primary, size: 20),
                 const SizedBox(width: 12),
                 Text(item['label'] as String, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 11, color: SahaayakTheme.textSecondary)),
                 const SizedBox(width: 8),
@@ -223,7 +223,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildCitizenPulseWidget(String langCode) {
     return Container(
       padding: const EdgeInsets.all(28),
-      decoration: SahaayakTheme.premiumCard(radius: 32).copyWith(
+      decoration: SahaayakTheme.glassmorphic(radius: 20).copyWith(
         gradient: LinearGradient(
           colors: [Colors.white, SahaayakTheme.primary.withValues(alpha: 0.02)],
           begin: Alignment.topLeft,

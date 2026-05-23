@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Scheme Information - Jan Seva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#faf8ff",
+                      "surface-container-high": "#e2e7ff",
+                      "surface": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#001f27",
+                      "on-tertiary-container": "#00442d",
+                      "on-secondary-container": "#fffbff",
+                      "inverse-on-surface": "#eef0ff",
+                      "on-surface-variant": "#3d494d",
+                      "on-primary-container": "#00414f",
+                      "surface-container-low": "#f2f3ff",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "on-tertiary-fixed": "#002113",
+                      "tertiary": "#006c49",
+                      "surface-container-highest": "#dae2ff",
+                      "secondary-fixed": "#e5deff",
+                      "primary-fixed": "#b3ebff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary-fixed": "#6ffbbe",
+                      "error": "#ba1a1a",
+                      "outline": "#6d797e",
+                      "on-error": "#ffffff",
+                      "surface-container": "#eaedff",
+                      "surface-variant": "#dae2ff",
+                      "inverse-surface": "#232f51",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary": "#00677d",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#ced9ff",
+                      "surface-tint": "#00677d",
+                      "inverse-primary": "#4cd6fb",
+                      "secondary-container": "#7459f7",
+                      "on-secondary-fixed": "#1a0063",
+                      "secondary": "#5b3cdd",
+                      "on-surface": "#0c1a3b",
+                      "tertiary-container": "#19bc84",
+                      "surface-bright": "#faf8ff",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "primary-fixed-dim": "#4cd6fb",
+                      "primary-container": "#00b4d8",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#0c1a3b",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#bcc9ce"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "base": "8px",
+                      "sm": "8px",
+                      "tap-target-min": "48px",
+                      "margin-mobile": "20px",
+                      "lg": "24px",
+                      "margin-desktop": "64px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "safe-bottom": "env(safe-area-inset-bottom, 20px)"
+              },
+              "fontFamily": {
+                      "label-sm": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "body-md": ["Outfit"],
+                      "body-lg": ["Outfit"],
+                      "headline-lg": ["Outfit"],
+                      "headline-lg-mobile": ["Outfit"],
+                      "label-lg": ["Outfit"]
+              },
+              "fontSize": {
+                      "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-lg": ["20px", {"lineHeight": "30px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #faf8ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .ai-pulse {
+            animation: pulse-secondary 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse-secondary {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(91, 60, 221, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(91, 60, 221, 0);
+            }
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-md min-h-screen pb-[100px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-40 w-full bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-sm transition-all flex justify-between items-center px-margin-mobile h-tap-target-min">
+<button aria-label="Go Back" class="flex items-center justify-center w-tap-target-min h-tap-target-min text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface flex-1 text-center truncate px-2">Scheme Details</h1>
+<button aria-label="Share" class="flex items-center justify-center w-tap-target-min h-tap-target-min text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">share</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto space-y-lg">
+<!-- Hero Section: Scheme Title & Status -->
+<section class="space-y-base mt-md">
+<div class="inline-flex items-center gap-xs bg-tertiary px-sm py-1 rounded-full">
+<span class="material-symbols-outlined text-on-tertiary text-label-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-tertiary uppercase tracking-wider">Active Scheme</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A national mission to improve farm productivity and ensure better utilization of the resources in the country.</p>
+</section>
+<!-- AI Voice Assistant Card -->
+<section class="glass-panel rounded-xl p-md flex items-center justify-between gap-md shadow-[0_8px_20px_rgba(11,25,58,0.04)] relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent pointer-events-none"></div>
+<div class="flex-1 z-10">
+<h3 class="font-headline-md text-headline-md text-secondary">Explain this Scheme</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Tap to hear a simple audio explanation in your local language.</p>
+</div>
+<button aria-label="Play Audio Explanation" class="w-[64px] h-[64px] rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 ai-pulse shadow-lg z-10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</section>
+<!-- Key Highlights Grid -->
+<section class="grid grid-cols-2 gap-md">
+<div class="glass-panel rounded-xl p-md flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(11,25,58,0.03)]">
+<span class="material-symbols-outlined text-primary-container text-[36px] mb-xs" style="font-variation-settings: 'FILL' 1;">currency_rupee</span>
+<span class="font-headline-md text-headline-md text-on-surface block">Up to 55%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Subsidy on Equipment</span>
+</div>
+<div class="glass-panel rounded-xl p-md flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(11,25,58,0.03)]">
+<span class="material-symbols-outlined text-tertiary-container text-[36px] mb-xs" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="font-headline-md text-headline-md text-on-surface block">Per Drop</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">More Crop Focus</span>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="glass-panel rounded-xl p-lg shadow-[0_8px_24px_rgba(11,25,58,0.06)]">
+<div class="flex items-center gap-sm mb-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Key Benefits</h3>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-start gap-md">
+<div class="mt-1 w-6 h-6 rounded-full bg-tertiary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">done</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Financial assistance for installing drip and sprinkler irrigation systems.</p>
+</li>
+<li class="flex items-start gap-md">
+<div class="mt-1 w-6 h-6 rounded-full bg-tertiary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">done</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Reduces water wastage and promotes efficient water management at the farm level.</p>
+</li>
+<li class="flex items-start gap-md">
+<div class="mt-1 w-6 h-6 rounded-full bg-tertiary-container/20 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">done</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Increases crop yield and overall income for the farming household.</p>
+</li>
+</ul>
+</section>
+<!-- Eligibility Criteria -->
+<section class="glass-panel rounded-xl p-lg shadow-[0_8px_24px_rgba(11,25,58,0.06)]">
+<div class="flex items-center gap-sm mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Eligibility Criteria</h3>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-md p-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0;">check_box</span>
+<span class="font-body-md text-body-md text-on-surface">Must be an active farmer with agricultural land.</span>
+</li>
+<li class="flex items-center gap-md p-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0;">check_box</span>
+<span class="font-body-md text-body-md text-on-surface">Valid land ownership documents required.</span>
+</li>
+<li class="flex items-center gap-md p-sm bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 0;">check_box</span>
+<span class="font-body-md text-body-md text-on-surface">Aadhaar card linked to a bank account.</span>
+</li>
+</ul>
+</section>
+<!-- Required Documents -->
+<section class="glass-panel rounded-xl p-lg shadow-[0_8px_24px_rgba(11,25,58,0.06)] mb-xl">
+<div class="flex items-center gap-sm mb-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Required Documents</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="flex items-center gap-sm border border-outline-variant p-sm rounded-lg bg-surface">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-lg text-label-lg text-on-surface">Aadhaar Card</span>
+</div>
+<div class="flex items-center gap-sm border border-outline-variant p-sm rounded-lg bg-surface">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-lg text-label-lg text-on-surface">Land Records (Khasra/Khatauni)</span>
+</div>
+<div class="flex items-center gap-sm border border-outline-variant p-sm rounded-lg bg-surface">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">account_balance</span>
+<span class="font-label-lg text-label-lg text-on-surface">Bank Passbook Copy</span>
+</div>
+<div class="flex items-center gap-sm border border-outline-variant p-sm rounded-lg bg-surface">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">photo_camera</span>
+<span class="font-label-lg text-label-lg text-on-surface">Passport Size Photo</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar (Apply Now FAB) -->
+<div class="fixed bottom-0 left-0 w-full z-50 p-margin-mobile bg-gradient-to-t from-surface via-surface/90 to-transparent pb-[calc(var(--spacing-margin-mobile)+env(safe-area-inset-bottom,20px))]">
+<button class="w-full max-w-md mx-auto flex items-center justify-center gap-sm bg-primary-container text-on-primary-container h-tap-target-min rounded-full shadow-[0_8px_20px_rgba(11,25,58,0.08)] active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+<span class="font-label-lg text-label-lg">Apply Now</span>
+</button>
+</div>
+</body></html>

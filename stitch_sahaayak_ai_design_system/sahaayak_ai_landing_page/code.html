@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - Citizen Services</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#faf8ff",
+                    "secondary-container": "#7459f7",
+                    "surface-tint": "#00677d",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-container-low": "#f2f3ff",
+                    "secondary-fixed": "#e5deff",
+                    "surface-variant": "#dae2ff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#232f51",
+                    "inverse-primary": "#4cd6fb",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#19bc84",
+                    "on-tertiary-fixed": "#002113",
+                    "on-primary-fixed": "#001f27",
+                    "surface-container-highest": "#dae2ff",
+                    "primary": "#00677d",
+                    "outline-variant": "#bcc9ce",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#b3ebff",
+                    "on-surface": "#0c1a3b",
+                    "surface-dim": "#ced9ff",
+                    "background": "#faf8ff",
+                    "primary-fixed-dim": "#4cd6fb",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#006c49",
+                    "surface": "#faf8ff",
+                    "inverse-on-surface": "#eef0ff",
+                    "secondary": "#5b3cdd",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#3d494d",
+                    "on-secondary-fixed": "#1a0063",
+                    "surface-container-high": "#e2e7ff",
+                    "surface-container": "#eaedff",
+                    "on-primary": "#ffffff",
+                    "on-background": "#0c1a3b",
+                    "on-secondary-container": "#fffbff",
+                    "secondary-fixed-dim": "#c9bfff",
+                    "primary-container": "#00b4d8",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#441cc8",
+                    "outline": "#6d797e",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-tertiary-container": "#00442d",
+                    "on-primary-container": "#00414f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "tap-target-min": "48px",
+                    "base": "8px",
+                    "xl": "32px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "headline-md": [
+                            "Outfit"
+                    ],
+                    "headline-lg-mobile": [
+                            "Outfit"
+                    ],
+                    "label-sm": [
+                            "Outfit"
+                    ],
+                    "label-lg": [
+                            "Outfit"
+                    ],
+                    "headline-lg": [
+                            "Outfit"
+                    ],
+                    "body-md": [
+                            "Outfit"
+                    ],
+                    "body-lg": [
+                            "Outfit"
+                    ]
+            },
+            "fontSize": {
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "20px",
+                            {
+                                    "lineHeight": "30px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #faf8ff; /* surface-bright */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism utility */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Soft Elevation utility */
+        .soft-elevation {
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08); /* Neutral color low opacity */
+        }
+
+        /* Pulse animation for Voice FAB */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(116, 89, 247, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(116, 89, 247, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(116, 89, 247, 0); }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-md shadow-on-surface/5 flex items-center justify-between px-margin-mobile md:px-margin-desktop h-[72px]">
+<div class="flex items-center gap-md hover:bg-primary-container/10 transition-colors duration-200 rounded-lg p-sm cursor-pointer scale-98 active:scale-95 duration-150">
+<span class="font-headline-md text-headline-md md:font-headline-lg md:text-headline-lg font-bold text-primary tracking-tight">Sahaayak AI</span>
+</div>
+<div class="flex items-center gap-sm">
+<button aria-label="notifications" class="w-[48px] h-[48px] flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors duration-200 text-on-surface-variant scale-98 active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="settings" class="w-[48px] h-[48px] flex items-center justify-center rounded-full hover:bg-primary-container/10 transition-colors duration-200 text-on-surface-variant scale-98 active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[90px] pb-[100px]">
+<!-- Hero Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-xl md:py-[80px] relative">
+<!-- Decorative background blob -->
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary-fixed opacity-40 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4"></div>
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div class="flex flex-col gap-lg z-10">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface leading-tight">
+                        AI-Powered Citizen Services for Every Indian.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[480px]">
+                        Voice-first assistance in your local dialect to help you access government schemes and services with ease.
+                    </p>
+<div class="mt-sm">
+<button class="h-tap-target-min min-w-[200px] px-xl rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center justify-center gap-sm soft-elevation hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">explore</span>
+                            Explore Services
+                        </button>
+</div>
+</div>
+<div class="relative h-[400px] w-full rounded-[2rem] overflow-hidden glass-panel soft-elevation flex items-center justify-center">
+<img alt="Hero Graphic" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay" data-alt="A bright, optimistic digital illustration depicting an Indian citizen using a modern voice interface to access services. The scene is rendered in a soft premium 3D style with high-key lighting, emphasizing pristine white surfaces and soft cyan accents. Subtle translucent glassmorphism layers float in the background, conveying a high-tech yet highly accessible, government-grade platform designed for rural empowerment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjde81orpXWjYpg2jkZZkRV35apVVhgUyu6ZhU9aIMbeDdN48CLTlaiiefjaGmvVWEN1nagQ9DL2tYNMXNmC40--dS-gLjj9okIcmEWYQi7K4q-dT2FyO0jfv_4riJayB4thHZe3xs0qmwK1_VHd9nY2sv6Wk9RBuUQKYjc9R8RKHE01_rsIOEmqBMeqc5pQYdDE-aNhOp2ioU76Cv3coMyJCjOVKFWgnan_hUvgdNgTCUD8cDZ93a27rmDxrsuNLHPkVkg28q0CI"/>
+<!-- Floating Glass Card overlay -->
+<div class="relative z-10 glass-panel rounded-xl p-lg flex items-center gap-md max-w-[80%]">
+<div class="w-12 h-12 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Application Approved</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">PM-Kisan Scheme</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How it Works Section (Bento Grid) -->
+<section class="px-margin-mobile md:px-margin-desktop py-xl bg-surface-container-low/50">
+<div class="max-w-[1200px] mx-auto">
+<div class="text-center mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface">How it Works</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Simple, accessible, and reliable.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Voice Card -->
+<div class="glass-panel rounded-[1.5rem] p-lg flex flex-col gap-md soft-elevation">
+<div class="w-14 h-14 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">mic</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-sm">Voice First</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            Speak naturally in your local language. Our AI understands dialects and processes requests effortlessly without typing.
+                        </p>
+</div>
+<!-- Trust Card -->
+<div class="glass-panel rounded-[1.5rem] p-lg flex flex-col gap-md soft-elevation border-t-4 border-t-primary-container">
+<div class="w-14 h-14 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-sm">Government Trust</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            Built with state-of-the-art security to ensure your data is protected and services are delivered authentically.
+                        </p>
+</div>
+<!-- Access Card -->
+<div class="glass-panel rounded-[1.5rem] p-lg flex flex-col gap-md soft-elevation">
+<div class="w-14 h-14 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">accessibility_new</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-sm">Universal Access</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            Designed for everyone. Large touch targets and high-contrast visuals ensure usability in any environment.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Schemes Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-xl">
+<div class="max-w-[1200px] mx-auto">
+<div class="flex items-center justify-between mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface">Featured Schemes</h2>
+<button class="font-label-lg text-label-lg text-primary flex items-center gap-xs hover:underline h-tap-target-min px-sm">
+                        View All <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Scheme Card 1 -->
+<div class="glass-panel rounded-[1.5rem] overflow-hidden soft-elevation flex flex-col cursor-pointer group hover:shadow-lg transition-shadow">
+<div class="h-[140px] bg-surface-container relative">
+<img alt="Farming" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A high-quality, bright photograph showing a lush green agricultural field in India under clear daylight. The image is styled with a high-contrast, light-mode aesthetic, ensuring high visibility. Subtle, sleek translucent overlays provide a modern, premium feel, harmonizing with the platform's cyan and white digital design language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL7xNEJeu84WuckMYIhhItCMfGIQtGdIspcjtva66KwfoAeiNYBxpAjRujxHnOkAUDTogJj3KbA1R4XIIEAsmZp07vB2CYP0YeLOvwsn5RMbY-62UCZ9SsW7N9Rs7SkQLQD2wewyHzYzBo2lCN1cw5-uDfj-4aAA5pDG6CQgp32emDo2WFcoj9OQI598hsPpFLB6Afta8TKpRp8pjzXhJup1NkIhaeI79F2JaJM4qZZ9BZCmbGRp6vCPOg8qyvjwILZEl4eoGRl8k"/>
+<div class="absolute top-sm right-sm bg-tertiary text-on-tertiary font-label-sm text-label-sm px-sm py-xs rounded-full">
+                                Active
+                            </div>
+</div>
+<div class="p-md flex flex-col gap-sm flex-grow bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">PM-Kisan Samman Nidhi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Income support to all landholding farmer families to supplement their financial needs.</p>
+<div class="mt-auto pt-sm">
+<button class="w-full h-tap-target-min border-2 border-primary text-primary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">assignment</span> Apply Now
+                                </button>
+</div>
+</div>
+</div>
+<!-- Scheme Card 2 -->
+<div class="glass-panel rounded-[1.5rem] overflow-hidden soft-elevation flex flex-col cursor-pointer group hover:shadow-lg transition-shadow">
+<div class="h-[140px] bg-surface-container relative">
+<img alt="Healthcare" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500" data-alt="A pristine, optimistic photograph showing a modern rural healthcare clinic in India. The lighting is bright and clean, emphasizing a hygienic and accessible environment. The aesthetic is soft premium, utilizing white and subtle purple tones to convey trust and advanced medical support, perfectly aligned with the high-contrast light-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD10ZfgIfZpeGV4QBGG4561alFw2U158VIycI9A5KZB3f7DBhO77ZhN8U6zyPdM-zNtFxChchtxAHtWoACsV1Ao2djjYI1mT7hfpZfI5-AAIeI1yQ8cGbIhqagk48w9T7sIvBG7TqUs-gkqbUVak-gvgmGgNDdiW_fMMl5HHY48gUKzwBiTFutIf86cj1Bcjd-sHCTystbeUqgr-c4hqzzIm6ZJnaKIqWnSR72P0v3LYYaRlrAR_SyH1yQW5wvmxZDIoDEA3yEyyQ8"/>
+<div class="absolute top-sm right-sm bg-tertiary text-on-tertiary font-label-sm text-label-sm px-sm py-xs rounded-full">
+                                Active
+                            </div>
+</div>
+<div class="p-md flex flex-col gap-sm flex-grow bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Ayushman Bharat</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Health cover of Rs. 5 lakhs per family per year for secondary and tertiary care hospitalization.</p>
+<div class="mt-auto pt-sm">
+<button class="w-full h-tap-target-min border-2 border-primary text-primary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">assignment</span> Apply Now
+                                </button>
+</div>
+</div>
+</div>
+<!-- Scheme Card 3 -->
+<div class="glass-panel rounded-[1.5rem] overflow-hidden soft-elevation flex flex-col cursor-pointer group hover:shadow-lg transition-shadow">
+<div class="h-[140px] bg-surface-container relative">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-variant to-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-[64px] text-primary/40">engineering</span>
+</div>
+</div>
+<div class="p-md flex flex-col gap-sm flex-grow bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">MGNREGA</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Guaranteed 100 days of wage employment in a financial year to rural households.</p>
+<div class="mt-auto pt-sm">
+<button class="w-full h-tap-target-min border-2 border-primary text-primary font-label-lg text-label-lg rounded-full flex items-center justify-center gap-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">assignment</span> Apply Now
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Citizen Impact Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-xl mb-xl">
+<div class="max-w-[1000px] mx-auto glass-panel rounded-[2rem] p-xl soft-elevation relative overflow-hidden">
+<!-- Decorative background accent -->
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-container via-secondary-container to-tertiary-container"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface text-center mb-lg">Citizen Impact</h2>
+<div class="flex flex-col md:flex-row gap-lg items-center justify-center">
+<div class="w-20 h-20 rounded-full bg-surface-container-highest overflow-hidden flex-shrink-0">
+<img alt="Citizen Portrait" class="w-full h-full object-cover" data-alt="A portrait photograph of a confident rural Indian woman smiling. The image is brightly lit with high-key lighting, fitting the modern, light-mode platform aesthetic. The background is softly blurred to emphasize the subject, creating a premium, professional yet highly approachable look that builds trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9kcWTh0DpSLlp9MGTym60HKNtUQahyFLntZ95To6KZ37NZRkdxEAeO-yvmZ4FZK2gdGLTUB89P9yz4Bnxhvnrj-P5gr_6FN7pbBQmYSNt23k_jqFmUvvbsEPE4JRps8hbwkw7xl05bVgD_MMSN_58PWJOZVegSzW8zXoQgSx-AdHv5azWcnEeJglUvruhBtD-o5LMxfKmZ7F-e_g8CcZmo_IFRJgbvylAOh3I3AVXWshdc5VR-ikzTRF5CCVtUtrmCeNYWymwkU8"/>
+</div>
+<div class="text-center md:text-left">
+<p class="font-body-lg text-body-lg text-on-surface-variant italic mb-sm">
+                            "I just pressed the mic button and asked for my pension status in Hindi. The system understood me perfectly and gave me the answer instantly. No more waiting in long lines."
+                        </p>
+<p class="font-label-lg text-label-lg text-on-surface">Sunita Devi</p>
+<p class="font-label-sm text-label-sm text-outline">Beneficiary, Rural UP</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Persistent Voice Trigger FAB -->
+<div class="fixed bottom-lg right-lg z-50">
+<button aria-label="Voice Input" class="w-[64px] h-[64px] rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center soft-elevation animate-pulse-ring hover:scale-105 transition-transform shadow-lg">
+<span class="material-symbols-outlined text-[32px]">mic</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Overview Dashboard - Sahaayak AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#4cd6fb",
+                        "surface-container": "#eaedff",
+                        "on-primary-fixed": "#001f27",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary": "#5b3cdd",
+                        "on-secondary-fixed": "#1a0063",
+                        "background": "#faf8ff",
+                        "surface-tint": "#00677d",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#00442d",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface": "#0c1a3b",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#dae2ff",
+                        "on-background": "#0c1a3b",
+                        "surface": "#faf8ff",
+                        "secondary-fixed": "#e5deff",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-container": "#7459f7",
+                        "primary-container": "#00b4d8",
+                        "surface-container-low": "#f2f3ff",
+                        "on-primary-container": "#00414f",
+                        "tertiary-container": "#19bc84",
+                        "surface-dim": "#ced9ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00677d",
+                        "primary-fixed": "#b3ebff",
+                        "on-surface-variant": "#3d494d",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "outline-variant": "#bcc9ce",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "inverse-surface": "#232f51",
+                        "error": "#ba1a1a",
+                        "tertiary": "#006c49",
+                        "surface-variant": "#dae2ff",
+                        "outline": "#6d797e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "tap-target-min": "48px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; background-color: #F7F9FC; }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .soft-shadow { box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col py-lg z-50 overflow-y-auto bg-surface-container-lowest/80 dark:bg-inverse-surface/90 backdrop-blur-2xl border-r border-white/20 dark:border-outline-variant/10 shadow-lg shadow-on-surface/8 w-64 translate-x-1 duration-200 ease-in-out">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed-dim tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+<ul class="flex flex-col gap-sm px-md flex-1">
+<li>
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    Overview
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+                    Applications
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+                    Document Vault
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+                    User Management
+                </a>
+</li>
+</ul>
+<div class="mt-auto px-md">
+<ul class="flex flex-col gap-sm border-t border-outline-variant/20 pt-md">
+<li>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 h-screen overflow-y-auto w-full relative">
+<!-- TopAppBar (Mobile Only - usually, but kept for context if needed, hidden on md) -->
+<header class="md:hidden flex items-center justify-between px-margin-mobile h-tap-target-min w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-md shadow-on-surface/5 sticky top-0">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Sahaayak AI</h1>
+<div class="flex items-center gap-md text-primary">
+<button class="material-symbols-outlined hover:bg-primary-container/10 p-sm rounded-full transition-colors duration-200">menu</button>
+</div>
+</header>
+<div class="p-margin-mobile md:p-margin-desktop space-y-xl max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex justify-between items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Dashboard Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Real-time system metrics and application status.</p>
+</div>
+<div class="flex gap-md hidden sm:flex">
+<button class="h-tap-target-min px-lg rounded-full bg-surface-container-high text-on-surface font-label-lg text-label-lg flex items-center gap-sm hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">download</span> Export
+                    </button>
+<button class="h-tap-target-min px-lg rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg flex items-center gap-sm hover:bg-inverse-primary transition-colors soft-shadow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span> New Report
+                    </button>
+</div>
+</div>
+<!-- Stat Cards Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Stat Card 1 -->
+<div class="glass-panel rounded-xl p-lg soft-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-lg text-label-lg text-on-surface-variant">Total Applications</span>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined">description</span>
+</div>
+</div>
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">24,502</h3>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> 12%</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="glass-panel rounded-xl p-lg soft-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-lg text-label-lg text-on-surface-variant">Pending Verification</span>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+</div>
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">1,240</h3>
+<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> 5%</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="glass-panel rounded-xl p-lg soft-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-lg text-label-lg text-on-surface-variant">Active Schemes</span>
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+</div>
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">48</h3>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center"><span class="material-symbols-outlined text-[16px]">horizontal_rule</span> 0%</span>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="glass-panel rounded-xl p-lg soft-shadow flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-lg text-label-lg text-on-surface-variant">Help Requests</span>
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+</div>
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">312</h3>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center"><span class="material-symbols-outlined text-[16px]">arrow_downward</span> 8%</span>
+</div>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Chart -->
+<div class="lg:col-span-2 glass-panel rounded-xl p-lg soft-shadow flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Application Trends</h3>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-md px-sm py-xs font-body-md text-body-md text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary outline-none">
+<option>Last 30 Days</option>
+<option>Last 3 Months</option>
+<option>This Year</option>
+</select>
+</div>
+<div class="flex-1 w-full relative bg-surface-container-lowest rounded-lg border border-outline-variant/30 flex items-end p-md gap-sm justify-between">
+<!-- Abstract Bar Chart Representation -->
+<div class="w-full bg-primary-container/20 rounded-t-md hover:bg-primary-container/40 transition-colors cursor-pointer relative group" style="height: 40%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">420</div></div>
+<div class="w-full bg-primary-container/30 rounded-t-md hover:bg-primary-container/50 transition-colors cursor-pointer relative group" style="height: 55%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">550</div></div>
+<div class="w-full bg-primary-container/20 rounded-t-md hover:bg-primary-container/40 transition-colors cursor-pointer relative group" style="height: 45%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">480</div></div>
+<div class="w-full bg-primary-container/40 rounded-t-md hover:bg-primary-container/60 transition-colors cursor-pointer relative group" style="height: 70%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">720</div></div>
+<div class="w-full bg-primary-container/50 rounded-t-md hover:bg-primary-container/70 transition-colors cursor-pointer relative group" style="height: 85%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">890</div></div>
+<div class="w-full bg-primary-container/40 rounded-t-md hover:bg-primary-container/60 transition-colors cursor-pointer relative group" style="height: 65%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">650</div></div>
+<div class="w-full bg-primary-container/70 rounded-t-md hover:bg-primary-container/90 transition-colors cursor-pointer relative group" style="height: 95%;"><div class="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-on-surface text-surface text-xs py-1 px-2 rounded">980</div></div>
+</div>
+<div class="flex justify-between mt-sm text-label-sm text-outline px-md">
+<span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+</div>
+</div>
+<!-- Right Column: Geographic Distribution -->
+<div class="lg:col-span-1 glass-panel rounded-xl p-lg soft-shadow flex flex-col h-[400px]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Top Regions</h3>
+<ul class="flex flex-col gap-md flex-1 overflow-y-auto pr-sm">
+<li class="flex items-center justify-between p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">location_on</span></div>
+<span class="font-body-md text-body-md text-on-surface">Bihar</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant">8,402</span>
+</li>
+<li class="flex items-center justify-between p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">location_on</span></div>
+<span class="font-body-md text-body-md text-on-surface">Maharashtra</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant">6,120</span>
+</li>
+<li class="flex items-center justify-between p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">location_on</span></div>
+<span class="font-body-md text-body-md text-on-surface">Uttar Pradesh</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant">5,890</span>
+</li>
+<li class="flex items-center justify-between p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">location_on</span></div>
+<span class="font-body-md text-body-md text-on-surface">Karnataka</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant">2,105</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Recent Activity Table -->
+<div class="glass-panel rounded-xl soft-shadow overflow-hidden mb-xl">
+<div class="p-lg border-b border-outline-variant/30 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Activity</h3>
+<a class="font-label-lg text-label-lg text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant font-semibold">Applicant Name</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant font-semibold">Scheme Applied</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant font-semibold">Date</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant font-semibold">Status</th>
+<th class="p-md font-label-lg text-label-lg text-on-surface-variant font-semibold">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface">Ramesh Kumar</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Kisan Samman Nidhi</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Oct 24, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary text-on-tertiary font-label-sm text-label-sm">Approved</span>
+</td>
+<td class="p-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface">Sunita Devi</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Awas Yojana</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Oct 24, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">Pending</span>
+</td>
+<td class="p-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface">Amit Singh</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Fasal Bima Yojana</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Oct 23, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error text-on-error font-label-sm text-label-sm">Flagged</span>
+</td>
+<td class="p-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface">Lakshmi Narayan</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Pension Scheme</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Oct 23, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary text-on-tertiary font-label-sm text-label-sm">Approved</span>
+</td>
+<td class="p-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface">Pooja Sharma</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Mudra Yojana</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">Oct 22, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">Pending</span>
+</td>
+<td class="p-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h-xl md:h-0"></div> <!-- padding for mobile -->
+</div>
+</main>
+</body></html>

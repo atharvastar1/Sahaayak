@@ -73,36 +73,36 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       builder: (ctx) {
         final controller = TextEditingController(text: prompts[langCode] ?? prompts['en']);
         return AlertDialog(
-          backgroundColor: const Color(0xFF1a1a2e),
+          backgroundColor: SahaayakTheme.surface,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: const Row(
             children: [
-              Icon(Icons.mic_rounded, color: Color(0xFF00B4D8), size: 22),
+              Icon(Icons.mic_rounded, color: SahaayakTheme.primary, size: 22),
               SizedBox(width: 8),
-              Text('Liquid Mic', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 18)),
+              Text('Liquid Mic', style: TextStyle(color: SahaayakTheme.textBody, fontWeight: FontWeight.w800, fontSize: 18)),
             ],
           ),
           content: TextField(
             controller: controller,
             autofocus: true,
             maxLines: 3,
-            style: const TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: SahaayakTheme.textBody, fontSize: 15),
             decoration: InputDecoration(
               hintText: 'Type your query...',
               hintStyle: const TextStyle(color: Colors.grey),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF00B4D8))),
-              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF2a2a4a))),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF00B4D8))),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: SahaayakTheme.primary)),
+              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: SahaayakTheme.primary.withValues(alpha: 0.3))),
+              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: SahaayakTheme.primary)),
               filled: true,
-              fillColor: const Color(0xFF0d0d1a),
+              fillColor: SahaayakTheme.background,
             ),
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel', style: TextStyle(color: Colors.grey))),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00B4D8), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+              style: ElevatedButton.styleFrom(backgroundColor: SahaayakTheme.primaryContainer, foregroundColor: SahaayakTheme.onPrimaryContainer, shape: const StadiumBorder()),
               onPressed: () => Navigator.pop(ctx, controller.text.trim()),
-              child: const Text('Submit', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+              child: const Text('Submit', style: TextStyle(fontWeight: FontWeight.w800)),
             ),
           ],
         );
@@ -187,9 +187,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             height: 400,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: SahaayakTheme.primary.withValues(alpha: 0.03),
+              color: SahaayakTheme.primary.withValues(alpha: 0.15),
             ),
-          ),
+          ).animate().blurXY(begin: 100, end: 100),
         ),
         Positioned(
           bottom: -50,
@@ -199,9 +199,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             height: 300,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: SahaayakTheme.accentAI.withValues(alpha: 0.04),
+              color: SahaayakTheme.accentAI.withValues(alpha: 0.1),
             ),
-          ),
+          ).animate().blurXY(begin: 120, end: 120),
         ),
         if (_state == AppState.processing || _state == AppState.listening)
           Positioned.fill(
@@ -289,21 +289,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(24),
-              decoration: SahaayakTheme.premiumCard(radius: 28).copyWith(
-                boxShadow: SahaayakTheme.premiumShadow,
-              ),
+              decoration: SahaayakTheme.glassmorphic(radius: 20),
               child: Column(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: const BoxDecoration(
-                      color: SahaayakTheme.background,
+                      color: SahaayakTheme.surface,
                       shape: BoxShape.circle,
                     ),
                     child: Text(e['icon']!, style: const TextStyle(fontSize: 28)),
                   ),
                   const SizedBox(height: 12),
-                  Text(e['label']!, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: SahaayakTheme.primaryDark, letterSpacing: -0.5)),
+                  Text(e['label']!, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12, color: SahaayakTheme.textBody, letterSpacing: -0.5)),
                 ],
               ),
             ),
@@ -332,14 +330,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                      width: 240,
                      margin: const EdgeInsets.only(right: 20, bottom: 10),
                      padding: const EdgeInsets.all(24),
-                     decoration: SahaayakTheme.premiumCard(radius: 28).copyWith(
-                       boxShadow: SahaayakTheme.premiumShadow,
-                       gradient: LinearGradient(
-                         colors: [Colors.white, SahaayakTheme.background.withValues(alpha: 0.5)],
-                         begin: Alignment.topLeft,
-                         end: Alignment.bottomRight,
-                       ),
-                     ),
+                     decoration: SahaayakTheme.glassmorphic(radius: 20),
                      child: Column(
                        crossAxisAlignment: CrossAxisAlignment.start,
                        children: [

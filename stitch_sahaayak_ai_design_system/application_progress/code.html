@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - Guided Coach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#faf8ff",
+                      "outline": "#6d797e",
+                      "on-primary-container": "#00414f",
+                      "on-tertiary-fixed": "#002113",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#ced9ff",
+                      "secondary-container": "#7459f7",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f2f3ff",
+                      "on-tertiary-container": "#00442d",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#bcc9ce",
+                      "on-background": "#0c1a3b",
+                      "surface-container": "#eaedff",
+                      "surface-tint": "#00677d",
+                      "surface-container-highest": "#dae2ff",
+                      "surface-variant": "#dae2ff",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "primary-fixed-dim": "#4cd6fb",
+                      "secondary": "#5b3cdd",
+                      "on-surface-variant": "#3d494d",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "tertiary": "#006c49",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#fffbff",
+                      "surface-bright": "#faf8ff",
+                      "background": "#faf8ff",
+                      "inverse-primary": "#4cd6fb",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary-container": "#19bc84",
+                      "primary-fixed": "#b3ebff",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "on-surface": "#0c1a3b",
+                      "on-secondary-fixed": "#1a0063",
+                      "primary": "#00677d",
+                      "error-container": "#ffdad6",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#232f51",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "inverse-on-surface": "#eef0ff",
+                      "surface-container-high": "#e2e7ff",
+                      "secondary-fixed": "#e5deff",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#00b4d8",
+                      "on-primary-fixed": "#001f27"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "tap-target-min": "48px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "margin-desktop": "64px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "margin-mobile": "20px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Outfit"
+                      ],
+                      "label-lg": [
+                              "Outfit"
+                      ],
+                      "headline-lg": [
+                              "Outfit"
+                      ],
+                      "headline-lg-mobile": [
+                              "Outfit"
+                      ],
+                      "headline-md": [
+                              "Outfit"
+                      ],
+                      "body-md": [
+                              "Outfit"
+                      ],
+                      "label-sm": [
+                              "Outfit"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #F7F9FC; /* Enforced Level 0 base */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Level 1 Glassmorphism Utility */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Level 2 Floating Utility */
+        .floating-action {
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08);
+        }
+
+        /* Custom Radio Styling */
+        input[type="radio"]:checked {
+            background-color: #00677d; /* primary */
+            border-color: #00677d;
+        }
+        input[type="radio"]:focus {
+            --tw-ring-color: #00b4d8; /* primary-container */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md mx-auto flex flex-col flex-grow relative">
+<!-- Progress Header -->
+<header class="w-full mb-lg">
+<div class="flex justify-between items-center mb-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Step 2 of 3</span>
+<span class="font-label-sm text-label-sm text-primary">Verify Landholding</span>
+</div>
+<!-- Progress Bar (8px height, cyan filled) -->
+<div class="w-full bg-surface-container-high rounded-full h-base overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500 ease-out" style="width: 66%;"></div>
+</div>
+</header>
+<!-- Question Card (Level 1 Glass) -->
+<div class="glass-panel rounded-xl p-lg mb-lg flex-grow flex flex-col">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-lg">
+                How much land do you own?
+            </h1>
+<!-- Options Form -->
+<form class="space-y-base flex-grow">
+<!-- Option 1 -->
+<label class="flex items-center p-md bg-surface-container-lowest rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer group h-tap-target-min">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary-container focus:ring-2" name="landholding" type="radio" value="less_than_1"/>
+<span class="ml-md font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Less than 1 hectare</span>
+</label>
+<!-- Option 2 (Selected) -->
+<label class="flex items-center p-md bg-surface-container-low rounded-lg border-2 border-primary cursor-pointer group h-tap-target-min">
+<input checked="" class="w-5 h-5 text-primary border-primary focus:ring-primary-container focus:ring-2" name="landholding" type="radio" value="1_to_5"/>
+<span class="ml-md font-body-md text-body-md text-primary font-medium">1-5 hectares</span>
+</label>
+<!-- Option 3 -->
+<label class="flex items-center p-md bg-surface-container-lowest rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer group h-tap-target-min">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary-container focus:ring-2" name="landholding" type="radio" value="5_to_10"/>
+<span class="ml-md font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">5-10 hectares</span>
+</label>
+<!-- Option 4 -->
+<label class="flex items-center p-md bg-surface-container-lowest rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer group h-tap-target-min">
+<input class="w-5 h-5 text-primary border-outline focus:ring-primary-container focus:ring-2" name="landholding" type="radio" value="more_than_10"/>
+<span class="ml-md font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">More than 10 hectares</span>
+</label>
+</form>
+<!-- Tip Box -->
+<div class="mt-lg p-md bg-surface-container rounded-lg flex items-start gap-md border border-surface-container-highest">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Tip:</span> This determines your subsidy eligibility level.
+                </p>
+</div>
+</div>
+<!-- Sticky Footer Actions -->
+<footer class="mt-auto pt-md pb-margin-mobile flex gap-md">
+<button class="flex-1 h-tap-target-min rounded-full border border-outline text-on-surface font-label-lg text-label-lg flex items-center justify-center hover:bg-surface-container-low transition-colors" type="button">
+                Back
+            </button>
+<button class="flex-1 h-tap-target-min rounded-full bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center hover:bg-primary transition-colors shadow-sm" type="button">
+                Continue
+            </button>
+</footer>
+</main>
+</body></html>

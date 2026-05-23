@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Applications - Sahaayak AI Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#4cd6fb",
+                        "surface-container": "#eaedff",
+                        "on-primary-fixed": "#001f27",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary": "#5b3cdd",
+                        "on-secondary-fixed": "#1a0063",
+                        "background": "#faf8ff",
+                        "surface-tint": "#00677d",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#00442d",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface": "#0c1a3b",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#dae2ff",
+                        "on-background": "#0c1a3b",
+                        "surface": "#faf8ff",
+                        "secondary-fixed": "#e5deff",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#fffbff",
+                        "secondary-container": "#7459f7",
+                        "primary-container": "#00b4d8",
+                        "surface-container-low": "#f2f3ff",
+                        "on-primary-container": "#00414f",
+                        "tertiary-container": "#19bc84",
+                        "surface-dim": "#ced9ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00677d",
+                        "primary-fixed": "#b3ebff",
+                        "on-surface-variant": "#3d494d",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "outline-variant": "#bcc9ce",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "inverse-surface": "#232f51",
+                        "error": "#ba1a1a",
+                        "tertiary": "#006c49",
+                        "surface-variant": "#dae2ff",
+                        "outline": "#6d797e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "tap-target-min": "48px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .level-2-shadow {
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- TopAppBar (Mobile Only) -->
+<header class="md:hidden flex items-center justify-between px-margin-mobile h-tap-target-min w-full z-40 fixed bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl bg-surface/70 border-b border-white/40 dark:border-outline-variant/20 shadow-md shadow-on-surface/5 top-0">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-primary-container/10 transition-colors duration-200 p-sm rounded-full scale-98 active:scale-95 duration-150" data-icon="menu">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Sahaayak AI</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-primary-container/10 transition-colors duration-200 p-sm rounded-full scale-98 active:scale-95 duration-150" data-icon="notifications">notifications</span>
+<img alt="Admin Avatar" class="w-[32px] h-[32px] rounded-full object-cover border border-outline-variant cursor-pointer" data-alt="A small circular profile picture of an Indian administrator wearing professional attire. They have a welcoming expression. The image should be bright and clear, matching the clean modern aesthetic of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyPa994aSOvkAULAkjGyqhsfjxxwz8VN2chuV5fE2HawzJKa9Vyh417jOC_shZvkfa5kzJ-iMJHzxyUtAIhfOSQRSYj4TJN7JIygo6lmxFFYMr5pFWDRLpkePhLT6iiS1wwyO5gzBSqKs0AtbrF8QdRxzZeQLDqBXK9zWFSQZHE4ZNCaxuY5gVNiZVL6dgNJl9_Lo-BJuC2ShVoO66wFWLlUEowsFICJcnZP9WURoL1BacBkFM1un0DORHXdrvItji5WKDEfrTKZo"/>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex flex-col py-lg z-50 overflow-y-auto bg-surface-container-lowest/80 dark:bg-inverse-surface/90 backdrop-blur-2xl docked left-0 h-screen w-64 border-r border-white/20 dark:border-outline-variant/10 shadow-lg shadow-on-surface/8 translate-x-1 duration-200 ease-in-out">
+<div class="px-lg pb-xl border-b border-outline-variant/20 mb-md flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-headline-md text-headline-md font-bold">
+                 S
+             </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed-dim tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+</div>
+<div class="flex-1 px-sm space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="assignment" data-weight="fill">assignment</span>
+                Applications
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+                Document Vault
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                User Management
+            </a>
+</div>
+<div class="mt-auto px-sm pt-md border-t border-outline-variant/20 space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-[72px] md:pt-0 p-margin-mobile md:p-margin-desktop overflow-y-auto h-screen w-full relative">
+<!-- Decorative Background Elements for Depth -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10 -translate-x-1/3 translate-y-1/3"></div>
+<div class="max-w-[1400px] mx-auto space-y-xl relative z-10">
+<!-- Page Header & Filters (Bento Style) -->
+<div class="glass-panel rounded-[24px] p-lg md:p-xl level-2-shadow">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-lg mb-lg">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Application Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Review, process, and manage citizen scheme applications.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-lg text-label-lg h-tap-target-min px-lg rounded-full flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors level-2-shadow shrink-0">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Export Report
+                    </button>
+</div>
+<!-- Filter Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md items-end">
+<!-- Search -->
+<div class="md:col-span-5 relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs ml-sm">Search Applicant</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-md text-outline" data-icon="search">search</span>
+<input class="w-full h-tap-target-min pl-[48px] pr-md rounded-xl border-outline-variant focus:border-secondary focus:ring-secondary text-on-surface font-body-md text-body-md placeholder:text-outline/70 bg-surface-container-lowest" placeholder="Citizen Name, Aadhar ID, or Phone..." type="text"/>
+</div>
+</div>
+<!-- Scheme Filter -->
+<div class="md:col-span-3">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs ml-sm">Scheme Category</label>
+<select class="w-full h-tap-target-min px-md rounded-xl border-outline-variant focus:border-secondary focus:ring-secondary text-on-surface font-body-md text-body-md bg-surface-container-lowest appearance-none">
+<option value="">All Categories</option>
+<option value="agriculture">Agriculture &amp; Farming</option>
+<option value="education">Education &amp; Scholarships</option>
+<option value="health">Healthcare Support</option>
+<option value="housing">Rural Housing</option>
+</select>
+</div>
+<!-- Status Filter -->
+<div class="md:col-span-3">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs ml-sm">Status</label>
+<select class="w-full h-tap-target-min px-md rounded-xl border-outline-variant focus:border-secondary focus:ring-secondary text-on-surface font-body-md text-body-md bg-surface-container-lowest appearance-none">
+<option value="">Any Status</option>
+<option value="verified">Verified</option>
+<option value="review">Review Required</option>
+<option value="rejected">Rejected</option>
+<option value="processing">Processing</option>
+</select>
+</div>
+<!-- Quick Filter Action -->
+<div class="md:col-span-1 flex justify-end">
+<button class="h-tap-target-min w-tap-target-min md:w-full bg-surface-container-high hover:bg-surface-variant text-on-surface rounded-xl flex items-center justify-center transition-colors" title="Clear Filters">
+<span class="material-symbols-outlined" data-icon="filter_alt_off">filter_alt_off</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Data List (Glassmorphism Cards replacing standard table) -->
+<div class="space-y-md">
+<!-- Data Row 1 -->
+<div class="glass-panel rounded-xl p-md flex flex-col xl:flex-row xl:items-center justify-between gap-lg hover:shadow-md transition-shadow group">
+<div class="flex items-center gap-md xl:w-[25%]">
+<div class="w-[48px] h-[48px] rounded-full bg-primary/10 text-primary flex items-center justify-center font-headline-md text-headline-md shrink-0">
+                            R
+                        </div>
+<div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Rajesh Kumar</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">ID: AP-2023-8942</p>
+</div>
+</div>
+<div class="xl:w-[25%]">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Scheme Applied</p>
+<p class="font-body-md text-body-md text-on-surface">Kisan Samman Nidhi</p>
+<div class="flex items-center gap-xs mt-xs text-xs text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                            12 Oct 2023
+                        </div>
+</div>
+<div class="xl:w-[20%]">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">Progress</p>
+<div class="flex items-center gap-sm">
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-2/4 rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Step 2/4</span>
+</div>
+</div>
+<div class="xl:w-[15%]">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-tertiary-container/20 text-on-tertiary-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            Verified
+                        </span>
+</div>
+<div class="flex items-center gap-sm xl:w-[15%] justify-end mt-sm xl:mt-0">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Message Citizen">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Download Docs">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+<button class="h-[40px] px-md rounded-full bg-surface-container text-primary font-label-sm text-label-sm hover:bg-surface-variant transition-colors border border-outline-variant/30">
+                            Review
+                        </button>
+</div>
+</div>
+<!-- Data Row 2 -->
+<div class="glass-panel rounded-xl p-md flex flex-col xl:flex-row xl:items-center justify-between gap-lg hover:shadow-md transition-shadow group border-l-4 border-l-error">
+<div class="flex items-center gap-md xl:w-[25%]">
+<div class="w-[48px] h-[48px] rounded-full bg-primary/10 text-primary flex items-center justify-center font-headline-md text-headline-md shrink-0">
+                            S
+                        </div>
+<div>
+<h3 class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Sunita Devi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">ID: AP-2023-9011</p>
+</div>
+</div>
+<div class="xl:w-[25%]">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Scheme Applied</p>
+<p class="font-body-md text-body-md text-on-surface">Pradhan Mantri Awas Yojana</p>
+<div class="flex items-center gap-xs mt-xs text-xs text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                            14 Oct 2023
+                        </div>
+</div>
+<div class="xl:w-[20%]">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">Progress</p>
+<div class="flex items-center gap-sm">
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error w-1/4 rounded-full"></div>
+</div>
+<span class="font-label-sm text-label-sm text-error font-bold">Step 1/4</span>
+</div>
+</div>
+<div class="xl:w-[15%]">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+                            Review Required
+                        </span>
+</div>
+<div class="flex items-center gap-sm xl:w-[15%] justify-end mt-sm xl:mt-0">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Message Citizen">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Download Docs">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+<button class="h-[40px] px-md rounded-full bg-surface-container text-primary font-label-sm text-label-sm hover:bg-surface-variant transition-colors border border-outline-variant/30">
+                            Review
+                        </button>
+</div>
+</div>
+</div>
+<!-- Pagination (Simple) -->
+<div class="flex items-center justify-between pt-md border-t border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Showing 1 to 10 of 245 entries</p>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Persistent AI Assistant FAB (Hidden on this admin screen per contextual rules, but structure kept for potential use if needed later based on requirements, though instructed to suppress on non-aligned screens. Omitting to follow semantic shell mandate for FAB suppression on admin lists). -->
+</body></html>

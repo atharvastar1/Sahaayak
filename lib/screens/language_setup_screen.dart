@@ -58,13 +58,13 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
                       children: [
                         const AnimatedLogo(size: 80, isAnimated: true),
                         const SizedBox(height: 32),
-                        const Text(
-                          'Sahaayak BharatBot',
+                        Text(
+                          'Sahaayak AI',
                           style: TextStyle(
                             fontWeight: FontWeight.w800, 
-                            fontSize: 48, 
-                            letterSpacing: -2.5, 
-                            color: SahaayakTheme.primaryDark,
+                            fontSize: 40, 
+                            letterSpacing: -1.5, 
+                            color: SahaayakTheme.textBody,
                             height: 1.0,
                           ),
                         ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.1),
@@ -147,17 +147,11 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
         padding: const EdgeInsets.all(24),
         decoration: isSelected 
           ? BoxDecoration(
-              color: SahaayakTheme.primaryDark,
+              color: SahaayakTheme.primary,
               borderRadius: BorderRadius.circular(24),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                )
-              ],
+              boxShadow: SahaayakTheme.premiumShadow,
             )
-          : SahaayakTheme.premiumCard(radius: 24),
+          : SahaayakTheme.glassmorphic(radius: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -175,7 +169,7 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 18,
-                color: isSelected ? Colors.white : SahaayakTheme.primaryDark,
+                color: isSelected ? Colors.white : SahaayakTheme.textBody,
               ),
             ),
             Text(
@@ -216,9 +210,10 @@ class _LanguageSetupScreenState extends State<LanguageSetupScreen> {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShellScreen()));
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: SahaayakTheme.primaryDark,
-          minimumSize: const Size(double.infinity, 72),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: SahaayakTheme.primaryContainer,
+          foregroundColor: SahaayakTheme.onPrimaryContainer,
+          minimumSize: const Size(double.infinity, 64),
+          shape: const StadiumBorder(),
           elevation: 0,
         ),
         child: const Text(

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Sahaayak AI - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f2f3ff",
+                        "on-tertiary-container": "#00442d",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "outline-variant": "#bcc9ce",
+                        "on-secondary-fixed": "#1a0063",
+                        "secondary-container": "#7459f7",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "tertiary-container": "#19bc84",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "primary": "#00677d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#e5deff",
+                        "surface-container": "#eaedff",
+                        "on-background": "#0c1a3b",
+                        "surface-container-high": "#e2e7ff",
+                        "on-primary-fixed": "#001f27",
+                        "on-primary": "#ffffff",
+                        "background": "#faf8ff",
+                        "on-surface": "#0c1a3b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-variant": "#dae2ff",
+                        "inverse-primary": "#4cd6fb",
+                        "tertiary": "#006c49",
+                        "inverse-surface": "#232f51",
+                        "surface": "#faf8ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-highest": "#dae2ff",
+                        "outline": "#6d797e",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#b3ebff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "secondary": "#5b3cdd",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-surface-variant": "#3d494d",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "surface-dim": "#ced9ff",
+                        "primary-container": "#00b4d8",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-secondary-container": "#fffbff",
+                        "surface-tint": "#00677d",
+                        "on-primary-container": "#00414f",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "tap-target-min": "48px",
+                        "md": "16px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "80": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "label-sm": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "level-1": "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)",
+                        "level-2": "0 8px 20px 0 rgba(11, 25, 58, 0.08)",
+                        "glow": "0 0 20px 0 rgba(0, 180, 216, 0.4)"
+                    },
+                    "animation": {
+                        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #faf8ff; /* surface */
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .input-solid {
+            background-color: #ffffff;
+            border: 1px solid #bcc9ce; /* outline-variant */
+            transition: border-color 0.2s ease;
+        }
+
+        .input-solid:focus {
+            outline: none;
+            border: 2px solid #00b4d8; /* primary-container */
+        }
+
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-surface">
+<!-- Decorative Ambient Background Gradient -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+<div class="absolute top-[-10%] left-[-20%] w-96 h-96 bg-primary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse-slow"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-80 h-80 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+</div>
+<!-- Main Content Container (Mobile Centric) -->
+<main class="relative z-10 w-full max-w-md px-margin-mobile flex flex-col h-[884px]">
+<!-- Top App Bar Area (Simplified for Login) -->
+<header class="flex justify-between items-center py-margin-mobile w-full">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[32px]">spa</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Sahaayak AI</span>
+</div>
+<!-- Language Selector -->
+<button class="h-tap-target-min px-md flex items-center gap-xs bg-surface-container-lowest rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors shadow-level-1">
+<span class="material-symbols-outlined text-[20px]">language</span>
+<span class="font-label-lg text-label-lg">English</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</header>
+<div class="flex-1 flex flex-col justify-center">
+<!-- Welcome Heading -->
+<div class="mb-xl text-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-sm">Namaste, welcome to Sahaayak</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Log in to access your secure services.</p>
+</div>
+<!-- Login Card (Glassmorphism) -->
+<div class="glass-panel rounded-3xl p-lg shadow-level-2 w-full max-w-[400px] mx-auto">
+<!-- Tab Selector -->
+<div class="flex p-xs bg-surface-container rounded-full mb-lg">
+<button aria-selected="true" class="flex-1 h-tap-target-min rounded-full bg-surface-container-lowest shadow-sm font-label-lg text-label-lg text-primary font-bold transition-all">
+                        Mobile &amp; OTP
+                    </button>
+<button aria-selected="false" class="flex-1 h-tap-target-min rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-all">
+                        Aadhaar
+                    </button>
+</div>
+<!-- Form Area -->
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-sm" for="mobile">Mobile Number</label>
+<div class="relative flex items-center h-tap-target-min">
+<span class="absolute left-md font-body-md text-body-md text-on-surface-variant">+91</span>
+<input class="input-solid w-full h-full rounded-full pl-[60px] pr-md font-body-md text-body-md text-on-surface placeholder:text-outline" id="mobile" maxlength="10" placeholder="Enter 10 digit number" type="tel"/>
+</div>
+</div>
+<button class="w-full h-tap-target-min mt-sm bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-full flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors shadow-level-1 active:scale-[0.98]" type="button">
+<span>Get OTP</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Voice Login Separator -->
+<div class="flex items-center justify-center gap-md my-xl opacity-60">
+<div class="h-[1px] flex-1 bg-outline-variant max-w-[100px]"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">OR USE VOICE</span>
+<div class="h-[1px] flex-1 bg-outline-variant max-w-[100px]"></div>
+</div>
+<!-- Voice Action Button -->
+<div class="flex flex-col items-center justify-center">
+<button aria-label="Login with Voice" class="relative w-80 h-80 rounded-full flex items-center justify-center bg-secondary-container text-on-secondary-container shadow-glow hover:scale-105 active:scale-95 transition-all duration-300 z-10 group">
+<!-- Pulsing rings -->
+<div class="absolute inset-0 rounded-full bg-secondary-container opacity-40 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+<div class="absolute inset-[-10px] rounded-full border border-secondary opacity-20 animate-pulse-slow"></div>
+<span class="material-symbols-outlined text-[40px] z-10 group-hover:scale-110 transition-transform">mic</span>
+</button>
+<span class="mt-md font-label-lg text-label-lg text-on-surface-variant font-medium">Tap to Speak</span>
+</div>
+</div>
+<!-- Footer / Support Link -->
+<footer class="py-margin-mobile text-center">
+<a class="font-label-sm text-label-sm text-primary hover:underline underline-offset-4" href="#">Need help logging in?</a>
+</footer>
+</main>
+</body></html>

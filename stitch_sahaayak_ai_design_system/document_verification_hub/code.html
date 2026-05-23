@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Document Vault - Sahaayak AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#e2e7ff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#4cd6fb",
+                      "surface-container": "#eaedff",
+                      "on-primary-fixed": "#001f27",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "secondary": "#5b3cdd",
+                      "on-secondary-fixed": "#1a0063",
+                      "background": "#faf8ff",
+                      "surface-tint": "#00677d",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#00442d",
+                      "inverse-on-surface": "#eef0ff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-surface": "#0c1a3b",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container-highest": "#dae2ff",
+                      "on-background": "#0c1a3b",
+                      "surface": "#faf8ff",
+                      "secondary-fixed": "#e5deff",
+                      "surface-bright": "#faf8ff",
+                      "on-secondary-container": "#fffbff",
+                      "secondary-container": "#7459f7",
+                      "primary-container": "#00b4d8",
+                      "surface-container-low": "#f2f3ff",
+                      "on-primary-container": "#00414f",
+                      "tertiary-container": "#19bc84",
+                      "surface-dim": "#ced9ff",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "primary": "#00677d",
+                      "primary-fixed": "#b3ebff",
+                      "on-surface-variant": "#3d494d",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#4cd6fb",
+                      "outline-variant": "#bcc9ce",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "inverse-surface": "#232f51",
+                      "error": "#ba1a1a",
+                      "tertiary": "#006c49",
+                      "surface-variant": "#dae2ff",
+                      "outline": "#6d797e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "64px",
+                      "gutter": "16px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "tap-target-min": "48px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Outfit"
+                      ],
+                      "body-md": [
+                              "Outfit"
+                      ],
+                      "body-lg": [
+                              "Outfit"
+                      ],
+                      "label-lg": [
+                              "Outfit"
+                      ],
+                      "headline-lg": [
+                              "Outfit"
+                      ],
+                      "label-sm": [
+                              "Outfit"
+                      ],
+                      "headline-md": [
+                              "Outfit"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #faf8ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Glassmorphism utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        /* Elevation Level 2 */
+        .elevation-active {
+            box-shadow: 0 8px 20px rgba(11, 25, 58, 0.08);
+        }
+        
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bcc9ce;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d797e;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex min-h-screen">
+<!-- TopAppBar (Mobile Only - visually hidden on desktop since SideNav takes over) -->
+<header class="md:hidden fixed top-0 w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-md shadow-on-surface/5 flex items-center justify-between px-margin-mobile h-[72px]">
+<div class="flex items-center gap-sm">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center text-primary rounded-full hover:bg-primary-container/10 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Sahaayak AI</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center text-primary rounded-full hover:bg-primary-container/10 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="Professional portrait of a mature Indian male administrative official. He is wearing a crisp light blue shirt and glasses, standing in a brightly lit modern office setting. The lighting is soft and professional, conveying a sense of trust and authority suitable for a government or high-level corporate admin portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwEc2KDqDmfDWdsQiODbDRXOw_5-t7bWuMIaScDoZ_oFdlaO3DMHEHKXA_IaECVRuAmJvxoV3KEi3LjFgQkQpn5kGmo1h01I705EpZjG_2GUBJeoqR3uxS0RyXfLBnDGQO2pBWVuPFcYBjyrHuGv6EGG3gQRzy0Ikgzccf7s32sCy9s9N39-2LYl-XAXIeSVkTJQwY1h8n_l7UxRcih4OhUiiATKizJBaCXLqPj8dcjEcEsIKM8390ByespDbCYswT-OVswVR3tXQ"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col py-lg z-50 overflow-y-auto bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/20 shadow-lg shadow-on-surface/8 w-64 translate-x-0 transition-transform duration-200 ease-in-out">
+<div class="px-lg pb-xl border-b border-outline-variant/20 mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-on-primary text-[28px]" data-icon="shield_person">shield_person</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+</div>
+</div>
+<div class="flex-1 px-sm space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-lg text-label-lg">Applications</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared" data-weight="fill" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+<span class="font-label-lg text-label-lg">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+</div>
+<div class="px-sm mt-auto pt-md border-t border-outline-variant/20 space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg text-label-lg">Support</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all min-h-tap-target-min" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 pt-[88px] md:pt-lg px-margin-mobile md:px-margin-desktop pb-xl min-h-screen relative flex flex-col md:flex-row gap-xl">
+<!-- Document Canvas -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- Header Section -->
+<div class="mb-xl flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Document Vault</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container animate-pulse inline-block"></span>
+                        Pending Document Reviews: 412
+                    </p>
+</div>
+<!-- Filter/Search Bar -->
+<div class="glass-panel rounded-full flex items-center px-md py-xs shadow-sm w-full sm:w-auto min-h-tap-target-min">
+<span class="material-symbols-outlined text-outline mr-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-on-surface font-body-md placeholder:text-outline w-full sm:w-64 focus:ring-0" placeholder="Search by Citizen ID..." type="text"/>
+<div class="h-6 w-[1px] bg-outline-variant mx-sm"></div>
+<button class="flex items-center justify-center text-primary hover:text-primary-container transition-colors p-xs rounded-full">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid / Cards View -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-lg auto-rows-max">
+<!-- Card 1 -->
+<div class="glass-panel rounded-xl p-md flex flex-col gap-md elevation-active transition-transform hover:-translate-y-1 duration-300">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="description">description</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Ramesh Kumar</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="fingerprint">fingerprint</span>
+                                    Aadhaar Verification
+                                </p>
+</div>
+</div>
+<span class="px-sm py-xs rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm border border-primary/20 shrink-0">
+                            2 hours ago
+                        </span>
+</div>
+<div class="h-32 w-full rounded-lg overflow-hidden border border-outline-variant relative group cursor-pointer bg-surface-container">
+<img alt="Document Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity blur-[2px] group-hover:blur-0" data-alt="A blurred, generic representation of an official government identification card lying on a clean wooden desk. The card features a placeholder photo, a barcode, and official-looking crests. The image is bathed in soft, diffused daylight creating a professional and trustworthy atmosphere. Focus is soft to simulate privacy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA22hfWWpHAUeXyCHY18vQmf4DZKmGRqBdSO9TCK0kNEjAeI8NNLdkJCX3lqasfF88BjyFCOcX4Iwvy2FVblOFNHh-SEVF8wMqQz_LBwGuWAcQ3pn_dL8mypo14IONUeYEXtgFYu3OgOb_1O3SPg1BAFbxGrupNe-HfCidvWYc5hMGqXRwbmr4vmHhEgQanq76hOgEajIXFUKG14nU0TumLer4fYijSm61E9AEaKvNUcsavYlj3nmAAV_eKswaTv3Z007caYr9y1qM"/>
+<div class="absolute inset-0 flex items-center justify-center bg-on-surface/10 group-hover:bg-transparent transition-colors">
+<span class="material-symbols-outlined text-white text-[32px] drop-shadow-md group-hover:scale-110 transition-transform">visibility</span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-auto pt-sm border-t border-outline-variant/30">
+<button class="flex-1 min-h-tap-target-min bg-tertiary-container hover:bg-tertiary-fixed text-on-tertiary-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                            Approve
+                        </button>
+<button class="flex-1 min-h-tap-target-min bg-error-container hover:bg-[#ffb4ab] text-on-error-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+<button class="w-tap-target-min h-tap-target-min bg-surface hover:bg-surface-variant border border-outline-variant text-on-surface font-label-lg text-label-lg rounded-xl flex items-center justify-center transition-colors" title="Request Re-upload">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel rounded-xl p-md flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="landscape">landscape</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Sunita Devi</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="map">map</span>
+                                    Land Record 7/12
+                                </p>
+</div>
+</div>
+<span class="px-sm py-xs rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm border border-primary/20 shrink-0">
+                            3 hours ago
+                        </span>
+</div>
+<div class="h-32 w-full rounded-lg overflow-hidden border border-outline-variant relative group cursor-pointer bg-surface-container">
+<img alt="Document Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity blur-[2px] group-hover:blur-0" data-alt="A macro shot of a worn, official paper document with typewritten text and a faded blue rubber stamp. The paper has a slight yellow tint indicating age. It is laid flat on a clean, light-colored surface. The lighting is bright and even, highlighting the texture of the paper and the ink of the stamp. The scene suggests official archival records." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1if_LEfZCaDp68n8SiYyETZ4vNwF7wbmFAyV6Ri5o0m31CO4pg1lFUmhAVF69IuzI8o2vJ5eMUGEGu45KhGo3Vp6gTZlzZmHAqOd77yhz4jzVOfUNACtQOIYcf8TcnuAQDFGcpm6Fob6jUK1gWmWVApmAF_zndVJuDhtgRZvzU3lY916BqNpjpGDaK4xT0wI1J6teIoFMFMEO7zq9Mraes_REIuxuMJz9QhkVpYlzk8OExlzUdMRitvmjrvfKhaXvvlhyHPLJNs8"/>
+<div class="absolute inset-0 flex items-center justify-center bg-on-surface/10 group-hover:bg-transparent transition-colors">
+<span class="material-symbols-outlined text-white text-[32px] drop-shadow-md group-hover:scale-110 transition-transform">visibility</span>
+</div>
+<!-- Alert Chip inside image for low quality -->
+<div class="absolute top-sm left-sm bg-error/90 text-on-error font-label-sm text-[12px] px-sm py-[2px] rounded-full flex items-center gap-xs backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span> AI: Low Clarity
+                        </div>
+</div>
+<div class="flex items-center gap-sm mt-auto pt-sm border-t border-outline-variant/30">
+<button class="flex-1 min-h-tap-target-min bg-tertiary-container hover:bg-tertiary-fixed text-on-tertiary-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                            Approve
+                        </button>
+<button class="flex-1 min-h-tap-target-min bg-error-container hover:bg-[#ffb4ab] text-on-error-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+<button class="w-tap-target-min h-tap-target-min bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg rounded-xl flex items-center justify-center transition-colors elevation-active" title="Request Re-upload">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel rounded-xl p-md flex flex-col gap-md transition-transform hover:-translate-y-1 duration-300">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="credit_card">credit_card</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface line-clamp-1">Vikram Singh</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="account_balance">account_balance</span>
+                                    PAN Card Update
+                                </p>
+</div>
+</div>
+<span class="px-sm py-xs rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm border border-primary/20 shrink-0">
+                            5 hours ago
+                        </span>
+</div>
+<div class="h-32 w-full rounded-lg overflow-hidden border border-outline-variant relative group cursor-pointer bg-surface-container">
+<img alt="Document Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity blur-[2px] group-hover:blur-0" data-alt="A generic laminated identification card with a blue header and a small profile photo area, laid flat on a clean white surface. The image is brightly lit, emphasizing the glossy texture of the lamination. The overall composition is clean, modern, and clinical, typical of identity verification documentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB99yf5jMkaZysNT0MjuAu3YBcpfU96UyLrjdeDPpQrKpqc9x_bWFL9r3oQ-2JzY8Ah2MGQ-pajlMItLil108NciIpG8Aj1-LyFKJWtS7EIn_HUzhCZLtRuj4-iHVG60iSO1pJ3hx_qr4nB_jUmIjedim09TS9BxWa7QSzF-aj0dFv4Q_SfjmuKfje7PI2urJM8ZvhRFu3uJ78RH8rUzWBSytqNzr81manfdl8T5qlh7OOslXScajc6FSnPeVlhAOTeiawYY6CbR7s"/>
+<div class="absolute inset-0 flex items-center justify-center bg-on-surface/10 group-hover:bg-transparent transition-colors">
+<span class="material-symbols-outlined text-white text-[32px] drop-shadow-md group-hover:scale-110 transition-transform">visibility</span>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-auto pt-sm border-t border-outline-variant/30">
+<button class="flex-1 min-h-tap-target-min bg-tertiary-container hover:bg-tertiary-fixed text-on-tertiary-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                            Approve
+                        </button>
+<button class="flex-1 min-h-tap-target-min bg-error-container hover:bg-[#ffb4ab] text-on-error-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs transition-colors">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+<button class="w-tap-target-min h-tap-target-min bg-surface hover:bg-surface-variant border border-outline-variant text-on-surface font-label-lg text-label-lg rounded-xl flex items-center justify-center transition-colors" title="Request Re-upload">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-lg flex justify-center">
+<button class="min-h-tap-target-min px-xl bg-surface-container border border-primary/20 text-primary font-label-lg text-label-lg rounded-full hover:bg-primary-container/10 transition-colors flex items-center gap-sm">
+                    Load More Documents
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Right Sidebar: Verification Guidelines (Desktop only, or bottom on mobile) -->
+<aside class="w-full md:w-[320px] shrink-0 flex flex-col gap-md">
+<div class="glass-panel rounded-xl p-lg border-t-4 border-t-secondary sticky top-[100px]">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary" data-icon="fact_check">fact_check</span>
+                    Guidelines
+                </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">
+                    Ensure the following criteria are met before approving any document:
+                </p>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary-container mt-1 text-[20px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Image is clear and all text is legible.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary-container mt-1 text-[20px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Corners of the document are visible.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary-container mt-1 text-[20px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">No excessive glare or shadows.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary-container mt-1 text-[20px]" data-icon="check_circle">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Name matches the citizen profile exactly.</span>
+</li>
+<li class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-error mt-1 text-[20px]" data-icon="warning">warning</span>
+<span class="font-body-md text-body-md text-on-surface">Reject immediately if tampering is suspected.</span>
+</li>
+</ul>
+<div class="mt-lg pt-md border-t border-outline-variant/30">
+<div class="bg-surface-container-high rounded-lg p-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="smart_toy">smart_toy</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Sahaayak AI pre-screens for clarity and fraud. Always review AI alerts.</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Floating Action Button (Mobile Voice Trigger) - Suppressed as per rules for Task-focused/Admin dashboard -->
+</body></html>

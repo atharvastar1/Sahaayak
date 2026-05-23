@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice Input Modal - Sahaayak AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#faf8ff",
+                        "outline": "#6d797e",
+                        "on-primary-container": "#00414f",
+                        "on-tertiary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#ced9ff",
+                        "secondary-container": "#7459f7",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f3ff",
+                        "on-tertiary-container": "#00442d",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bcc9ce",
+                        "on-background": "#0c1a3b",
+                        "surface-container": "#eaedff",
+                        "surface-tint": "#00677d",
+                        "surface-container-highest": "#dae2ff",
+                        "surface-variant": "#dae2ff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "secondary": "#5b3cdd",
+                        "on-surface-variant": "#3d494d",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "tertiary": "#006c49",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-bright": "#faf8ff",
+                        "background": "#faf8ff",
+                        "inverse-primary": "#4cd6fb",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-container": "#19bc84",
+                        "primary-fixed": "#b3ebff",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "on-surface": "#0c1a3b",
+                        "on-secondary-fixed": "#1a0063",
+                        "primary": "#00677d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#232f51",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-container-high": "#e2e7ff",
+                        "secondary-fixed": "#e5deff",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#00b4d8",
+                        "on-primary-fixed": "#001f27"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "tap-target-min": "48px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "margin-desktop": "64px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Outfit"],
+                        "label-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "label-sm": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>.pulse-ring {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: rgba(116, 89, 247, 0.3);
+    /* secondary-container with opacity */
+    animation: pulse-animation 2s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    z-index: -1
+    }
+.pulse-ring:nth-child(2) {
+    animation-delay: 0.6s
+    }
+.pulse-ring:nth-child(3) {
+    animation-delay: 1.2s
+    }
+@keyframes pulse-animation {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+        } 100% {
+        transform: scale(1.8);
+        opacity: 0;
+        }
+    }
+/* Simulated background for context */
+body {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC9RQmOc9135132_Aua0mPlvQueRwQTTpNoq2kxOpDT7onUq2y_ik5L35BxtQlmXO8llCNOBYMIWBHT189gX6ZscqEYnHZiwoIOuux-s0iokZRGqA8SQWcuJW6iThOMjB5Y0kJU_-5hUNkwaV1Ngl2Mh0_h_qh1DJOHKiCjHuBjMTYl-LScJbluL_TY0Av3xoUov4nqZ_Ne9JmzJhBpeu4o32kXxsczfQN3-36DjNuvhKCfdsxfS3Le6N1pItgiLEcFJ0Sn7RWqkOA);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- Voice Input Overlay Modal -->
+<div class="fixed inset-0 z-50 flex flex-col bg-surface/85 backdrop-blur-2xl">
+<!-- Header: Close Button -->
+<header class="w-full flex justify-end p-margin-mobile md:p-margin-desktop">
+<button aria-label="Close modal" class="w-tap-target-min h-tap-target-min flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+</header>
+<!-- Center Content: Orb and Transcription -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop gap-xl max-w-4xl mx-auto w-full text-center">
+<!-- Animated Waveform Orb -->
+<div class="relative flex flex-col items-center gap-md">
+<div class="relative flex items-center justify-center w-[120px] h-[120px] rounded-full bg-gradient-to-tr from-secondary to-secondary-container shadow-[0_8px_32px_rgba(91,60,221,0.4)]">
+<div class="pulse-ring"></div>
+<div class="pulse-ring"></div>
+<div class="pulse-ring"></div>
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-lg animate-pulse">
+                    Listening... Suno
+                </h2>
+</div>
+<!-- Transcription Area -->
+<div class="w-full max-w-2xl mt-xl bg-surface-container-lowest/50 backdrop-blur-md rounded-xl p-lg border border-white/40 shadow-sm min-h-[160px] flex items-center justify-center">
+<p class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface opacity-90 transition-all duration-300">
+                    "Mujhe farming scheme ke baare mein batayein..."
+                </p>
+</div>
+</main>
+<!-- Footer Actions -->
+<footer class="w-full flex flex-col sm:flex-row justify-center items-center gap-md p-margin-mobile md:p-margin-desktop pb-safe mb-8">
+<button class="w-full sm:w-auto min-w-[160px] h-tap-target-min flex items-center justify-center gap-sm px-xl rounded-full bg-error text-on-error font-label-lg text-label-lg shadow-md hover:bg-on-error-container hover:text-white transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stop_circle</span>
+                Stop
+            </button>
+<button class="w-full sm:w-auto min-w-[160px] h-tap-target-min flex items-center justify-center gap-sm px-xl rounded-full bg-surface-container-lowest text-on-surface font-label-lg text-label-lg border-2 border-outline-variant hover:bg-surface-container transition-colors active:scale-95 duration-200 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">refresh</span>
+                Retry
+            </button>
+</footer>
+</div>
+</body></html>

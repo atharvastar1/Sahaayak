@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#004e5f",
+                    "primary-fixed": "#b3ebff",
+                    "surface-variant": "#dae2ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#1a0063",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f2f3ff",
+                    "on-primary-fixed": "#001f27",
+                    "outline-variant": "#bcc9ce",
+                    "background": "#faf8ff",
+                    "on-tertiary-fixed": "#002113",
+                    "inverse-primary": "#4cd6fb",
+                    "on-secondary-container": "#fffbff",
+                    "surface-container-high": "#e2e7ff",
+                    "surface-dim": "#ced9ff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "outline": "#6d797e",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#006c49",
+                    "secondary-container": "#7459f7",
+                    "on-secondary": "#ffffff",
+                    "surface": "#faf8ff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#5b3cdd",
+                    "surface-tint": "#00677d",
+                    "secondary-fixed": "#e5deff",
+                    "on-tertiary-container": "#00442d",
+                    "on-primary-container": "#00414f",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-surface-variant": "#3d494d",
+                    "surface-bright": "#faf8ff",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-surface": "#0c1a3b",
+                    "inverse-surface": "#232f51",
+                    "primary-container": "#00b4d8",
+                    "inverse-on-surface": "#eef0ff",
+                    "on-secondary-fixed-variant": "#441cc8",
+                    "on-background": "#0c1a3b",
+                    "surface-container-highest": "#dae2ff",
+                    "primary": "#00677d",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#19bc84",
+                    "surface-container": "#eaedff",
+                    "secondary-fixed-dim": "#c9bfff",
+                    "primary-fixed-dim": "#4cd6fb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem",
+                    "card": "12px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "base": "8px",
+                    "tap-target-min": "48px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "sm": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Outfit"],
+                    "headline-lg-mobile": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "label-lg": ["Outfit"],
+                    "body-md": ["Outfit"],
+                    "body-lg": ["Outfit"],
+                    "headline-md": ["Outfit"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-lg": ["20px", {"lineHeight": "30px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; background-color: #F7F9FC; }
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 58, 0.05), 0 2px 4px -1px rgba(11, 25, 58, 0.03);
+        }
+        .glass-floating {
+            box-shadow: 0 8px 20px -2px rgba(11, 25, 58, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<aside aria-label="Sidebar" class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-white/20 shadow-lg shadow-on-surface/8 flex flex-col py-lg z-50 overflow-y-auto hidden md:flex">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-black text-primary tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Admin Console</p>
+</div>
+<nav class="flex-1 px-sm space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">assignment</span>
+<span class="font-label-lg text-label-lg">Applications</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">folder_shared</span>
+<span class="font-label-lg text-label-lg">Document Vault</span>
+</a>
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+</nav>
+<div class="mt-auto px-sm pt-xl border-t border-surface-variant/50">
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">help</span>
+<span class="font-label-lg text-label-lg">Support</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-lg py-sm hover:bg-surface-container-high rounded-full transition-all group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-[72px] w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-white/40 shadow-md shadow-on-surface/5 shrink-0">
+<div class="flex items-center gap-md">
+<button class="md:hidden text-primary p-sm rounded-full hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-md py-sm border border-surface-variant focus-within:border-secondary transition-colors w-64 lg:w-96">
+<span class="material-symbols-outlined text-outline mr-sm">search</span>
+<input class="bg-transparent border-none outline-none font-body-md text-body-md text-on-surface w-full placeholder:text-outline p-0 focus:ring-0" placeholder="Search users, roles..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant p-sm rounded-full hover:bg-primary-container/10 transition-colors duration-200 scale-98 active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant p-sm rounded-full hover:bg-primary-container/10 transition-colors duration-200 scale-98 active:scale-95 hidden md:block">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-variant border-2 border-primary-container overflow-hidden ml-sm cursor-pointer shadow-sm">
+<img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1sWsoH1qAj0Igt2CX324BMeuST-z3HFyA1Tvh9IH_sZOfBuEGwt-NQ0mKHrGTvCKl3KdSbUZ_ttBmbLS5xcT844rXgHR6cdn6FhMbSW8VOYEtE3buXeokGhutleVGmF2dM7IQkoKqcbseiLx1xgU5KqTkIJgPFYsvXN4dWHNrISf2-15dw-cWAmyJc33fJkwxowc5QehOPzqyUb2ddBgOSQUon4Z7RWD0dXkb__7pcbkr0HfP1UUnIQVhQMkrUo5a7b9ssvrEaGE"/>
+</div>
+</div>
+</header>
+<!-- Main Content Scrollable Area -->
+<main class="flex-1 overflow-y-auto hide-scrollbar p-margin-mobile md:p-margin-desktop relative">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-lg mb-xl">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-xs">User Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage system administrators, verification officers, and regional coordinators.</p>
+</div>
+<button class="flex items-center justify-center gap-sm bg-primary-container text-on-primary-container h-tap-target-min px-lg rounded-full font-label-lg text-label-lg shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all active:translate-y-0 active:shadow-sm self-start md:self-auto">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_add</span>
+                    New User
+                </button>
+</div>
+<!-- Content Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg">
+<!-- Main Data Section (Left) -->
+<div class="xl:col-span-8 space-y-lg">
+<!-- Search & Filters -->
+<div class="glass-panel rounded-card p-md flex flex-col md:flex-row gap-md items-center">
+<div class="flex-1 w-full bg-white rounded-lg border border-outline-variant focus-within:border-primary-container px-md flex items-center h-[48px] shadow-sm">
+<span class="material-symbols-outlined text-outline mr-sm">search</span>
+<input class="bg-transparent border-none outline-none font-body-md text-body-md text-on-surface w-full p-0 focus:ring-0" placeholder="Search by name, ID, or email..." type="text"/>
+</div>
+<div class="flex w-full md:w-auto gap-sm overflow-x-auto hide-scrollbar pb-xs md:pb-0">
+<select class="bg-white border border-outline-variant text-on-surface font-label-sm text-label-sm rounded-lg h-[48px] px-md focus:border-primary-container focus:ring-0 shadow-sm shrink-0">
+<option>All Roles</option>
+<option>Admin</option>
+<option>Verification Officer</option>
+<option>Field Agent</option>
+</select>
+<select class="bg-white border border-outline-variant text-on-surface font-label-sm text-label-sm rounded-lg h-[48px] px-md focus:border-primary-container focus:ring-0 shadow-sm shrink-0">
+<option>All Status</option>
+<option>Active</option>
+<option>Inactive</option>
+<option>Pending</option>
+</select>
+<button class="bg-surface-container h-[48px] px-md rounded-lg text-on-surface flex items-center justify-center border border-outline-variant/50 hover:bg-surface-container-high transition-colors shrink-0">
+<span class="material-symbols-outlined text-outline">filter_list</span>
+</button>
+</div>
+</div>
+<!-- User List Cards (Bento Style instead of standard table) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- User Card 1 -->
+<div class="glass-panel rounded-card p-lg flex flex-col hover:glass-floating transition-all duration-300 relative group">
+<div class="absolute top-md right-md">
+<button class="text-outline hover:text-on-surface p-xs rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md mb-md">
+<img alt="Sarah Jenkins Avatar" class="w-14 h-14 rounded-full border-2 border-white shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwNJdOpnelCYcOnOI2Q3lPq8WjGCAdo16YT2CS83CmRV4Gs_qdNKdKC76UCA7PcNt_jH4yaQdaCK2Y-8OF64vyjWRFbLbugRh7UdrR01bNSgr7NCpN58vzELTfus7MC9HThKtqci2Wjs5d6sEIsqUNp8Iut2AiLU4bUQVq48trH5CRhY_HU-giRqRxLtydBDBUmQ4AqfCELJsoIGIPZVyHGvp6P6AZwbqQnVj_tSigvBHkRUP-C5pjglu21E4vA4AC3ECipbXllM0"/>
+<div>
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface">Sarah Jenkins</h3>
+<p class="font-body-md text-[14px] text-outline">ID: SYK-A042</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-sm mb-lg">
+<span class="bg-secondary-container/20 text-secondary border border-secondary-container/30 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span> Admin
+                                </span>
+<span class="bg-tertiary-container/20 text-tertiary border border-tertiary-container/30 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div> Active
+                                </span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-md border-t border-outline-variant/30">
+<span class="font-body-md text-[12px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Last: 2h ago
+                                </span>
+<div class="flex gap-sm">
+<button class="text-primary font-label-sm text-[14px] hover:underline px-2 py-1 rounded hover:bg-primary/5 transition-colors">Edit</button>
+</div>
+</div>
+</div>
+<!-- User Card 2 -->
+<div class="glass-panel rounded-card p-lg flex flex-col hover:glass-floating transition-all duration-300 relative group">
+<div class="absolute top-md right-md">
+<button class="text-outline hover:text-on-surface p-xs rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md mb-md">
+<div class="w-14 h-14 rounded-full bg-primary-container/20 border-2 border-white shadow-sm flex items-center justify-center text-primary font-headline-md text-headline-md">
+                                    RK
+                                </div>
+<div>
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface">Rajesh Kumar</h3>
+<p class="font-body-md text-[14px] text-outline">ID: SYK-V105</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-sm mb-lg">
+<span class="bg-primary/10 text-primary border border-primary/20 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified_user</span> Verification Officer
+                                </span>
+<span class="bg-tertiary-container/20 text-tertiary border border-tertiary-container/30 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div> Active
+                                </span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-md border-t border-outline-variant/30">
+<span class="font-body-md text-[12px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Last: 5m ago
+                                </span>
+<div class="flex gap-sm">
+<button class="text-primary font-label-sm text-[14px] hover:underline px-2 py-1 rounded hover:bg-primary/5 transition-colors">Edit</button>
+</div>
+</div>
+</div>
+<!-- User Card 3 -->
+<div class="glass-panel rounded-card p-lg flex flex-col hover:glass-floating transition-all duration-300 relative group opacity-75">
+<div class="absolute top-md right-md">
+<button class="text-outline hover:text-on-surface p-xs rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="flex items-center gap-md mb-md">
+<img alt="David Chen Avatar" class="w-14 h-14 rounded-full border-2 border-white shadow-sm object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDHbBJ-xIW5KLtkbFSyw70tGxT3vS-fy5_XzueqWPuzooWOv6gXyFXi5yDooEBNmLE7BsAvtzoS-1cneW2p3qH9E_wqDXp7aznyLgLDbRLXuFK9qNxe36CusiCODSMyRGL-LVbOM9YzIVe9mAKA9OE6ESlEhOUwTWvvDkVEqCheYSfGPDDfNqeEkz01uj2ABTAjo0EodSqTqj9j_j_MVWJD5qJY1EjLegLa3CCOmKLnthPSmNGzz506n3srxY8CwcVSPR0UFkO728"/>
+<div>
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface">David Chen</h3>
+<p class="font-body-md text-[14px] text-outline">ID: SYK-F882</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-sm mb-lg">
+<span class="bg-surface-variant text-on-surface-variant border border-outline-variant/50 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">directions_walk</span> Field Agent
+                                </span>
+<span class="bg-surface-variant text-outline border border-outline-variant/50 px-3 py-1 rounded-full font-label-sm text-[12px] flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-outline"></div> Inactive
+                                </span>
+</div>
+<div class="mt-auto flex items-center justify-between pt-md border-t border-outline-variant/30">
+<span class="font-body-md text-[12px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Last: 12 days ago
+                                </span>
+<div class="flex gap-sm">
+<button class="text-primary font-label-sm text-[14px] hover:underline px-2 py-1 rounded hover:bg-primary/5 transition-colors">Edit</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-sm mt-lg">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-outline hover:bg-surface-variant transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-sm shadow-sm">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors font-label-sm">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors font-label-sm">3</button>
+<span class="text-outline">...</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-outline hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Secondary Section (Right Panel) -->
+<div class="xl:col-span-4 space-y-lg mt-xl xl:mt-0">
+<!-- Roles Summary Bento Box -->
+<div class="glass-panel rounded-card p-lg">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-md">System Distribution</h3>
+<div class="space-y-md">
+<!-- Role Stat Item -->
+<div class="bg-surface-container-lowest/50 rounded-lg p-md border border-white/50 relative overflow-hidden group hover:bg-surface-container-lowest transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-secondary-container rounded-r-lg"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm text-secondary">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-lg text-label-lg text-on-surface">Administrators</span>
+</div>
+<span class="font-headline-md text-headline-md text-secondary">12</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full mt-sm overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 15%"></div>
+</div>
+</div>
+<!-- Role Stat Item -->
+<div class="bg-surface-container-lowest/50 rounded-lg p-md border border-white/50 relative overflow-hidden group hover:bg-surface-container-lowest transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-primary rounded-r-lg"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-lg text-label-lg text-on-surface">Verification Officers</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary">48</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full mt-sm overflow-hidden">
+<div class="bg-primary h-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Role Stat Item -->
+<div class="bg-surface-container-lowest/50 rounded-lg p-md border border-white/50 relative overflow-hidden group hover:bg-surface-container-lowest transition-colors">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-tertiary rounded-r-lg"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm text-tertiary">
+<span class="material-symbols-outlined">directions_walk</span>
+<span class="font-label-lg text-label-lg text-on-surface">Field Agents</span>
+</div>
+<span class="font-headline-md text-headline-md text-tertiary">156</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full mt-sm overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-lg h-tap-target-min border-2 border-outline-variant/30 rounded-full font-label-lg text-on-surface flex items-center justify-center gap-sm hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">security</span>
+                            Manage Permissions Matrix
+                        </button>
+</div>
+<!-- Pending Actions Card -->
+<div class="bg-error-container/20 rounded-card p-lg border border-error-container/50">
+<div class="flex items-start gap-md">
+<div class="bg-error-container text-on-error-container p-sm rounded-full shrink-0">
+<span class="material-symbols-outlined">gpp_maybe</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-xs">Action Required</h4>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-md">3 new Verification Officers are awaiting access approval.</p>
+<button class="font-label-sm text-[14px] text-primary hover:underline">Review Requests →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for floating elements -->
+<div class="h-24 md:h-12"></div>
+</main>
+<!-- Global FAB for Voice (Requested in Style Guidelines) -->
+<button aria-label="Voice Command Assistant" class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop w-14 h-14 rounded-full bg-gradient-to-tr from-secondary to-secondary-container text-white shadow-lg flex items-center justify-center hover:scale-105 transition-transform duration-300 z-50 animate-pulse">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+</body></html>

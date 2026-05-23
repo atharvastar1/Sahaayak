@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahaayak AI - Help &amp; Support Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#faf8ff",
+                      "secondary-container": "#7459f7",
+                      "surface-tint": "#00677d",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface-container-low": "#f2f3ff",
+                      "secondary-fixed": "#e5deff",
+                      "surface-variant": "#dae2ff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#232f51",
+                      "inverse-primary": "#4cd6fb",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#19bc84",
+                      "on-tertiary-fixed": "#002113",
+                      "on-primary-fixed": "#001f27",
+                      "surface-container-highest": "#dae2ff",
+                      "primary": "#00677d",
+                      "outline-variant": "#bcc9ce",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#b3ebff",
+                      "on-surface": "#0c1a3b",
+                      "surface-dim": "#ced9ff",
+                      "background": "#faf8ff",
+                      "primary-fixed-dim": "#4cd6fb",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#006c49",
+                      "surface": "#faf8ff",
+                      "inverse-on-surface": "#eef0ff",
+                      "secondary": "#5b3cdd",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#3d494d",
+                      "on-secondary-fixed": "#1a0063",
+                      "surface-container-high": "#e2e7ff",
+                      "surface-container": "#eaedff",
+                      "on-primary": "#ffffff",
+                      "on-background": "#0c1a3b",
+                      "on-secondary-container": "#fffbff",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "primary-container": "#00b4d8",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "outline": "#6d797e",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-tertiary-container": "#00442d",
+                      "on-primary-container": "#00414f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "tap-target-min": "48px",
+                      "base": "8px",
+                      "xl": "32px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Outfit"
+                      ],
+                      "headline-lg-mobile": [
+                              "Outfit"
+                      ],
+                      "label-sm": [
+                              "Outfit"
+                      ],
+                      "label-lg": [
+                              "Outfit"
+                      ],
+                      "headline-lg": [
+                              "Outfit"
+                      ],
+                      "body-md": [
+                              "Outfit"
+                      ],
+                      "body-lg": [
+                              "Outfit"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "30px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-64 py-lg z-50 overflow-y-auto bg-surface-container-lowest/80 dark:bg-inverse-surface/90 backdrop-blur-2xl border-r border-white/20 dark:border-outline-variant/10 shadow-lg shadow-on-surface/8">
+<div class="px-margin-desktop mb-xl">
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed-dim tracking-tight">Sahaayak AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Admin Console</p>
+</div>
+<div class="flex-1 px-lg space-y-sm">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-lg text-label-lg">Applications</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-lg text-label-lg">Document Vault</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+</div>
+<div class="px-lg mt-auto space-y-sm">
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-full px-lg py-sm font-bold shadow-sm translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-lg text-label-lg">Support</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-surface-variant px-lg py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant/20 rounded-full transition-all translate-x-1 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 relative min-h-screen">
+<!-- TopAppBar (Mobile & Desktop) -->
+<header class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-[72px] w-full z-40 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl shadow-md shadow-on-surface/5 bg-surface/70 border-b border-white/40 dark:border-outline-variant/20 sticky top-0">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Button -->
+<button class="md:hidden p-sm text-on-surface-variant hover:bg-primary-container/10 rounded-full transition-colors duration-200 scale-98 active:scale-95 duration-150 h-tap-target-min w-tap-target-min flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="md:hidden font-headline-md text-headline-md md:font-headline-lg md:text-headline-lg font-bold text-primary dark:text-primary-fixed-dim">Sahaayak AI</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant dark:text-outline hover:bg-primary-container/10 transition-colors duration-200 p-sm rounded-full scale-98 active:scale-95 duration-150 h-tap-target-min w-tap-target-min flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full border border-outline-variant/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_ndd_zaN0WkKE-CrMVnqcBYnm7MFCL4Ui3d3Ji4OhHxQ_p2DA_bTxpBnd-U8HwK6ecv17cHgVdN4cIQKRkQeVyWrIL-3saXD8Z5Vy49Hgg5yM6igPfxTCwcLCFdD63eY3kXA5itk1_P3yaMif-Pm5gHa5b2FL5hJM85QE5bVXBCriEr3S0ulMjAlrEm1wxnhrPZP8AhDL78b1YDXZUn6P41uMjtneTmtim_TWSKB6w7qYDEeNT_nPPUCPcAdVxUPzc5OedNuCXE"/>
+</div>
+</header>
+<div class="p-margin-mobile md:p-margin-desktop max-w-7xl mx-auto space-y-xl pb-[100px]">
+<!-- Hero Search Section -->
+<section class="bg-surface-container-low rounded-xl p-xl md:p-margin-desktop text-center shadow-sm relative overflow-hidden border border-white/40">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-md">How can we help you today?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Search our knowledge base or navigate through categories below.</p>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full h-tap-target-min pl-xl pr-md py-sm bg-surface-bright rounded-full border-2 border-outline-variant focus:border-primary focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-outline transition-colors shadow-inner" placeholder="Search for answers..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Help Categories (Bento Grid) -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Browse Categories</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Category 1 -->
+<a class="group block bg-surface-bright/80 backdrop-blur-xl rounded-xl p-lg border border-white/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-start justify-between min-h-[160px]" href="#">
+<div class="bg-primary/10 p-md rounded-full text-primary mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="rocket_launch" data-weight="fill">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-xs">Getting Started</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Basic setup &amp; platform navigation.</p>
+</div>
+</a>
+<!-- Category 2 -->
+<a class="group block bg-surface-bright/80 backdrop-blur-xl rounded-xl p-lg border border-white/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-start justify-between min-h-[160px]" href="#">
+<div class="bg-secondary/10 p-md rounded-full text-secondary mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="security" data-weight="fill">security</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-xs">Identity &amp; Security</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Login, passwords, and verification.</p>
+</div>
+</a>
+<!-- Category 3 -->
+<a class="group block bg-surface-bright/80 backdrop-blur-xl rounded-xl p-lg border border-white/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-start justify-between min-h-[160px]" href="#">
+<div class="bg-tertiary/10 p-md rounded-full text-tertiary mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="description" data-weight="fill">description</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-xs">Scheme Applications</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Forms, statuses, and documents.</p>
+</div>
+</a>
+<!-- Category 4 -->
+<a class="group block bg-surface-bright/80 backdrop-blur-xl rounded-xl p-lg border border-white/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col items-start justify-between min-h-[160px]" href="#">
+<div class="bg-error/10 p-md rounded-full text-error mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="build" data-weight="fill">build</span>
+</div>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface mb-xs">Troubleshooting</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Errors, bugs, and quick fixes.</p>
+</div>
+</a>
+</div>
+</section>
+<!-- Popular FAQs -->
+<section class="bg-surface-bright/80 backdrop-blur-xl rounded-xl p-lg md:p-xl border border-white/40 shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="star" data-weight="fill">star</span>
+                    Frequently Asked Questions
+                </h3>
+<div class="space-y-sm">
+<!-- FAQ Item 1 -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden">
+<summary class="flex justify-between items-center font-label-lg text-label-lg text-on-surface p-md cursor-pointer hover:bg-surface-container-low transition-colors h-tap-target-min list-none">
+                            How do I reset my password if I forget it?
+                            <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant font-body-md text-body-md border-t border-outline-variant/10 mt-xs">
+                            You can reset your password by clicking 'Forgot Password' on the login screen. We will send an OTP to your registered mobile number for verification.
+                        </div>
+</details>
+<!-- FAQ Item 2 -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden">
+<summary class="flex justify-between items-center font-label-lg text-label-lg text-on-surface p-md cursor-pointer hover:bg-surface-container-low transition-colors h-tap-target-min list-none">
+                            Where can I check the status of my application?
+                            <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant font-body-md text-body-md border-t border-outline-variant/10 mt-xs">
+                            Navigate to the 'Applications' tab on the left menu (or bottom bar on mobile). There you will see a list of all your active and past applications along with their current status.
+                        </div>
+</details>
+<!-- FAQ Item 3 -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden">
+<summary class="flex justify-between items-center font-label-lg text-label-lg text-on-surface p-md cursor-pointer hover:bg-surface-container-low transition-colors h-tap-target-min list-none">
+                            What documents do I need for a scheme?
+                            <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="p-md pt-0 text-on-surface-variant font-body-md text-body-md border-t border-outline-variant/10 mt-xs">
+                            Required documents vary by scheme. Typically, you will need your Aadhar Card, Ration Card, and bank details. Specific requirements are listed on each scheme's details page.
+                        </div>
+</details>
+</div>
+</section>
+</div>
+</main>
+<!-- Voice Trigger FAB (AI Assistant) -->
+<button class="fixed bottom-lg right-lg z-50 h-[64px] w-[64px] rounded-full bg-gradient-to-r from-secondary to-secondary-container text-on-secondary shadow-[0_8px_20px_rgba(11,25,58,0.2)] flex flex-col items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200 group">
+<span class="material-symbols-outlined text-[32px] group-hover:animate-pulse" data-icon="mic" data-weight="fill">mic</span>
+<span class="absolute -top-12 bg-inverse-surface text-inverse-on-surface font-label-sm text-label-sm px-sm py-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Talk to Sahaayak</span>
+</button>
+</body></html>

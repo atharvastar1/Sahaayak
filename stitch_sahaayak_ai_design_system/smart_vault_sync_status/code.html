@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Vault - Jan Seva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "outline-variant": "#bcc9ce",
+                            "on-tertiary-container": "#00442d",
+                            "error": "#ba1a1a",
+                            "surface-container-low": "#f2f3ff",
+                            "on-primary": "#ffffff",
+                            "surface-container-highest": "#dae2ff",
+                            "surface-tint": "#00677d",
+                            "surface-container": "#eaedff",
+                            "on-background": "#0c1a3b",
+                            "on-primary-container": "#00414f",
+                            "outline": "#6d797e",
+                            "surface-container-lowest": "#ffffff",
+                            "surface": "#faf8ff",
+                            "surface-dim": "#ced9ff",
+                            "secondary-container": "#7459f7",
+                            "on-tertiary-fixed": "#002113",
+                            "on-error": "#ffffff",
+                            "on-error-container": "#93000a",
+                            "tertiary-fixed": "#6ffbbe",
+                            "tertiary": "#006c49",
+                            "on-surface-variant": "#3d494d",
+                            "on-secondary-fixed-variant": "#441cc8",
+                            "surface-bright": "#faf8ff",
+                            "background": "#faf8ff",
+                            "on-secondary-container": "#fffbff",
+                            "surface-variant": "#dae2ff",
+                            "primary-fixed-dim": "#4cd6fb",
+                            "on-primary-fixed-variant": "#004e5f",
+                            "secondary": "#5b3cdd",
+                            "secondary-fixed-dim": "#c9bfff",
+                            "primary-fixed": "#b3ebff",
+                            "on-tertiary-fixed-variant": "#005236",
+                            "inverse-primary": "#4cd6fb",
+                            "tertiary-container": "#19bc84",
+                            "surface-container-high": "#e2e7ff",
+                            "secondary-fixed": "#e5deff",
+                            "inverse-on-surface": "#eef0ff",
+                            "on-primary-fixed": "#001f27",
+                            "primary-container": "#00b4d8",
+                            "on-secondary": "#ffffff",
+                            "on-secondary-fixed": "#1a0063",
+                            "on-surface": "#0c1a3b",
+                            "tertiary-fixed-dim": "#4edea3",
+                            "inverse-surface": "#232f51",
+                            "on-tertiary": "#ffffff",
+                            "primary": "#00677d",
+                            "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "tap-target-min": "48px",
+                            "base": "8px",
+                            "lg": "24px",
+                            "gutter": "16px",
+                            "md": "16px",
+                            "margin-desktop": "64px",
+                            "xl": "32px",
+                            "sm": "8px",
+                            "margin-mobile": "20px",
+                            "xs": "4px"
+                    },
+                    "fontFamily": {
+                            "headline-md": ["Outfit"],
+                            "label-sm": ["Outfit"],
+                            "body-md": ["Outfit"],
+                            "headline-lg": ["Outfit"],
+                            "label-lg": ["Outfit"],
+                            "body-lg": ["Outfit"],
+                            "headline-lg-mobile": ["Outfit"]
+                    },
+                    "fontSize": {
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                            "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "label-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "body-lg": ["20px", {"lineHeight": "30px", "fontWeight": "400"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col relative pb-[100px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-40 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl shadow-sm border-b border-white/40 dark:border-outline-variant flex justify-between items-center px-margin-mobile h-tap-target-min">
+<button aria-label="Menu" class="h-tap-target-min w-tap-target-min flex items-center justify-center text-primary dark:text-primary-fixed-dim hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface-variant">Smart Vault</h1>
+<button aria-label="User Profile" class="h-tap-target-min w-tap-target-min flex items-center justify-center hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-95 duration-200 rounded-full overflow-hidden">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="A close up portrait of a young Indian woman smiling warmly, conveying trust and accessibility. The lighting is soft and natural, emphasizing a clean, modern aesthetic suitable for a professional yet friendly user profile picture. Soft premium style with bright, high-key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTgisS9QetTw2nB5eT51lCYM971_qZW3-h9TFE1KeZpqcwzDYtDbN0D8kYUPe92Yg-fFDofm0XXWoP_8X1NvqRrUYg_3bhamhPuKLCUFjoxTAOsYr19ViJpPt1T5biq6Azhn4VULrDLz-Y9eg1txFMn5eCCf6Nk0tL0fgQJrixt6h13ElSJWBbyRvBYg7QAhcaAk-HGre32uBomd7cz-6krBmKIYqX7vALNNXovddZNsAOA-gc6htaQNBPa2t428zjl1DIFBtV6V4"/>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[80px] px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto space-y-lg">
+<!-- Last Sync Card (Level 1 Glass) -->
+<section class="bg-surface-container-lowest/80 backdrop-blur-xl rounded-xl p-md border border-white/40 shadow-[0_8px_20px_rgba(11,25,58,0.04)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-base">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">sync</span>
+</div>
+<div>
+<h2 class="font-label-lg text-label-lg text-on-surface">Data Synced</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Last Sync: 2 hours ago</p>
+</div>
+</div>
+<button class="h-tap-target-min px-md bg-primary-container text-on-primary-container font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-xs hover:bg-surface-tint hover:text-white transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                Refresh Now
+            </button>
+</section>
+<!-- Document Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<!-- Card 1: Aadhaar -->
+<article class="bg-surface-container-lowest/90 backdrop-blur-lg rounded-xl p-md border border-white/40 shadow-[0_4px_12px_rgba(11,25,58,0.03)] hover:shadow-[0_8px_24px_rgba(11,25,58,0.08)] transition-all flex flex-col justify-between h-[160px] group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-container/10 rounded-bl-full -z-10 group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">badge</span>
+</div>
+<span class="inline-flex items-center gap-xs bg-tertiary/10 text-tertiary px-sm py-xs rounded-full font-label-sm text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Verified
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Aadhaar Card</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verified &amp; Secured</p>
+</div>
+</article>
+<!-- Card 2: PAN -->
+<article class="bg-surface-container-lowest/90 backdrop-blur-lg rounded-xl p-md border border-white/40 shadow-[0_4px_12px_rgba(11,25,58,0.03)] hover:shadow-[0_8px_24px_rgba(11,25,58,0.08)] transition-all flex flex-col justify-between h-[160px] group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-container/10 rounded-bl-full -z-10 group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">credit_card</span>
+</div>
+<span class="inline-flex items-center gap-xs bg-tertiary/10 text-tertiary px-sm py-xs rounded-full font-label-sm text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Verified
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">PAN Card</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verified &amp; Secured</p>
+</div>
+</article>
+<!-- Card 3: Driving License -->
+<article class="bg-surface-container-lowest/90 backdrop-blur-lg rounded-xl p-md border border-white/40 shadow-[0_4px_12px_rgba(11,25,58,0.03)] hover:shadow-[0_8px_24px_rgba(11,25,58,0.08)] transition-all flex flex-col justify-between h-[160px] group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-container/10 rounded-bl-full -z-10 group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<span class="inline-flex items-center gap-xs bg-tertiary/10 text-tertiary px-sm py-xs rounded-full font-label-sm text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Verified
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Driving License</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Verified &amp; Secured</p>
+</div>
+</article>
+<!-- Card 4: Land Record -->
+<article class="bg-surface-container-lowest/90 backdrop-blur-lg rounded-xl p-md border border-white/40 shadow-[0_4px_12px_rgba(11,25,58,0.03)] hover:shadow-[0_8px_24px_rgba(11,25,58,0.08)] transition-all flex flex-col justify-between h-[160px] group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary-container/10 rounded-bl-full -z-10 group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+<span class="inline-flex items-center gap-xs bg-tertiary/10 text-tertiary px-sm py-xs rounded-full font-label-sm text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">cloud_done</span> Synced
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Land Record</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Khasra/Khatauni</p>
+</div>
+</article>
+<!-- Card 5: Ration Card -->
+<article class="bg-surface-container-lowest/90 backdrop-blur-lg rounded-xl p-md border border-white/40 shadow-[0_4px_12px_rgba(11,25,58,0.03)] hover:shadow-[0_8px_24px_rgba(11,25,58,0.08)] transition-all flex flex-col justify-between h-[160px] group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container/10 rounded-bl-full -z-10 group-hover:bg-secondary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<span class="inline-flex items-center gap-xs bg-[#fff3e0] text-[#e65100] px-sm py-xs rounded-full font-label-sm text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Pending
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight">Ration Card</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Sync in progress...</p>
+</div>
+</article>
+</section>
+<!-- Prominent Action Footer -->
+<div class="mt-xl pb-md">
+<button class="w-full h-[56px] bg-secondary-container text-on-secondary-container rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-sm shadow-[0_8px_20px_rgba(11,25,58,0.08)] hover:bg-secondary hover:text-white transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">link</span>
+                Link DigiLocker Account
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface/90 dark:bg-surface-container-highest/90 backdrop-blur-2xl text-on-surface fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm pb-safe rounded-t-full shadow-[0_-8px_20px_rgba(11,25,58,0.08)] border-t border-white/20 dark:border-outline-variant">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-90 duration-300 ease-out h-tap-target-min w-[64px] rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-sm text-[10px] mt-xs">Home</span>
+</a>
+<!-- Schemes (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-90 duration-300 ease-out h-tap-target-min w-[64px] rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard_customize</span>
+<span class="font-label-sm text-[10px] mt-xs">Schemes</span>
+</a>
+<!-- Documents (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-secondary-container text-on-primary-container dark:text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-90 duration-300 ease-out h-tap-target-min" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-sm text-[12px] font-bold mt-xs">Documents</span>
+</a>
+<!-- Support (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-90 duration-300 ease-out h-tap-target-min w-[64px] rounded-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">support_agent</span>
+<span class="font-label-sm text-[10px] mt-xs">Support</span>
+</a>
+</nav>
+</body></html>

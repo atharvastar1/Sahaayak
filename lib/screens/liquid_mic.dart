@@ -64,11 +64,11 @@ class _LiquidMicButtonState extends State<LiquidMicButton> with SingleTickerProv
         children: [
           // 1. LIFE-PULSE AURA (Ethereal Glow)
           if (widget.isListening)
-            ...List.generate(2, (index) {
+            ...List.generate(3, (index) {
               return AnimatedBuilder(
                 animation: _pulseController,
                 builder: (context, child) {
-                  final progress = (_pulseController.value + (index * 0.5)) % 1.0;
+                  final progress = (_pulseController.value + (index * 0.33)) % 1.0;
                   return Container(
                     width: 140 + (progress * 160),
                     height: 140 + (progress * 160),
@@ -76,9 +76,9 @@ class _LiquidMicButtonState extends State<LiquidMicButton> with SingleTickerProv
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: SahaayakTheme.primary.withValues(alpha: 0.15 * (1.0 - progress)),
+                          color: SahaayakTheme.accentAI.withValues(alpha: 0.3 * (1.0 - progress)),
                           blurRadius: 40,
-                          spreadRadius: 20 * progress,
+                          spreadRadius: 30 * progress,
                         ),
                       ],
                     ),
@@ -102,11 +102,9 @@ class _LiquidMicButtonState extends State<LiquidMicButton> with SingleTickerProv
             duration: 800.ms,
             width: 140,
             height: 140,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              gradient: widget.isListening 
-                  ? SahaayakTheme.aiAura 
-                  : SahaayakTheme.appleGradient,
+              gradient: SahaayakTheme.aiAura,
             ),
             child: widget.isListening 
               ? _buildLiquidWaves()

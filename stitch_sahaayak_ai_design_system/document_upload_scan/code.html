@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jan Seva - Document Upload</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001f27",
+                        "on-tertiary-container": "#00442d",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-surface-variant": "#3d494d",
+                        "on-primary-container": "#00414f",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary": "#006c49",
+                        "surface-container-highest": "#dae2ff",
+                        "secondary-fixed": "#e5deff",
+                        "primary-fixed": "#b3ebff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error": "#ba1a1a",
+                        "outline": "#6d797e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "surface-variant": "#dae2ff",
+                        "inverse-surface": "#232f51",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#00677d",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ced9ff",
+                        "surface-tint": "#00677d",
+                        "inverse-primary": "#4cd6fb",
+                        "secondary-container": "#7459f7",
+                        "on-secondary-fixed": "#1a0063",
+                        "secondary": "#5b3cdd",
+                        "on-surface": "#0c1a3b",
+                        "tertiary-container": "#19bc84",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "primary-fixed-dim": "#4cd6fb",
+                        "primary-container": "#00b4d8",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#0c1a3b",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#bcc9ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "8px",
+                        "sm": "8px",
+                        "tap-target-min": "48px",
+                        "margin-mobile": "20px",
+                        "lg": "24px",
+                        "margin-desktop": "64px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "label-lg": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .camera-overlay {
+            background: 
+                linear-gradient(to right, #00b4d8 4px, transparent 4px) 0 0,
+                linear-gradient(to right, #00b4d8 4px, transparent 4px) 0 100%,
+                linear-gradient(to left, #00b4d8 4px, transparent 4px) 100% 0,
+                linear-gradient(to left, #00b4d8 4px, transparent 4px) 100% 100%,
+                linear-gradient(to bottom, #00b4d8 4px, transparent 4px) 0 0,
+                linear-gradient(to bottom, #00b4d8 4px, transparent 4px) 100% 0,
+                linear-gradient(to top, #00b4d8 4px, transparent 4px) 0 100%,
+                linear-gradient(to top, #00b4d8 4px, transparent 4px) 100% 100%;
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-hidden">
+<!-- Top Navigation Area (Transactional/Task Focused - Minimal Header) -->
+<header class="w-full flex justify-between items-center px-margin-mobile h-tap-target-min bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl border-b border-white/40 shadow-sm z-40 fixed top-0 left-0">
+<button class="w-tap-target-min h-tap-target-min flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Upload Document</h1>
+<div class="w-tap-target-min h-tap-target-min flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="help_outline">help_outline</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[calc(48px+20px)] pb-safe px-margin-mobile flex flex-col gap-lg z-10 relative">
+<!-- Instructional Prompt -->
+<div class="text-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">Scan ID Card</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Place document within the frame. Ensure good lighting.</p>
+</div>
+<!-- Camera Viewfinder Area -->
+<div class="relative w-full aspect-[3/4] md:aspect-video rounded-xl overflow-hidden shadow-lg bg-surface-container-highest">
+<!-- Simulated Camera Feed -->
+<img alt="Simulated camera view of a document on a wooden desk" class="w-full h-full object-cover blur-[2px] opacity-80" data-alt="A simulated camera viewfinder perspective looking down at a generic official ID document resting on a worn, textured wooden table. The lighting is slightly uneven, simulating a real-world amateur photo capture scenario. Soft premium glassmorphism overlay UI style. Colors are muted with bright cyan targeting guides overlayed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4er_KZe6HtB3SJCkyCz13kqE_NXTEWi_P8f9-v_UKVHGp2H4f3NJrij-TPws9wyDgWnfcnLpEQzq3XdjUCI_elV3wIzENmNTgsi47-DvsgfUHEUcC7G1wrib3Wd9lLj-hVJmn-uOkFrj57-MjOhH3WXvSyRxEi5ObKHARKgmr-FtD8SnqKIuDkpwaRMeCkOnCbaF1sysbIrNIDC_PZlANHwUYV031xf3wFwgqwIKw8vDFRN8HSwUiTz_fqwIKGZ80lqGh_R7k3yo"/>
+<!-- Dark Overlay Outside Guide -->
+<div class="absolute inset-0 bg-black/40"></div>
+<!-- Clear Center Guide -->
+<div class="absolute inset-md top-[15%] bottom-[25%] camera-overlay rounded-lg border border-white/20 shadow-[0_0_0_9999px_rgba(0,0,0,0.4)] z-10">
+<!-- AI Guidance Indicator within frame -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/70 flex flex-col items-center pointer-events-none">
+<span class="material-symbols-outlined text-4xl mb-2" data-icon="document_scanner">document_scanner</span>
+<span class="font-label-lg text-label-lg tracking-widest uppercase">Align Here</span>
+</div>
+</div>
+<!-- Clarity Score (Top Right) -->
+<div class="absolute top-sm right-sm z-20 glass-panel rounded-full px-md py-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Clarity: Good</span>
+</div>
+<!-- Capture Controls (Bottom of viewfinder) -->
+<div class="absolute bottom-md left-0 w-full flex justify-center items-center gap-xl z-20">
+<button class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="flash_auto">flash_auto</span>
+</button>
+<button class="w-20 h-20 rounded-full bg-white border-4 border-surface-container-highest shadow-xl flex items-center justify-center active:scale-90 transition-transform hover:bg-surface-container-lowest">
+<div class="w-16 h-16 rounded-full border-2 border-primary-container"></div>
+</button>
+<button class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-on-surface-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="cameraswitch">cameraswitch</span>
+</button>
+</div>
+</div>
+<!-- Captured Thumbnails Gallery -->
+<div class="w-full">
+<h3 class="font-label-lg text-label-lg text-on-surface-variant mb-sm">Captured Documents (1/2)</h3>
+<div class="flex gap-md overflow-x-auto pb-sm snap-x">
+<!-- Thumbnail Item -->
+<div class="relative flex-none w-24 h-24 rounded-lg overflow-hidden border-2 border-tertiary-container snap-center shadow-sm">
+<img alt="Thumbnail of captured ID card front" class="w-full h-full object-cover" data-alt="A small square thumbnail image showing a close up crop of a generic official identity card front side. Crisp focus, well lit. Set against a soft premium UI background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-WWtMc360Cp4sIc8-mwBYke1optvQcH0Vj5eZ0_6Wf_thigCMJE8zxdygFnPR7Uif1CqMStMjxHjyictRyzz7BVpTbaapGMBnVDmBB6EPLZijwKCE4gYCafl5kniX2es1CSPmeRsvt2X7FfvkRBaru23nQ2N5c78-hPMkmyyQAVrkH2Hg1vgKLkAYW75MSdbQl9JKsfA6V7mtfWg8liOljsMjiEOMCLtMWRlTdeNejIRFlAfmraSwhpbXcBssNq-nRFGlzFG7RBk"/>
+<div class="absolute top-1 right-1 bg-tertiary-container text-on-tertiary rounded-full w-6 h-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Placeholder for Next Capture -->
+<div class="relative flex-none w-24 h-24 rounded-lg bg-surface-container border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant snap-center">
+<span class="material-symbols-outlined mb-1" data-icon="add_photo_alternate">add_photo_alternate</span>
+<span class="text-[10px] font-medium">Back Side</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Persistent Floating Voice Assistant (Silicon Orb) -->
+<div class="fixed bottom-lg right-margin-mobile z-50">
+<button class="relative w-16 h-16 rounded-full bg-gradient-to-br from-secondary-container to-secondary shadow-[0_8px_20px_rgba(11,25,58,0.15)] flex items-center justify-center text-on-secondary hover:scale-105 active:scale-95 transition-all duration-300 group">
+<div class="absolute inset-0 rounded-full border-2 border-secondary-fixed opacity-50 pulse-ring"></div>
+<span class="material-symbols-outlined text-3xl z-10" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+<!-- Tooltip -->
+<div class="absolute right-full mr-md top-1/2 -translate-y-1/2 bg-surface-container-highest text-on-surface px-md py-sm rounded-lg whitespace-nowrap font-label-sm text-label-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden md:block">
+                Tap to speak instructions
+            </div>
+</button>
+</div>
+<!-- Hidden Navigation (Suppressed per logic for transactional flow, but structure kept clean) -->
+<!-- Navigation Bottom/Drawer intentionally omitted as this is a focused task screen (Upload) -->
+</body></html>

@@ -184,16 +184,13 @@ def health_check():
 def engine_info():
     """
     Returns the active LLM engine info.
-    Frontend uses this to display the AWS Bedrock / Groq badge.
     """
-    engine = get_active_llm_engine()
     return {
-        "engine":      engine,
-        "primary":     "Amazon Bedrock",
-        "model":       __import__('os').getenv('BEDROCK_MODEL_ID', 'amazon.nova-lite-v1:0') if engine == 'bedrock' else 'llama-3.3-70b-versatile',
-        "provider":    "AWS" if engine == 'bedrock' else 'Groq',
-        "aws_region":  __import__('os').getenv('AWS_REGION', 'ap-south-1'),
-        "status":      "active" if engine == 'bedrock' else 'fallback',
+        "engine":      "groq",
+        "primary":     "Groq Cloud Inference",
+        "model":       "llama-3.3-70b-versatile",
+        "provider":    "Groq",
+        "status":      "active",
     }
 
 
